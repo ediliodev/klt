@@ -1,5 +1,5 @@
 set :application, "kollector"
-     set :repo_url, "git@github.com:ediliodev/kollector.git" # pdventa viejo 5anos old
+     set :repo_url, "git@github.com:ediliodev/klt.git" # pdventa viejo 5anos old
    # set :repo_url, "git@github.com:ediliodev/kposmulti.git"
 
     set :deploy_to, '/home/deploy/kollector'
@@ -48,3 +48,4 @@ set :application, "kollector"
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+#set :ssh_options, { :forward_agent => true }  # manualmente test sctackoveflow 17457323
