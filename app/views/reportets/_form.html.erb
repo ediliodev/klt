@@ -11,7 +11,12 @@
     </div>
   <% end %>
 
-  <div class="field">
+
+
+<% #LA VISTA PUEDE CAMIAR SI EL TIPO DE USUARIO DE REPORTES ES ADMIN O CENTRAL MOSTRAMOS FILTROS DE LO CONTRARIO USUARIO DE LA BACNA GENERIC OK TED. %>
+
+
+ <div class="field">
     <%= form.label :desde %>
     <%= form.date_select :desde, id: :reportet_desde, :order => [:day, :month, :year] %>
 
@@ -22,9 +27,86 @@
     <%= form.date_select :hasta, id: :reportet_hasta, :order => [:day, :month, :year] %>
   </div>
 
-  <div class="field">                       
-    <%= form.password_field :password, :value => "nada" %>
-  </div>
+
+
+
+
+
+<% if not @reporte_sucursal_actual_only %>
+
+    <div class="field">
+      <%= form.label  "Supervisor" %>
+      <%=  form.select :supervisor, Maquinat.order(:supervisor).pluck(:supervisor).uniq.collect{ |item|  [ " --> " + item , item ] }, :include_blank => true %> 
+    </div>
+
+<% end %>
+
+
+
+
+<% #MOSTRAR SLEECIOND DE SUCURSAL(ES) %>
+<% if @reporte_sucursal_actual_only %>
+
+    <div class="field">
+      <%= form.label  "Sucursal" %>
+      <% #visualizar solo opcion de mostrar esa sucursal de ese usuario, debe ser en array ok ted [] %>
+      <%=  form.select :sucursal, ["#{@sucursal_del_usuario }"]  %> 
+    </div>
+    
+
+<%else%>
+
+    <div class="field">
+      <%= form.label  "Sucursal" %>
+      <% #  form.select :sucursal, Maquinat.order(:sucursal).collect{ |item|  [ " --> " + item.sucursal , item.sucursal.downcase ] }, :include_blank => true  %> 
+      
+      <% # Este evita sucursal repetida: Stackoverflow 9658881 %>
+      <%=  form.select :sucursal, Maquinat.order(:sucursal).pluck(:sucursal).uniq.collect{ |item|  [ " --> " + item , item ] }, :include_blank => true  %> 
+
+    </div>
+
+<% end %>
+
+  
+
+
+
+
+<% if not @reporte_sucursal_actual_only %>
+
+    <div class="field">
+      <%= form.label  "TipoMaq" %>
+      <%=  form.select :tipomaquina, Tipomaquinat.order(:tipomaquina).collect{ |item|  [ " --> " + item.tipomaquina.to_s , item.tipomaquina ] }, :include_blank => true  %> 
+    </div>
+
+
+   
+
+<% end %>
+
+
+ <div class="field">                       
+      <%= form.password_field :password, :value => "nada" %>
+</div>
+
+</br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <div class="actions">
     <%= form.submit "Consultar" %>

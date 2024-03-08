@@ -1,0 +1,27 @@
+<%= form_with(model: historypostransaccionest, local: true) do |form| %>
+  <% if historypostransaccionest.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(historypostransaccionest.errors.count, "error") %> prohibited this historypostransaccionest from being saved:</h2>
+
+      <ul>
+      <% historypostransaccionest.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :creditin %>
+    <%= form.text_field :creditin, id: :historypostransaccionest_creditin %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cashout %>
+    <%= form.text_field :cashout, id: :historypostransaccionest_cashout %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

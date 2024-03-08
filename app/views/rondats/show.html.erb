@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Jugador:</strong>
+  <%= @rondat.jugador %>
+</p>
+
+<p>
+  <strong>Credito:</strong>
+  <%= @rondat.credito %>
+</p>
+
+<p>
+  <strong>Cartucho:</strong>
+  <%= @rondat.cartucho %>
+</p>
+
+<p>
+  <strong>Posiciondisparo:</strong>
+  <%= @rondat.posiciondisparo %>
+</p>
+
+<p>
+  <strong>Resultado:</strong>
+  <%= @rondat.resultado %>
+</p>
+
+<%= link_to 'Edit', edit_rondat_path(@rondat) %> |
+<%= link_to 'Back', rondats_path %>

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Contadorests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Totalin</th>
+      <th>Totalout</th>
+      <th>Totalnet</th>
+      <th>Recaudacion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contadorests.each do |contadorest| %>
+      <tr>
+        <td><%= contadorest.totalin %></td>
+        <td><%= contadorest.totalout %></td>
+        <td><%= contadorest.totalnet %></td>
+        
+        <% if contadorest.totalin.to_f.round(2) > 0 %>
+           <td><%= ( 100 * contadorest.totalnet.to_f / contadorest.totalin.to_f ).round(2) %> % </td>
+        <%else%>
+          <td><%= "0" %></td>   
+        <%end%>
+        
+        <td><%= link_to 'Show', contadorest %></td>
+        <td><%= link_to 'Edit', edit_contadorest_path(contadorest) %></td>
+        <td><%= link_to 'Destroy', contadorest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contadorest', new_contadorest_path %>

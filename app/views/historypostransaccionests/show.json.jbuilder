@@ -1,0 +1,1 @@
+json.partial! "historypostransaccionests/historypostransaccionest", historypostransaccionest: @historypostransaccionest

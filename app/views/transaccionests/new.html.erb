@@ -8,352 +8,748 @@
 <div class="bg">
 
 
-<p style="color:blue;">_____________________________________________<%= image_tag('favicon.ico', size: "70x45" ) %>_____________________________________________</p> 
+<p style="color:blue;">_______________________________<%= image_tag('favicon.ico', size: "70x45" ) %>_________________________________</p> 
 
 <h1 style="color:black;">- Kollector VIP Systems -</h1>
 
 
 <h2> <%= render 'reloj'  %> </h2> 
 
-<h3>Suc: <%= @sucursal %>  <%= session[:current_user] ||  "*" %> </h3>
+
+<% #SECCION DE LOGIN/out KICK MD5 %>
+
+<% if @flag_inscribir_md5 == true %>
+<% #inscirbien en localst ok %>
+	<script type="text/javascript">
+		localStorage.setItem("md5pc", "<%= @valor_md5_new %>")
+		alert("Bienvenido ok!" + "##" );
+	</script>
+
+<% end %>
+
+ 
+                
 
 
-
-<%  if  @hw_equipo_no_autorizado != true %>
-
-	<div id="monitor" class="monitor_class">
-
-		<% @kit_color_verde_style = "" # inicializo variablde fuera del each loop ok. %>
-		  <table>
-
-		      <tbody>
-		      	<tr>
-		        <% @kit_maquinats.each do |transaccionest| %>
-
-		         <td>
-		          <%if @kit_maquinats_verde.include? transaccionest.id  %>
-		           <button class="button" type="button" style="color:white;background-color:green; height:35px;">  <%= transaccionest.descripcion %>  </button> 
-
-		           <% else  %>
-		           
-		           <button class="button" type="button" style="color:white;background-color:red; height:35px;">  <%= transaccionest.descripcion %>  </button> 
-		          <%end%>
-
-		         </td>
-
-		        <% end %>
-		          </tr>
-		      </tbody>
-		    </table>
-	</div>
-
-	<h2 style="color:darkblue;" >Enviar Cr&eacute;ditos($):</h2>
-
-
-	<!-- 
-
-		<% # @kit_color_verde_style # =  "class=\"button\" type=\"button\" style=\"color:white;background-color:green; height:35px;\"  onclick= cash_modifySend()> "              #{}"style=\"color:white;background-color:green; height:35px;\"" %>
-
-
-	<div class="seccion_monitoreo">
-	   <button class="button" type="button" style="color:white;background-color:green; height:35px;" onclick= cash_modifySend('05')>1PoG</button> 
-	   <button class="button" type="button" onclick= cash_modifySend('05')>2</button> 
-	   <button class="button" type="button" onclick= cash_modifySend('05')>3</button> 
-	   <button class="button" type="button" onclick= cash_modifySend('05')>4</button> 
-	   <button class="button" type="button" onclick= cash_modifySend('05')>5</button> 
-	   <button class="button" type="button" onclick= cash_modifySend('05')>6</button> 
-	   <button class="button" type="button" onclick= cash_modifySend('05')>7</button> 
-	   <button class="button" type="button" onclick= cash_modifySend('05')>8</button> 
-	   <button class="button" type="button" onclick= cash_modifySend('05')>9</button> 
-	</div>
-
-	-->
-
-
-
-	<%= render 'form2', transaccionest: @transaccionest %>
-
-	<!-- Esto para indicar mensane de error cuando la mq esten en rojo. No credit sent -->
-	<p id="notice"><%= notice %></p>
-
-
-	<!-- El grupo de botones de creditos esta/lo puse dentro del form2.html para fines de mejorar el layout ok. -->
-
-	<h4 style="color:blue;">_______________________________________________________________________________________________</h4>
-
-
-	<h3>
-
-	<%= link_to 'Reportes', new_reportet_path %>
-	<%= link_to '- Maquinas -', maquinats_path %>
-	<%= link_to 'Sucursal -', localidadts_path %>
-    <%= link_to 'ShiftReport', accesots_path %>	    
-
-	</h3>
-
-	<h3 style="color:green;" > Venta de hoy:
-	( IN: $ <%= ActionController::Base.helpers.number_to_currency(@total_in, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %>)...(OUT: $ <%= ActionController::Base.helpers.number_to_currency(@total_out, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %>).....(NETO: $ <%= ActionController::Base.helpers.number_to_currency(@neto_hoy, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %>)
-	</h3>
-
-
-	<h3 id="conteo_reciente">Reciente: </h3>
-
-	<div id="tabla_recientes" class="tabla_transacciones">
-	 
-	 <%if not @lastly_transaccionests.empty? %>
-	   <h3>Envios Recientes (creditos): </h3>  
-		<table>
-			<thead>
-				<tr>
-				  <th>Fecha</th>
-				  <th>Maquina</th>
-				  <th>TipoTx</th>
-				  <th>Cantidad</th>  
-				  <th>Status</th>
-				 <!--  <th>Print</th> -->
-
-				</tr>
-			</thead>
-
-			<tbody>
-			<% @lastly_transaccionests.each do |transaccionest| %>
-			  <tr>
-			  	<td><%= transaccionest.created_at.to_s.split(" -")[0] %></td>
-			    <td><%= transaccionest.maquinat.descripcion %></td>
-			    <td>* <%= transaccionest.tipotransaccion%> *</td>
-			    <td><%= transaccionest.cantidad %></td>
-			    <td><%= transaccionest.status %></td>
-			<!-- 
-			    <td><%  @line_tx_with_id = 'line_tx_with_id_' + transaccionest.id.to_s %>
-					<button class="button" type="button"  style="color:white;background-color:blue; height:35px;"> Print  </button> 
-			    </td>
-			-->
-			    
-			  </tr>
-			<% end %>
-			</tbody>
-		</table>
-
-	<%end%>
-
-	<%if not @lastly_postransaccionests.empty? %>
-
-	 <h3>Pagos Recientes (debitos): </h3>  
-		<table>
-			<thead>
-				<tr>
-				  <th>Fecha</th>
-				  <th>Maquina</th>
-				  <th>TipoTx</th>
-				  <th>Cantidad</th>  
-				  <th>Status</th>
-				 <!--  <th>Print</th> -->
-
-				</tr>
-			</thead>
-
-			<tbody>
-			<% @lastly_postransaccionests.each do |postransaccionest| %>
-			  <tr>
-			  	<td><%= postransaccionest.created_at.to_s.split(" -")[0] %></td>
-			    <td><%= Maquinat.where(:serial => postransaccionest.serial).first.descripcion %></td>
-			    <td>*debito*</td>
-
-			    <%if postransaccionest.cantidad.nil?%>
-			    	<td> <%= "*" %> </td>
-			    	<%else%>
-			    	<td> <%= postransaccionest.cantidad.split(".")[0] %> </td>
-
-			    <%end%>
-
-			    <%if postransaccionest.cantidad.nil?%>
-			    	<td> <%= "*" %> </td>
-			    	<%else%>
-			    	<td> <%= postransaccionest.cantidad.split("..")[1] %> </td>
-
-			    <%end%>
-			    
+<% if @flag_validacion_md5 == true %>
+<% #comparar datos%>
+		<script type="text/javascript">
+			
+			if ( localStorage.getItem("md5pc") != "<%= @valor_md5_to_confirm %>"){
+				//alert("no son iguales");
+				location.replace("https://usera:pwd1234@" + location.host);
 				
-			  </tr>
-			<% end %>
-			</tbody>
-		</table>
+			}
 
-	<%end%>
-		
-	</div>
-	  
-	 <!-- Mostrar el boton imprimir solo si hay data que imprimir de las transacciones realizadas -->
-	<%if (not @lastly_transaccionests.empty?) || (not @lastly_postransaccionests.empty?) %>
+			 // alert("son iguales");
+			 // todo ok no hacer nadasi todo bien iguales ok.
 
-	<button class="button" type="button" onclick="PrintElem('tabla_recientes')" style="color:white;background-color:blue; height:25px;">  Imprimir</button> 
-
-	<% end %>
-	<!-- Esta seccion low level now and for future development only :
-
-	<div class="klk3">
-	   <button class="button" type="button" onclick= cash_modifySend('05')>Sup. Key Cicle</button> 
-	   <button class="button" type="button" onclick= cash_modifySend('05')>Sup. KeyON</button> 
-	   <button class="button" type="button" onclick= cash_modifySend('05')>Sup. KeyOFF</button> 
-	</div>
-	</br>
-
-	<div class="klk4">
-	   <button class="button" type="button" onclick= cash_modifySend('05')>Men. Key Cicle</button> 
-	   <button class="button" type="button" onclick= cash_modifySend('05')>Men. KeyON</button> 
-	   <button class="button" type="button" onclick= cash_modifySend('05')>Men. KeyOFF</button>     
-	</div>
-	-->
-
-
-
-	<%# link_to 'Back', transaccionests_path %>
-
-	<h4 style="color:blue;" >_______________________________________________________________</h4>
-
-	<h4>	Kollector Admin v1.0 - support email: kollectorsystems@hotmail.com</h4>
-	<h4>All Rights Reserved.</h4>
-
-</div>
-
-	<script type="text/javascript">
-	  	document.style.zoom="500%";
-
-	  	
-
-		function cash_modifySend(cash){
-			document.getElementById('transaccionest_cantidad').value = cash;
-			document.getElementById('transaccionest_tipotransaccion').value = "credito";	
-			document.getElementById('transaccionest_comando').value = "@cash" + cash + "^";	
-			document.getElementById('transaccionest_status').value = "pendiente";	
-		}
-
-		function reset_modifySend(cash){
-			document.getElementById('transaccionest_cantidad').value = "";
-			document.getElementById('transaccionest_tipotransaccion').value = "";	
-			document.getElementById('transaccionest_comando').value = "";	
-			document.getElementById('transaccionest_status').value = "";	
-		}
-
-	</script>
-
-
-
-
-	<script type="text/javascript">
-		function limpiar_valores(){
-			document.getElementById('transaccionest_cantidad').value = "sdsf";	
-		}
-	  
-	</script>
-
-
-
-	<body onclick="pararconteo()" >
-
-	<body onload="limpiar_valores()">
-
-		<!-- Limpiar valores de manera manual onload no esta trabajando, necesario y provisional -->
-
-
-
-	<script type="text/javascript">
-		document.getElementById('transaccionest_tipotransaccion').value = "";	
-		document.getElementById('transaccionest_cantidad').value = "";	
-		document.getElementById('transaccionest_comando').value = "";	
-		document.getElementById('transaccionest_status').value = "";	
-	</script>
-
-
-	<!-- Configuracion del counter monitor and page ACT -->
-
-
-	<script type="text/javascript">
-	 var sec = 20;
-	 //alert("ok1");
-
-	 var inka = setInterval(timertoreload, 1000);
-
-
-
-
-	function timertoreload() {
-	  //alert("klk5000");
-	  document.getElementById("conteo_reciente").innerHTML = "Reciente: " + sec + "s";
-	  if (sec > 0){
-
-	    sec = sec - 1;
-
-	  }
-
-	  if (sec < 1){
-
-	     sec = 25;
-
-	     location.reload(); 
-
-	  }
-
-
-	}
-
-
-
-	function pararconteo() {
-
-	  clearInterval(inka);
-
-	  sec = 25;
-
-	   inka = setInterval(timertoreload, 1000);
-
-	}
-
-
-	 
-	</script>
-
-
-
-
-	<!-- -----Funcion para impresion de transacciones de la tabla ok ------ -->
-
-	<script type="text/javascript">
-	  
-	  function PrintElem(elem)
-	  {
-	      var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-	      mywindow.document.write('<html><head><title>' + document.title  + '</title>');
-	      mywindow.document.write('</head><body > <h2>');
-	    //  mywindow.document.write('<h1>' + document.title  + '</h1>');
-	      mywindow.document.write(document.getElementById(elem).innerHTML);
-	      mywindow.document.write('</h2></body></html>');
-
-	      mywindow.document.close(); // necessary for IE >= 10
-	      mywindow.focus(); // necessary for IE >= 10*/
-
-	      mywindow.print();
-	      mywindow.close();
-
-	      return true;
-	  }  
-
-	</script>
-
-
-
-  <% else %>
-    
-	<h3 style="color:white;background-color:red; height:35px;"> X ERROR: <%= @salida_static1 %> </h3>
-	<h3 style="color:white;background-color:red; height:35px;"> X ERROR: <%= @salida_static2 %> </h3>
-	<h3 style="color:white;background-color:red; height:35px;"> X ERROR: <%= @salida_static3 %> </h3>
-
-
-	
+		</script>
 
 <% end %>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% #MOSTRAR DIFERENTES VISTAS DEPENDIENDO USER %>
+
+
+<% if (@vista_usuario_reporte == true )  %>
+    <h3>USER: <%= session[:usuario_actual].to_s %> </h3>
+	</br>
+	<h2> <%= link_to 'Reportes', new_reportet_path %> </h2>
+    </br>
+
+    <% if @kit_maquinats %>
+			<div id="monitor" class="monitor_class">
+
+				<% @kit_color_verde_style = "" # inicializo variablde fuera del each loop ok. %>
+				  <table>
+
+				      <tbody>
+				      	<tr>
+				      	
+				        <% @kit_maquinats.each do |transaccionest| %>
+
+				         <td>
+				          <%if @kit_maquinats_verde.include? transaccionest.id  %>
+				          <!--Si es verde, esta activa, si esta activa puede estar verde ok o amarilla:pagando: -->
+
+				           <% if @ids_mq_amarilla.include? transaccionest.id %>
+				           <button class="button" type="button" style="color:black;background-color:yellow; height:35px;">  <%=   "[#{transaccionest.sucursal.to_s}] " + transaccionest.descripcion.to_s[0..10] %>  </button> 
+				           <%else%>
+
+				           <button class="button" type="button" style="color:white;background-color:green; height:35px;">  <%=  "[#{transaccionest.sucursal.to_s}] " + transaccionest.descripcion[0..10] %>  </button> 
+				           <%end%>
+
+				           <% else  %>
+				           
+				           <button class="button" type="button" style="color:white;background-color:red; height:35px;">  <%=  "[#{transaccionest.sucursal.to_s}] " + transaccionest.descripcion.to_s[0..10]  %>  </button> 
+				          <%end%>
+
+				         </td>
+
+				        <% end %>
+				          </tr>
+				      
+				      </tbody>
+				    </table>
+			</div>
+	<%end%>
+	
+
+	
+	<script type="text/javascript">
+		setInterval(function() {location.reload()}, 300000);	// refresh monitor 5mins y main web cada  30segs
+
+		function basic_logout_js(){
+
+			//location.replace("http://usera:pwd1234@10.0.7.55:3000")
+			// alert(location.host);
+		//    alert ("usera:pwd1234@" + location.host);
+			location.replace("https://usera:pwd1234@" + location.host);
+		}
+
+	</script>
+    
+    <h4>[ <button style="color:red;" class="button" type="button" onclick= basic_logout_js()>X</button> ]</h4>
+
+<% end %>
+
+
+
+
+
+
+<% if (@vista_usuario_admin == true )  %>
+	
+	 <h3>USER: <%= session[:usuario_actual].to_s %> </h3>
+
+	</br>
+	<h2> 
+		<%= link_to 'Reportes', new_reportet_path %>
+	    <%= link_to '- Máquinas -', maquinats_path %>
+	    <%= link_to ' Usuarios -', usuariosbrts_path %>
+	    <%= link_to 'ShiftReport', accesots_path %>	 
+	
+	</h2>
+
+	<% if @kit_maquinats %>
+			<div id="monitor" class="monitor_class">
+
+				<% @kit_color_verde_style = "" # inicializo variablde fuera del each loop ok. %>
+				  <table>
+
+				      <tbody>
+				      	<tr>
+				      	
+				        <% @kit_maquinats.each do |transaccionest| %>
+
+				         <td>
+				          <%if @kit_maquinats_verde.include? transaccionest.id  %>
+				          <!--Si es verde, esta activa, si esta activa puede estar verde ok o amarilla:pagando: -->
+
+				           <% if @ids_mq_amarilla.include? transaccionest.id %>
+				           <button class="button" type="button" style="color:black;background-color:yellow; height:35px;">  <%=   "[#{transaccionest.sucursal.to_s}] " + transaccionest.descripcion.to_s[0..10] %>  </button> 
+				           <%else%>
+
+				           <button class="button" type="button" style="color:white;background-color:green; height:35px;">  <%=  "[#{transaccionest.sucursal.to_s}] " + transaccionest.descripcion[0..10] %>  </button> 
+				           <%end%>
+
+				           <% else  %>
+				           
+				           <button class="button" type="button" style="color:white;background-color:red; height:35px;">  <%=  "[#{transaccionest.sucursal.to_s}] " + transaccionest.descripcion.to_s[0..10]  %>  </button> 
+				          <%end%>
+
+				         </td>
+
+				        <% end %>
+				          </tr>
+				      
+				      </tbody>
+				    </table>
+			</div>
+	<%end%>
+	
+	
+    
+    </br>
+	
+	<script type="text/javascript">
+		setInterval(function() {location.reload()}, 300000);	// refresh 5min monitor y main web cada  30segs
+
+		function basic_logout_js(){
+
+			//location.replace("http://usera:pwd1234@10.0.7.55:3000")
+			// alert(location.host);
+		//    alert ("usera:pwd1234@" + location.host);
+			location.replace("https://usera:pwd1234@" + location.host);
+		}
+
+	</script>
+    
+    <h4>[ <button style="color:red;" class="button" type="button" onclick= basic_logout_js()>X</button> ]</h4>
+
+
+<% end %>
+
+
+
+
+<% if ( (@vista_usuario_reporte == false ) && (@vista_usuario_admin == false ) && (@vista_usuario_ventas == false) ) %>
+
+		<h3>Suc: <%= "Error tipousuario EDIT CHECK. Contactar Central e Intente de nuevo." %> </h3>
+		<script type="text/javascript">
+			function basic_logout_js(){
+
+     		//probar haciendo xmlrequets klk
+
+
+			//location.replace("http://usera:pwd1234@10.0.7.55:3000")
+			// alert(location.host);
+	     	//    alert ("usera:pwd1234@" + location.host);
+			location.replace("https://usera:pwd1234@" + location.host);
+		}
+
+     	</script>
+    
+        <h4>[ <button style="color:red;" class="button" type="button" onclick= basic_logout_js()>X</button> ]</h4>
+
+
+
+		
+
+
+<%end%>
+
+
+
+<% if ( (@vista_usuario_reporte != true ) && (@vista_usuario_admin != true) && (@vista_usuario_ventas == true) ) %>
+
+		<h3>Suc: <%= @sucursal_basada_en_maquina_de_usuario   ||  "*" %> </h3>
+
+
+
+		<%  if  @hw_equipo_no_autorizado != true %>
+
+		<% if @kit_maquinats %>
+			<div id="monitor" class="monitor_class">
+
+				<% @kit_color_verde_style = "" # inicializo variablde fuera del each loop ok. %>
+				  <table>
+
+				      <tbody>
+				      	<tr>
+				        <% @kit_maquinats.each do |transaccionest| %>
+
+				         <td>
+				          <%if @kit_maquinats_verde.include? transaccionest.id  %>
+				          <!--Si es verde, esta activa, si esta activa puede estar verde ok o amarilla:pagando: -->
+
+				           <% if @ids_mq_amarilla.include? transaccionest.id %>
+				           <button class="button" type="button" style="color:black;background-color:yellow; height:35px;">  <%= transaccionest.descripcion %>  </button> 
+				           <%else%>
+
+				           <button class="button" type="button" style="color:white;background-color:green; height:35px;">  <%= transaccionest.descripcion %>  </button> 
+				           <%end%>
+
+				           <% else  %>
+				           
+				           <button class="button" type="button" style="color:white;background-color:red; height:35px;">  <%= transaccionest.descripcion %>  </button> 
+				          <%end%>
+
+				         </td>
+
+				        <% end %>
+				          </tr>
+				      </tbody>
+				    </table>
+			</div>
+		<%end%>
+
+			<p>_______________________________________________________</p>
+
+			<h2 style="color:darkblue;" >Enviar Cr&eacute;ditos($):</h2>
+
+
+			<!-- 
+
+				<% # @kit_color_verde_style # =  "class=\"button\" type=\"button\" style=\"color:white;background-color:green; height:35px;\"  onclick= cash_modifySend()> "              #{}"style=\"color:white;background-color:green; height:35px;\"" %>
+
+
+			<div class="seccion_monitoreo">
+			   <button class="button" type="button" style="color:white;background-color:green; height:35px;" onclick= cash_modifySend('05')>1PoG</button> 
+			   <button class="button" type="button" onclick= cash_modifySend('05')>2</button> 
+			   <button class="button" type="button" onclick= cash_modifySend('05')>3</button> 
+			   <button class="button" type="button" onclick= cash_modifySend('05')>4</button> 
+			   <button class="button" type="button" onclick= cash_modifySend('05')>5</button> 
+			   <button class="button" type="button" onclick= cash_modifySend('05')>6</button> 
+			   <button class="button" type="button" onclick= cash_modifySend('05')>7</button> 
+			   <button class="button" type="button" onclick= cash_modifySend('05')>8</button> 
+			   <button class="button" type="button" onclick= cash_modifySend('05')>9</button> 
+			</div>
+
+			-->
+
+
+
+			<%= render 'form2', transaccionest: @transaccionest %>
+
+			<!-- Esto para indicar mensane de error cuando la mq esten en rojo. No credit sent -->
+			<p id="notice"><%= notice %></p>
+
+
+			<!-- El grupo de botones de creditos esta/lo puse dentro del form2.html para fines de mejorar el layout ok. -->
+
+			<h4 style="color:blue;">_______________________________________________________________________________________________</h4>
+
+			<%if @poner_en_amarillo_banca_flag %>
+			  <h3 style="color: red"><< PLEASE UPDATE ONLINE! >></h3>
+			<%end%>
+
+			<h3>
+
+			<%= link_to 'Reportes', new_reportet_path %>
+			<% link_to '- Máquinas -', maquinats_path %>
+			<% link_to 'Sucursal ', localidadts_path %>
+		    <% link_to 'ShiftReport', accesots_path %>	    
+
+			</h3>
+
+			<h3 style="color:green;" > HOY:
+			(VENDIDO: $ <%= ActionController::Base.helpers.number_to_currency(@total_in, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %> ) - (PAGADO: $ <%= ActionController::Base.helpers.number_to_currency(@total_out, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %> ) = (NETO: $ <%= ActionController::Base.helpers.number_to_currency(@neto_hoy, :unit => "", :delimiter => ",", :precision => 0, :separator => "." )  %> )
+			</h3>
+
+			
+			<h3 id="conteo_reciente">Reciente:</h3>
+
+
+			<div id="tabla_recientes" class="tabla_transacciones">
+
+			 <h2 id="Titulo_Ticket_Reporte_Banca" hidden=""> <%= Localidadt.last.sucursal %> </h2>
+
+		     <h3><button id="resfresh_button1" onclick="location.reload();" >@</button> Env&iacute;os Recientes (cr&eacute;ditos):</h3> <!--Fuera del if para que siempre salga el titulo, aunque los detalles salgan en blanco si no hubo acreditaciones ok. --> 
+			
+		    <% if @lastly_transaccionests %>
+				<%if not @lastly_transaccionests.empty? %>
+				    
+					<table>
+						<thead>
+							<tr>
+							  <th>Fecha</th>
+							  <th>MQ</th>
+							  <th></th>
+							  <th>$$</th>  
+							  <th>Status</th>
+							 <!--  <th>Print</th> -->
+
+							</tr>
+						</thead>
+
+						<tbody>
+						<% @lastly_transaccionests.each_with_index do |transaccionest, index| %>
+						<%if index == 0%> <!--Resaltar last credito enviado -->
+							  <tr style="color: blue">
+							  	<% st = transaccionest.created_at.to_s.split(" -")[0] %>
+							  	
+							  	<td><%= st[8..9] + "-" + st[5..6] + "-" + st[2..3] + st[10..19] %></td>
+							    <td><%= transaccionest.maquinat.descripcion.split(" ").map { |x| "#{x[0]}" }.join() + ".J"+ ( transaccionest.jugador.nil? ? "1" : transaccionest.jugador.to_s ) %></td>
+							    <td><%= (transaccionest.tipotransaccion.to_s == "credito"? "+" : "-") %></td>
+							    <td><%= transaccionest.cantidad %></td>
+							    <td>  &nbsp;  <%= transaccionest.status %></td>
+							<!-- 
+							    <td><%  @line_tx_with_id = 'line_tx_with_id_' + transaccionest.id.to_s %>
+									<button class="button" type="button"  style="color:white;background-color:blue; height:35px;"> Print  </button> 
+							    </td>
+							-->
+							    
+							  </tr>
+						
+						<%else%>
+								<tr>
+									  	<% st = transaccionest.created_at.to_s.split(" -")[0] %>
+									  	
+									  	<td><%= st[8..9] + "-" + st[5..6] + "-" + st[2..3] + st[10..19] %></td>
+									    <td><%= transaccionest.maquinat.descripcion.split(" ").map { |x| "#{x[0]}" }.join() + ".J"+ ( transaccionest.jugador.nil? ? "1" : transaccionest.jugador.to_s ) %></td>
+									    <td><%= (transaccionest.tipotransaccion.to_s == "credito"? "+" : "-") %></td>
+									    <td><%= transaccionest.cantidad %></td>
+									    <td>  &nbsp;  <%= transaccionest.status %></td>
+									
+									    
+								</tr>
+
+						<%end%>
+
+
+
+						<% end %>
+						</tbody>
+
+					</table>
+
+				<%end%>
+			<%end%>
+
+			<h3><button id="resfresh_button2" onclick="location.reload();" >@</button>Pagos Recientes (d&eacute;bitos): </h3> <!--Fuera del if para que siempre salga el titulo, aunque los detalles de pagos recientes salgan en blanco si no hubo pagos ok. -->
+			<%if @lastly_postransaccionests %>
+				<%if not @lastly_postransaccionests.empty? %>
+			 
+					<table>
+						<thead>
+							<tr>
+							  <th>Fecha</th>
+							  <th>MQ.</th>
+							  <th> </th>
+							  <th>$$</th>  
+							  <th>Status</th>
+							 <!--  <th>Print</th> -->
+
+							</tr>
+						</thead>
+
+						<tbody>
+						<% @lastly_postransaccionests.each_with_index do |postransaccionest, index| %> 
+							<%if index == 0%> <!--Resaltar last pago enviado -->
+
+								  <tr style="color: red">
+								  	<% st = postransaccionest.created_at.to_s.split(" -")[0] %>	  	
+								  	<td><%= st[8..9] + "-" + st[5..6] + "-" + st[2..3] + st[10..19] %></td>
+								  <!-- 	<td><%= postransaccionest.created_at.to_s.split(" -")[0] %></td> -->
+								    <td> <!-- aqui no mostraremos el jugador .j1 si la maq es ptgold ok monojugador ademas usameos este campo para las confirmaciones tag ptogol ok gio g ok ted -->
+								    	<%if ( Maquinat.where(:serial => postransaccionest.serial).first.serial.to_s.include?("01-001-0") )  %>
+								    	 <%= Maquinat.where(:serial => postransaccionest.serial).first.descripcion.split(" ").map { |x| "#{x[0]}" }.join().to_s  %>
+								    	 <%else%>
+								    	   <%= Maquinat.where(:serial => postransaccionest.serial).first.descripcion.split(" ").map { |x| "#{x[0]}" }.join().to_s + ".J" + ( postransaccionest.jugador.nil? ? "I" : postransaccionest.jugador.to_s )  %>
+
+								    	 <%end%>
+								    		
+								     </td>
+
+								    <td> - </td>
+
+								    <%if postransaccionest.cantidad.nil?%>
+								    	<td> &nbsp; <%= "*" %> </td>
+								    	<%else%>
+								    	<td> <%= postransaccionest.cantidad.split(".")[0] %> </td>
+
+								    <%end%>
+
+								    <%if postransaccionest.cantidad.nil?%>
+								    	<td> &nbsp; <%= "*" %> </td>
+								    	<%else%>
+								        <% @abreviar = postransaccionest.cantidad.split("..")[1]%>  <!-- 500..devolucion => "devolucion" PoG only creo ted. => "Devol." abreviado impresion ticket ok ted. -->
+								    	<td> <%= (@abreviar == nil ? " " : @abreviar[0..4] + "." ) %> </td>
+
+								    <%end%>
+								    
+									
+								  </tr>
+
+							<%else%>
+									<tr>
+									  	<% st = postransaccionest.created_at.to_s.split(" -")[0] %>	  	
+									  	<td><%= st[8..9] + "-" + st[5..6] + "-" + st[2..3] + st[10..19] %></td>
+									   <td> <!-- aqui no mostraremos el jugador .j1 si la maq es ptgold ok monojugador ademas usameos este campo para las confirmaciones tag ptogol ok gio g ok ted -->
+								    	<%if ( Maquinat.where(:serial => postransaccionest.serial).first.serial.to_s.include?("01-001-0") )  %>
+								    	 <%= Maquinat.where(:serial => postransaccionest.serial).first.descripcion.split(" ").map { |x| "#{x[0]}" }.join().to_s  %>
+								    	 <%else%>
+								    	   <%= Maquinat.where(:serial => postransaccionest.serial).first.descripcion.split(" ").map { |x| "#{x[0]}" }.join().to_s + ".J" + ( postransaccionest.jugador.nil? ? "I" : postransaccionest.jugador.to_s )  %>
+
+								    	 <%end%>
+								    		
+								     </td>
+									    <td> - </td>
+
+									    <%if postransaccionest.cantidad.nil?%>
+									    	<td> &nbsp; <%= "*" %> </td>
+									    	<%else%>
+									    	<td> <%= postransaccionest.cantidad.split(".")[0] %> </td>
+
+									    <%end%>
+
+									    <%if postransaccionest.cantidad.nil?%>
+									    	<td> &nbsp; <%= "*" %> </td>
+									    	<%else%>
+									        <% @abreviar = postransaccionest.cantidad.split("..")[1]%>  <!-- 500..devolucion => "devolucion" PoG only creo ted. => "Devol." abreviado impresion ticket ok ted. -->
+									    	<td> <%= (@abreviar == nil ? " " : @abreviar[0..4] + "." ) %> </td>
+
+									    <%end%>
+										
+									</tr>
+
+							<%end%>
+
+						<% end %>
+
+						</tbody>
+
+					</table>
+
+
+
+				<%end%>
+			<%end%>
+			
+			<h3 id="Footer_Ticket_Reporte_Banca" hidden=""> Kollector Systems. </h3>
+
+				
+			</div>
+			  
+			 <!-- Mostrar el boton imprimir solo si hay data que imprimir de las transacciones realizadas -->
+			<%if @lastly_transaccionests && @lastly_postransaccionests %> 
+				<%if (not @lastly_transaccionests.empty?) || (not @lastly_postransaccionests.empty?) %>
+
+				<button class="button" type="button" onclick="PrintElem('tabla_recientes')" style="color:white;background-color:blue; height:25px;">  Imprimir</button> 
+
+				<% end %>
+			<% end %>
+			<!-- Esta seccion low level now and for future development only :
+
+			<div class="klk3">
+			   <button class="button" type="button" onclick= cash_modifySend('05')>Sup. Key Cicle</button> 
+			   <button class="button" type="button" onclick= cash_modifySend('05')>Sup. KeyON</button> 
+			   <button class="button" type="button" onclick= cash_modifySend('05')>Sup. KeyOFF</button> 
+			</div>
+			</br>
+
+			<div class="klk4">
+			   <button class="button" type="button" onclick= cash_modifySend('05')>Men. Key Cicle</button> 
+			   <button class="button" type="button" onclick= cash_modifySend('05')>Men. KeyON</button> 
+			   <button class="button" type="button" onclick= cash_modifySend('05')>Men. KeyOFF</button>     
+			</div>
+			-->
+
+
+
+			<%# link_to 'Back', transaccionests_path %>
+
+			<h4 style="color:blue;" >_______________________________________________________________</h4>
+
+			<h4>	Kollector Admin v1.0 - support email: kollectorsystems@hotmail.com</h4>
+			<h4>All Rights Reserved.</h4>
+
+
+
+		</div>
+
+			<script type="text/javascript">
+			  	document.style.zoom="500%";
+
+			  	
+
+				function cash_modifySend(cash){
+					document.getElementById('transaccionest_cantidad').value = cash;
+					document.getElementById('transaccionest_tipotransaccion').value = "credito";	
+					document.getElementById('transaccionest_comando').value = "@cash" + cash + "^";	
+					document.getElementById('transaccionest_status').value = "pendiente";	
+				}
+
+				function reset_modifySend(cash){
+					document.getElementById('transaccionest_cantidad').value = "";
+					document.getElementById('transaccionest_tipotransaccion').value = "";	
+					document.getElementById('transaccionest_comando').value = "";	
+					document.getElementById('transaccionest_status').value = "";	
+				}
+
+				function command_switch_supervisor(comando){
+					document.getElementById('transaccionest_cantidad').value = 'Limpiar Alarma: Supervisor (S18a)';
+					document.getElementById('transaccionest_tipotransaccion').value = "comando";	
+					document.getElementById('transaccionest_comando').value = "@" + comando + "^";	
+					document.getElementById('transaccionest_status').value = "pendiente";	
+				}
+
+				function command_switch_supervisor_disable_machine(comando){
+					// document.getElementById("password_div").style.display = "block";
+					document.getElementById('transaccionest_cantidad').value = 'Desabilitar Mq. Sup.(S18b)';
+					document.getElementById('transaccionest_tipotransaccion').value = "comando";	
+					document.getElementById('transaccionest_comando').value = "@" + comando + "^";	
+					document.getElementById('transaccionest_status').value = "pendiente";	
+				}
+
+				
+		        function command_switch_admin(comando){
+					document.getElementById('transaccionest_cantidad').value = 'Switch Admin (S14)';
+					document.getElementById('transaccionest_tipotransaccion').value = "comando";	
+					document.getElementById('transaccionest_comando').value = "@" + comando + "^";	
+					document.getElementById('transaccionest_status').value = "pendiente";	
+				}
+
+				function command_switch_pantalla(comando){
+					document.getElementById('transaccionest_cantidad').value = 'Cambiar Pantalla (Switch Screen)';
+					document.getElementById('transaccionest_tipotransaccion').value = "comando";	
+					document.getElementById('transaccionest_comando').value = "@" + comando + "^";	
+					document.getElementById('transaccionest_status').value = "pendiente";	
+				}
+
+
+
+			</script>
+
+
+
+
+			<script type="text/javascript">
+				function limpiar_valores(){
+					document.getElementById('transaccionest_cantidad').value = "sdsf";	
+				}
+			  
+			</script>
+
+
+
+			<body onclick="pararconteo()" >
+
+			<body onload="limpiar_valores()">
+
+				<!-- Limpiar valores de manera manual onload no esta trabajando, necesario y provisional -->
+
+
+
+			<script type="text/javascript">
+				document.getElementById('transaccionest_tipotransaccion').value = "";	
+				document.getElementById('transaccionest_cantidad').value = "";	
+				document.getElementById('transaccionest_comando').value = "";	
+				document.getElementById('transaccionest_status').value = "";	
+			</script>
+
+
+			<!-- Configuracion del counter monitor and page ACT -->
+
+
+			<script type="text/javascript">
+
+			 var sec = 7;
+
+			 var inka = setInterval(timertoreload, 1000);
+
+
+			function timertoreload() {
+			  //alert("klk5000");
+			  document.getElementById("conteo_reciente").innerHTML = "Reciente: " + sec + "s";
+			  if (sec > 0){
+
+			    sec = sec - 1;
+
+			  }
+
+			  if (sec < 1){
+
+			     sec = 7;
+
+			     location.reload(); 
+
+			  }
+
+
+			}
+
+
+
+			function pararconteo() {
+
+			  clearInterval(inka);
+
+			  sec = 7;
+
+			   inka = setInterval(timertoreload, 1000);
+
+			}
+
+
+
+
+		//var bbb = setTimeout(reenvio, 5000);
+
+		// Salir basico ok stackvo44022128
+
+		function basic_logout_js(){
+
+			//location.replace("http://usera:pwd1234@10.0.7.55:3000")
+			// alert(location.host);
+		//    alert ("usera:pwd1234@" + location.host);
+			location.replace("https://usera:pwd1234@" + location.host);
+		}
+
+
+
+
+
+
+
+			 
+			</script>
+
+
+
+
+			<!-- -----Funcion para impresion de transacciones de la tabla ok ------ -->
+
+			<script type="text/javascript">
+			  
+			  function PrintElem(elem)
+			  {
+			  	 //Setear mostrar el Titulo en el cuerpo del div, ponerlo visible para imprimir el header del ticket
+			  	  document.getElementById("Titulo_Ticket_Reporte_Banca").style.display = "block";
+			  	  document.getElementById("Footer_Ticket_Reporte_Banca").style.display = "block";
+
+
+			      var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+			      mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+			      mywindow.document.write('</head><body > <h2>');
+			    //  mywindow.document.write('<h1>' + document.title  + '</h1>');
+			      mywindow.document.write(document.getElementById(elem).innerHTML);
+			      mywindow.document.write('</h2></body></html>');
+
+			      mywindow.document.close(); // necessary for IE >= 10
+			      mywindow.focus(); // necessary for IE >= 10*/
+
+			      mywindow.print();
+			      mywindow.close();
+
+			      document.getElementById("Titulo_Ticket_Reporte_Banca").style.display = "none";
+			      document.getElementById("Footer_Ticket_Reporte_Banca").style.display = "none";
+
+
+			      return true;
+			  }  
+
+			</script>
+
+
+
+		  <% else %>
+		    
+			<h3 style="color:white;background-color:red; height:35px;"> X ERROR: <%= @salida_static1 %> </h3>
+			<h3 style="color:white;background-color:red; height:35px;"> X ERROR: <%= @salida_static2 %> </h3>
+			<h3 style="color:white;background-color:red; height:35px;"> X ERROR: <%= @salida_static3 %> </h3>
+
+		<!--
+			</br>
+			</br>
+			<h2> X ERROR: <%= @salida_static4 %> </h2>
+			</br>
+			<h2> X ERROR: <%= @salida_static5 %> </h2>
+		    </br>
+		    </br>
+		-->
+			
+
+		<% end %>
+
+<% end %>
 
 
 

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fecha: MyString
+  consorcio: MyString
+  sucursal: MyString
+  localidad: MyString
+  serialmq: MyString
+  cantidad: MyString
+  montoxcontribuyente: MyString
+
+two:
+  fecha: MyString
+  consorcio: MyString
+  sucursal: MyString
+  localidad: MyString
+  serialmq: MyString
+  cantidad: MyString
+  montoxcontribuyente: MyString

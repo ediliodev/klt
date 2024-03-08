@@ -11,6 +11,43 @@
     </div>
   <% end %>
 
+
+
+ <div class="field">
+    <%= form.label "Consorcio" %>
+    <%= form.text_field :consorcio, id: :maquinat_consorcio %>
+  </div>
+
+
+   <div class="field">
+    <%= form.label "Sucursal (debe ser minuscula)" %>
+    <%= form.text_field :sucursal, id: :maquinat_sucursal %>
+  </div>
+
+   <div class="field">
+    <%= form.label "usuarioventa (el mismo de sucursal)" %>
+    <%= form.text_field :usuarioventa, id: :maquinat_usuarioventa %>
+  </div>
+
+   <div class="field">
+    <%= form.label "Supervisor" %>
+    <%= form.text_field :supervisor, id: :maquinat_supervisor %>
+  </div>
+
+   <div class="field">
+    <%= form.label "Entrada" %>
+    <%= form.text_field :entrada, id: :maquinat_entrada %>
+  </div>
+
+   <div class="field">
+    <%= form.label "Salida" %>
+    <%= form.text_field :salida, id: :maquinat_salida %>
+  </div>
+
+
+
+
+
   <div class="field">
     <%= form.label :tipomaquinat_id %>
     <%= form.select :tipomaquinat_id, Tipomaquinat.order(:tipomaquina).collect{ |item|  [ " --> " + item.tipomaquina , item.id ] } %> 
@@ -25,10 +62,12 @@
     <%= form.text_field :descripcion, id: :maquinat_descripcion %>
   </div>
 
+  
    <div class="field">
     <%= form.label "Serial" %>
     <%= form.text_field :serial, id: :maquinat_serial %>
   </div>
+
 
   <div class="field">
     <%= form.label "Activa" %>
@@ -36,6 +75,9 @@
     <%= form.select :activa, ["si", "no"].collect{ |item|  [ item , item ] } %> 
 
   </div>
+
+<!-- (:tipomaquinat_id, :descripcion, :serial, :activa, :lastseen, :consorcio, :sucursal, :usuarioventa, :supervisor, :entrada, :salida )
+  -->
 
 <!--
   <div class="field">

@@ -1,0 +1,24 @@
+A continuacion presento las consideraciones para el setup del vps server de produccion:
+
+Escenario:
+Ubuntu server 16.04
+Vmware player 6 (VPS)
+Ruby 2.5.1p57
+Rails 5.1.7
+
+Realizar la instalacion de ruby y postgres segun link gorails ubuntu 16.04 production server
+esto ahy que documentarlo bien, para eso hay que hacer un new vps setup live install e ir documentando todo.
+De lo que recuerdo bien:
+
+Setup vps
+setup ssh server (sudo apt-get install openssh-server, ruby, postgres, puma.conf production, etc...)
+configurar postgress para aceptar conexiones tcp/ip y de la red del server. 
+tratar de que rails console funcione
+hacer el rails db:migrate en produccion etc..
+gem install rails 
+rbenv rehash
+copiar el proyecto
+configurar el asset precompile true en la configuracion del enviroment/production.rb del proyecto
+realizar el rails 
+
+puma -e "production"

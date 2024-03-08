@@ -1,0 +1,79 @@
+Kollector VIP Systems - SOFTWARE & API DOCUMENTACION:
+
+La siguiente documentacion es una descripcion general del software y de la API del sistema.
+
+Kollector es un Software que permite controlar y administrar las maquinas de casino Pot of Gold's y Ruletas desde un computador
+para que puedan operar de manera 'coinless', sin necesidad de utilizar comparadores de monedas, billeteros, hoppers o impresoras de tickets en cada maquina en servicio. EL programa permite administrar el envio y la recepcion de creditos, reporte de cuadre de ventas diarias y por rango de fechas, ventas global y ventas detallada por maquina, porcentajes de beneficios, entre otras. Tambien permite el monitoreo y el status de las maquinas en tiempo real para verificar siempre la disponibilidad de las mismas.
+
+Descripcion de la API:
+
+La API esta basada en un servidor web con las siguientes especificaciones:
+*************************
+SERVER IP: 10.0.7.213
+SERVER PORT: 3000
+
+*************************
+
+Cada maquina debe tener un identificador (ID_SERIAL) unico con el siguiente formato y debe conectar al server en modo polling para recibir creditos, y en modo post para enviar un cashout o payout disponible.
+
+ID_SERIAL:   [STRING]  '02-000-0001' hasta  '02-000-9999'
+IP_MAQUINA:  [NETWORK]  10.0.7.111 hasta 10.0.7.150
+MSK_MAQUINA: [NETWORK]  255.255.255.0 (/24)
+
+************************
+
+BUSCAR CREDITOS PARA LA MAQUINA [GET CREDITS]:
+
+TYPE:   HTML 
+METHOD: GET (POLLING) HTTP/1.0
+URL:    /transaccionests?serial=02-000-0001
+Si hay credito disponible retorna un string html del que debes buscar o filtar el comando del credito en este formato:
+@cash05^j1#    ->  05   pesos en creditos (para jugador 1)
+@cash10^j1#    ->  10   pesos en creditos (para jugador 1)
+@cash25^j2#    ->  25   pesos en creditos (para jugador 2)
+@cash50^j3#    ->  50   pesos en creditos (para jugador 3)
+@cash100^j4#   ->  100  pesos en creditos (para jugador 4)
+@cash200^j5#   ->  200  pesos en creditos (para jugador 5)
+@cash500^j6#   ->  500  pesos en creditos (para jugador 6)
+@cash1000^j6#  ->  1000 pesos en creditos (para jugador 6)
+
+ 
+
+Nota: el polling (get credits) deber ser realizado cada 3-5 segundos para verificar disponibilidad de un nuevo credito y validar que la 
+maquina siempre esta online. Si la maquina dura mas de 60 segundos sin hacerlo se considera offline y el credito es anulado automaticamente. Esto para evitar creditos flotantes en el sistema. Si la conexion con la maquina sube antes de los 60 segundos, el credito llegara de manera normal a la misma.
+
+
+************************
+
+ENVIAR UN PAGO DESDE LA MAQUINA [CASHOUT/PAYOUT]:
+
+TYPE:   JSON 
+METHOD: POST HTTP/1.1
+URL:    /postransaccionests
+DATA:   { 'cantidad:500j1', 'serial:02-000-0001' } -> 500 pesos desde jugador 1 (cashout j1)
+
+
+DATA:   { 'cantidad:500j2', 'serial:02-000-0001' } -> 500 pesos desde jugador 2 (cashout j2)
+DATA:   { 'cantidad:500j3', 'serial:02-000-0001' } -> 500 pesos desde jugador 3 (cashout j3)
+.
+.
+DATA:   { 'cantidad:500j6', 'serial:02-000-0001' } -> 500 pesos desde jugador 6 (cashout j6)
+
+
+nota: si llega sin judador { 'cantidad:500', 'serial:02-000-0001' }  se le atribuye al jugador 1 siempre => default. Si quieres enviar todos los creditos de los 6 jugadores CADA JUGADOR debe hacer su post (cashout button) independiente. Si lo mandan todo en un solo comando { 'cantidad:500', 'serial:02-000-0001' } jugador 1 sera el default cashout player. Solo para informar.
+
+
+
+
+Nota: El cashout/payout se debe enviar una sola vez y si hay conexion con el sistema. Si no hay conexion se debe guardar en la maquina en la tabla de historial de ganadores, ejemplo: tabla de ultimos 10 premios ganadores. Si deseas puedes tratar de enviarlo nuevamente pero antes de los 60 segundos y sin repeticiones.
+
+************************
+
+
+
+Kollector Systems - All rights reserved © 2020.
+
+
+
+
+ 

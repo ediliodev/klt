@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  color: MyString
+  totalinold: MyString
+  totalinnow: MyString
+  cantidad: MyString
+  trigger: MyString
+
+two:
+  color: MyString
+  totalinold: MyString
+  totalinnow: MyString
+  cantidad: MyString
+  trigger: MyString

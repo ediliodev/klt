@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Participantes:</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Consorcio</th>
+      <th>Sucursal</th>
+      <th>Siglas</th>
+      <th>Localidad</th>
+      <th>SerialMq</th>
+    <!--   <th>Countermeterold</th> -->
+    <!--   <th>Countermeternew</th> -->
+      <th>Aporte</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contribuyentets.each do |contribuyentet| %>
+      <tr>
+        <td><%= contribuyentet.consorcio %></td>
+        <td><%= contribuyentet.sucursal %></td>
+        <td><%= contribuyentet.siglas %></td>
+        <td><%= contribuyentet.localidad %></td>
+        <td>*<% contribuyentet.serialmq %></td>
+       <!-- <td><% contribuyentet.countermeterold %></td> -->
+       <!-- <td><% contribuyentet.countermeternew %></td> -->
+        <td><%= contribuyentet.aportemega %></td>
+        <td><% link_to 'Show', contribuyentet %></td>
+        <td><%= link_to 'Editar', edit_contribuyentet_path(contribuyentet) %></td>
+        <td><% link_to 'Destroy', contribuyentet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contribuyentet', new_contribuyentet_path %>

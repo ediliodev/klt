@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+      <style>
+          body, html {
+            height: 100%;
+            margin: 0;
+          }
+
+          .bg {
+            /* The image used */
+            background-image: url("../br1.png");
+
+            /* Full height */
+            height: 100%; 
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+
+           .win_display_iphone6s{
+            color: white;
+            font-size: 15px;
+            border-radius: 10%;
+            padding: 1px 1px;
+            position: absolute;
+            left: 76.5px;
+            top: 61px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             border: 0px transparent; */             
+          }
+
+           .credit_display_iphone6s{
+            color: white;
+            font-size: 15px;
+            border-radius: 10%;
+            padding: 1px 1px;
+            position: absolute;
+            left: 210px;
+            top: 61px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             border: 0px transparent; */             
+          }
+
+           .spin_display_iphone6s{
+            color: yellow;
+            font-size: 10px;
+            border-radius: 50%;
+            padding: 2px 2px;
+            position: absolute;
+            background-color: yellow;
+            /* left: 194px;  ajustar esta coodenada para cada btn */ 
+            /* top: 62px;    ajustar esta coodenada para cada btn */ 
+             /*border: 2px transparent; */  
+              border: 0.5px solid gray;*/
+           /*  border: 0px transparent; */             
+          }
+
+
+
+
+           .button_cancel_iphone6s{
+            font-size: 6px;
+            border-radius: 10%;
+            padding: 5px 4px;
+            position: absolute;
+            left: 62px;
+            top: 118px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             
+              background-color: yellow;
+
+            /* font-size: 8px; border-radius: 10%; padding: 2px 2px;  */
+          }
+
+          .button_start_iphone6s{
+            font-size: 6px;
+            border-radius: 10%;
+            padding: 5px 4px;
+            position: absolute;
+            left: 227px;
+            top: 117px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             
+              background-color: red;
+
+            /* font-size: 8px; border-radius: 10%; padding: 2px 2px;  */
+          }
+
+
+
+          .button_iphone6s{
+            font-size: 6px;
+            border-radius: 10%;
+            padding: 3px 5px;
+            position: absolute;
+          /*  left: 124px; ajustar esta coodenada para cada btn */ 
+          /*  top: 155px;  ajustar esta coodenada para cada btn */  
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             
+            background-color: yellow;
+
+            /* font-size: 8px; border-radius: 10%; padding: 2px 2px;  */
+          }
+
+
+
+          .button_ejemplo {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 4px 4px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 5px;
+          }
+
+          @font-face{
+           font-family:'digital-clock-font';
+           src: url('digital-7.mono.ttf');
+          }
+
+      </style>
+
+  </head>
+
+
+  <body>
+
+    <audio id="sound1" src="../musicafondojuego.mp3" preload="auto"></audio>
+    <audio id="sound3" src="../escopetavacia.mp3" preload="auto"></audio>
+    <audio id="sound4" src="../sonidoseleccion.mp3" preload="auto"></audio>
+    <audio id="sound50" src="../xp.mp3" preload="auto"></audio>
+
+<!-- 
+<p style="font-family:'digital-clock-font'"> TEST 1234</p>
+-->
+    <div class="bg">  
+
+
+<!--WIN DISPLAY BUTTON -->
+ <button style="font-family:'digital-clock-font'" id="win_display" class="win_display_iphone6s" onclick="sonartbn();" >0000</button>
+
+
+<!--CREDIT DISPLAY BUTTON -->
+ <button style="font-family:'digital-clock-font'" id="credit_display" class="credit_display_iphone6s" onclick="sonartbn();" >0050</button>
+
+<!--SPIN DISPLAY BUTTONS -->
+ <button id="spin_0" class="spin_display_iphone6s" style="left: 158px; top: 30px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_5" class="spin_display_iphone6s" style="left: 175px; top: 34px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_12" class="spin_display_iphone6s" style="left: 188px; top: 46px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_3" class="spin_display_iphone6s" style="left: 194px; top: 62px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_10" class="spin_display_iphone6s" style="left: 193px; top: 79px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_1" class="spin_display_iphone6s" style="left: 182px; top: 95px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_8" class="spin_display_iphone6s" style="left: 167px; top: 103px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_9" class="spin_display_iphone6s" style="left: 148px; top: 103px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_2" class="spin_display_iphone6s" style="left: 132px; top: 95px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_7" class="spin_display_iphone6s" style="left: 122px; top: 80px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_6" class="spin_display_iphone6s" style="left: 120px; top: 62px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_11" class="spin_display_iphone6s" style="left: 126px; top: 46px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_4" class="spin_display_iphone6s" style="left: 140px; top: 34px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+
+
+
+<!--CANCEL BUTTON -->
+ <button id="btn_cancel" class="button_cancel_iphone6s" onclick="sonartbn();refresh_con_delay();" >CANCEL</button>
+
+
+<!--START BUTTON -->
+ <button id="btn_start" class="button_start_iphone6s" onclick="sonartbn3();ronda_spin_animation1_off();reset_vuelta_counter();ronda_spin_game_fast(4);" >START</button>
+
+<!--0_BUTTON -->
+      <button id="btn_0_1" class="button_iphone6s" style="left: 124px; top: 155px;" onclick="sonartbn();toggle_selection('btn_0_1');" >1</button>
+      <button id="btn_0_2" class="button_iphone6s" style="left: 182px; top: 155px;" onclick="sonartbn();toggle_selection('btn_0_2');" >2</button>
+
+      <button id="btn_0_3" class="button_iphone6s" style="left: 124px; top: 183px;" onclick="sonartbn();toggle_selection('btn_0_3');" >3</button>
+      <button id="btn_0_4" class="button_iphone6s" style="left: 182px; top: 183px;" onclick="sonartbn();toggle_selection('btn_0_4');" >4</button>
+
+
+<!--1_BUTTON -->
+      <button id="btn_1_1" class="button_iphone6s" style="left: 80px; top: 213px;" onclick="sonartbn();toggle_selection('btn_1_1');" >1</button>
+      <button id="btn_1_2" class="button_iphone6s" style="left: 110px; top: 213px;" onclick="sonartbn();toggle_selection('btn_1_2');" >2</button>
+
+      <button id="btn_1_3" class="button_iphone6s" style="left: 80px; top: 242px;" onclick="sonartbn();toggle_selection('btn_1_3');" >3</button>
+      <button id="btn_1_4" class="button_iphone6s" style="left: 110px; top: 242px;" onclick="sonartbn();toggle_selection('btn_1_4');" >4</button>
+
+
+<!--2_BUTTON -->
+      <button id="btn_2_1" class="button_iphone6s" style="left: 138px; top: 213px;" onclick="sonartbn();toggle_selection('btn_2_1');" >1</button>
+      <button id="btn_2_2" class="button_iphone6s" style="left: 168px; top: 213px;" onclick="sonartbn();toggle_selection('btn_2_2');" >2</button>
+
+      <button id="btn_2_3" class="button_iphone6s" style="left: 138px; top: 242px;" onclick="sonartbn();toggle_selection('btn_2_3');" >3</button>
+      <button id="btn_2_4" class="button_iphone6s" style="left: 168px; top: 242px;" onclick="sonartbn();toggle_selection('btn_2_4');" >4</button>
+
+
+
+<!--3_BUTTON -->
+      <button id="btn_3_1" class="button_iphone6s" style="left: 196px; top: 213px;" onclick="sonartbn();toggle_selection('btn_3_1');" >1</button>
+      <button id="btn_3_2" class="button_iphone6s" style="left: 226px; top: 213px;" onclick="sonartbn();toggle_selection('btn_3_2');" >2</button>
+
+      <button id="btn_3_3" class="button_iphone6s" style="left: 196px; top: 242px;" onclick="sonartbn();toggle_selection('btn_3_3');" >3</button>
+      <button id="btn_3_4" class="button_iphone6s" style="left: 226px; top: 242px;" onclick="sonartbn();toggle_selection('btn_3_4');" >4</button>
+
+
+
+
+<!--4_BUTTON -->
+      <button id="btn_4_1" class="button_iphone6s" style="left: 80px; top: 271px;" onclick="sonartbn();toggle_selection('btn_4_1');" >1</button>
+      <button id="btn_4_2" class="button_iphone6s" style="left: 110px; top: 271px;" onclick="sonartbn();toggle_selection('btn_4_2');" >2</button>
+
+      <button id="btn_4_3" class="button_iphone6s" style="left: 80px; top: 300px;" onclick="sonartbn();toggle_selection('btn_4_3');" >3</button>
+      <button id="btn_4_4" class="button_iphone6s" style="left: 110px; top: 300px;" onclick="sonartbn();toggle_selection('btn_4_4');" >4</button>
+
+
+<!--5_BUTTON -->
+      <button id="btn_5_1" class="button_iphone6s" style="left: 138px; top: 271px;" onclick="sonartbn();toggle_selection('btn_5_1');" >1</button>
+      <button id="btn_5_2" class="button_iphone6s" style="left: 168px; top: 271px;" onclick="sonartbn();toggle_selection('btn_5_2');" >2</button>
+
+      <button id="btn_5_3" class="button_iphone6s" style="left: 138px; top: 300px;" onclick="sonartbn();toggle_selection('btn_5_3');" >3</button>
+      <button id="btn_5_4" class="button_iphone6s" style="left: 168px; top: 300px;" onclick="sonartbn();toggle_selection('btn_5_4');" >4</button>
+
+
+
+<!--6_BUTTON -->
+      <button id="btn_6_1" class="button_iphone6s" style="left: 196px; top: 271px;" onclick="sonartbn();toggle_selection('btn_6_1');" >1</button>
+      <button id="btn_6_2" class="button_iphone6s" style="left: 226px; top: 271px;" onclick="sonartbn();toggle_selection('btn_6_2');" >2</button>
+
+      <button id="btn_6_3" class="button_iphone6s" style="left: 196px; top: 300px;" onclick="sonartbn();toggle_selection('btn_6_3');" >3</button>
+      <button id="btn_6_4" class="button_iphone6s" style="left: 226px; top: 300px;" onclick="sonartbn();toggle_selection('btn_6_4');" >4</button>
+
+
+
+
+<!--7_BUTTON -->
+      <button id="btn_7_1" class="button_iphone6s" style="left: 80px; top: 329px;" onclick="sonartbn();toggle_selection('btn_7_1');" >1</button>
+      <button id="btn_7_2" class="button_iphone6s" style="left: 110px; top: 329px;" onclick="sonartbn();toggle_selection('btn_7_2');" >2</button>
+
+      <button id="btn_7_3" class="button_iphone6s" style="left: 80px; top: 358px;" onclick="sonartbn();toggle_selection('btn_7_3');" >3</button>
+      <button id="btn_7_4" class="button_iphone6s" style="left: 110px; top: 358px;" onclick="sonartbn();toggle_selection('btn_7_4');" >4</button>
+
+
+<!--8_BUTTON -->
+      <button id="btn_8_1" class="button_iphone6s" style="left: 138px; top: 329px;" onclick="sonartbn();toggle_selection('btn_8_1');" >1</button>
+      <button id="btn_8_2" class="button_iphone6s" style="left: 168px; top: 329px;" onclick="sonartbn();toggle_selection('btn_8_2');" >2</button>
+
+      <button id="btn_8_3" class="button_iphone6s" style="left: 138px; top: 358px;" onclick="sonartbn();toggle_selection('btn_8_3');" >3</button>
+      <button id="btn_8_4" class="button_iphone6s" style="left: 168px; top: 358px;" onclick="sonartbn();toggle_selection('btn_8_4');" >4</button>
+
+
+
+<!--9_BUTTON -->
+      <button id="btn_9_1" class="button_iphone6s" style="left: 196px; top: 329px;" onclick="sonartbn();toggle_selection('btn_9_1');" >1</button>
+      <button id="btn_9_2" class="button_iphone6s" style="left: 226px; top: 329px;" onclick="sonartbn();toggle_selection('btn_9_2');" >2</button>
+
+      <button id="btn_9_3" class="button_iphone6s" style="left: 196px; top: 358px;" onclick="sonartbn();toggle_selection('btn_9_3');" >3</button>
+      <button id="btn_9_4" class="button_iphone6s" style="left: 226px; top: 358px;" onclick="sonartbn();toggle_selection('btn_9_4');" >4</button>
+
+
+
+
+<!--10_BUTTON -->
+      <button id="btn_10_1" class="button_iphone6s" style="left: 80px;  top: 386px;" onclick="sonartbn();toggle_selection('btn_10_1');" >1</button>
+      <button id="btn_10_2" class="button_iphone6s" style="left: 110px; top: 386px;" onclick="sonartbn();toggle_selection('btn_10_2');" >2</button>
+
+      <button id="btn_10_3" class="button_iphone6s" style="left: 80px; top:  415px;" onclick="sonartbn();toggle_selection('btn_10_3');" >3</button>
+      <button id="btn_10_4" class="button_iphone6s" style="left: 110px; top: 415px;" onclick="sonartbn();toggle_selection('btn_10_4');" >4</button>
+
+
+<!--11_BUTTON -->
+      <button id="btn_11_1" class="button_iphone6s" style="left: 138px; top: 386px;" onclick="sonartbn();toggle_selection('btn_11_1');" >1</button>
+      <button id="btn_11_2" class="button_iphone6s" style="left: 168px; top: 386px;" onclick="sonartbn();toggle_selection('btn_11_2');" >2</button>
+
+      <button id="btn_11_3" class="button_iphone6s" style="left: 138px; top: 415px;" onclick="sonartbn();toggle_selection('btn_11_3');" >3</button>
+      <button id="btn_11_4" class="button_iphone6s" style="left: 168px; top: 415px;" onclick="sonartbn();toggle_selection('btn_11_4');" >4</button>
+
+
+
+<!--12_BUTTON -->
+      <button id="btn_12_1" class="button_iphone6s" style="left: 196px; top: 386px;" onclick="sonartbn();toggle_selection('btn_12_1');" >1</button>
+      <button id="btn_12_2" class="button_iphone6s" style="left: 226px; top: 385px;" onclick="sonartbn();toggle_selection('btn_12_2');" >2</button>
+
+      <button id="btn_12_3" class="button_iphone6s" style="left: 196px; top: 415px;" onclick="sonartbn();toggle_selection('btn_12_3');" >3</button>
+      <button id="btn_12_4" class="button_iphone6s" style="left: 226px; top: 415px;" onclick="sonartbn();toggle_selection('btn_12_4');" >4</button>
+
+
+
+
+
+
+    </div>
+
+  </body>
+
+</html>
+
+<script type="text/javascript">
+  //crear el array de hash de botones toggeados en la ruleta para seleccionar en apuestas:
+  //declaracion de hash y asignacion de valores default no seleccionado.
+  var hash_bnt_status =  {btn_0_1: 'n', btn_0_2: 'n', btn_0_3: 'n', btn_0_4: 'n' ,
+                          btn_1_1: 'n', btn_1_2: 'n', btn_1_3: 'n', btn_1_4: 'n' ,
+                          btn_2_1: 'n', btn_2_2: 'n', btn_2_3: 'n', btn_2_4: 'n' ,
+                          btn_3_1: 'n', btn_3_2: 'n', btn_3_3: 'n', btn_3_4: 'n' ,
+                          btn_4_1: 'n', btn_4_2: 'n', btn_4_3: 'n', btn_4_4: 'n' ,
+                          btn_5_1: 'n', btn_5_2: 'n', btn_5_3: 'n', btn_5_4: 'n' ,
+                          btn_6_1: 'n', btn_6_2: 'n', btn_6_3: 'n', btn_6_4: 'n' ,
+                          btn_7_1: 'n', btn_7_2: 'n', btn_7_3: 'n', btn_7_4: 'n' ,
+                          btn_8_1: 'n', btn_8_2: 'n', btn_8_3: 'n', btn_8_4: 'n' ,
+                          btn_9_1: 'n', btn_9_2: 'n', btn_9_3: 'n', btn_9_4: 'n' ,
+                          btn_10_1: 'n', btn_10_2: 'n', btn_10_3: 'n', btn_10_4: 'n', 
+                          btn_11_1: 'n', btn_11_2: 'n', btn_11_3: 'n', btn_11_4: 'n', 
+                          btn_12_1: 'n', btn_12_2: 'n', btn_12_3: 'n', btn_12_4: 'n', 
+                         };
+
+  function sonartbn(){
+    document.getElementById('sound4').play();
+   // document.getElementById("spin_0").style.visibility = "visible"; 
+    ronda_spin_animation1();
+  }
+
+  function sonartbn2(){
+    document.getElementById('sound3').play();
+   // document.getElementById("spin_0").style.visibility = "visible"; 
+    ronda_spin_animation1();
+  }
+
+  
+  function sonartbn3(){
+    document.getElementById('sound1').play();
+   // document.getElementById("spin_0").style.visibility = "visible"; 
+    ronda_spin_animation1();
+  }
+
+function sonarporbtn() {
+
+ document.getElementById('sound4').play();
+  //document.getElementById('sound3').play();
+  // body...
+}
+
+  
+
+  function refresh_con_delay(){
+    //desabilitar el boton START para que no intenten jugar hasta el reload:
+    document.getElementById('btn_start').disabled = true;
+    // el delay es para esperar 1 seg que termine el mp3 de la funcion sonarbtn al presional CANCEL button ok ted.
+    setTimeout(function() {
+        //your code to be executed after x seconds
+         window.location.reload(); // refresh page and cancel all ruleta plays. ok ted. 
+      }, 1000);  
+    
+
+  }
+
+
+
+  function ronda_spin_animation1(){
+    //document.getElementById('sound4').play();
+    document.getElementById("spin_0").style.visibility = "visible"; 
+    document.getElementById("spin_5").style.visibility = "visible"; 
+    document.getElementById("spin_12").style.visibility = "visible"; 
+    document.getElementById("spin_3").style.visibility = "visible"; 
+    document.getElementById("spin_10").style.visibility = "visible"; 
+    document.getElementById("spin_1").style.visibility = "visible"; 
+    document.getElementById("spin_8").style.visibility = "visible"; 
+    document.getElementById("spin_9").style.visibility = "visible"; 
+    document.getElementById("spin_2").style.visibility = "visible"; 
+    document.getElementById("spin_7").style.visibility = "visible"; 
+    document.getElementById("spin_6").style.visibility = "visible"; 
+    document.getElementById("spin_11").style.visibility = "visible"; 
+    document.getElementById("spin_4").style.visibility = "visible"; 
+
+  }
+// funcion que apaga todos los leds de la ruleta ok. hiiden. ok.
+  function ronda_spin_animation1_off(){
+    //document.getElementById('sound4').play();
+    document.getElementById("spin_0").style.visibility =  "hidden"; 
+    document.getElementById("spin_5").style.visibility =  "hidden"; 
+    document.getElementById("spin_12").style.visibility = "hidden"; 
+    document.getElementById("spin_3").style.visibility =  "hidden"; 
+    document.getElementById("spin_10").style.visibility = "hidden"; 
+    document.getElementById("spin_1").style.visibility =  "hidden"; 
+    document.getElementById("spin_8").style.visibility =  "hidden"; 
+    document.getElementById("spin_9").style.visibility =  "hidden"; 
+    document.getElementById("spin_2").style.visibility =  "hidden"; 
+    document.getElementById("spin_7").style.visibility =  "hidden"; 
+    document.getElementById("spin_6").style.visibility =  "hidden"; 
+    document.getElementById("spin_11").style.visibility = "hidden"; 
+    document.getElementById("spin_4").style.visibility =  "hidden"; 
+
+
+  }
+
+  function toggle_selection(id_btn) {
+
+    if ( document.getElementById(id_btn).style.backgroundColor == "red" ) // estaba rojo
+      {
+        document.getElementById(id_btn).style.backgroundColor = "yellow";
+        //sacar_btn_de_la_ronda(id_btn);
+        hash_bnt_status[id_btn]='n'; //sacar_btn_de_la_ronda
+        
+        // retornar el credito del jugador:
+        balance = parseInt(document.getElementById('credit_display').innerHTML); // capturar valor 
+        moneda_apostada = id_btn[id_btn.length-1] // ej: btn_0_1 => 1 moneda
+  //document.getElementById('credit_display').innerHTML = (balance + parseInt(moneda_apostada));
+        var enviar1 = balance + parseInt(moneda_apostada);
+        mostrar_credit_display(enviar1);
+        //alert debug msj:
+       // alert(hash_bnt_status[id_btn]);
+
+      }else{
+       
+        //si hay balance, adicionar_btn_en_la_ronda(id_btn);
+        balance = parseInt(document.getElementById('credit_display').innerHTML); // capturar valor string del credito y hacer un casting a intenger para descontar apuesta. ok. ted.
+        moneda_apostada = id_btn[id_btn.length-1] // ej: btn_0_1 => 1 moneda
+        if( (balance - moneda_apostada) >= 0 ) 
+          { 
+            //adicionar_btn_en_la_ronda(id_btn);
+
+            //cambiar status color boton seleccionado para apuesta.
+            document.getElementById(id_btn).style.backgroundColor = "red";
+           // document.getElementById('credit_display').value = (balance - moneda_apostada);
+           // document.getElementById('credit_display').innerHTML = (balance - moneda_apostada);
+            mostrar_credit_display(balance - moneda_apostada);
+
+            hash_bnt_status[id_btn]='y'; // asigno 'y' como seleecionado par ael sortreo. ok.
+
+             //alert debug msj:
+            //alert(hash_bnt_status[id_btn]);
+          }else{
+             document.getElementById('sound3').play();
+             hash_bnt_status[id_btn]='n'; //sacar_btn_de_la_ronda, me aseguro. No tiene cred. suficiente ok. ted. 
+             //En resumen, esta parte del else deja el boton en amarillo, suena no credit y saca le pone 'n' a la seleccion del hash ok ted.
+          }
+
+       // alert(moneda_apostada);
+        //alert(balance + 1);
+      }
+     
+  } // fin de la funcion toggle_seleccion
+
+  function mostrar_credit_display(credito) {
+    // visualizar el credito en un formato apropiado led ej. "0012"
+    var credito = parseInt(credito); // me aseguro trabajar castin integer type.
+    var formato = "";
+    
+    if(credito <= 9){
+      formato = "000"+ credito;
+    }
+
+     if((credito >= 10) && (credito <= 99)){
+      formato = "00" + credito;
+    }
+
+    if((credito >= 100) && (credito <= 999)){
+      formato = "0" + credito;
+    }
+
+    if(credito >= 1000){
+      formato = "" + credito;
+    }
+
+    document.getElementById('credit_display').innerHTML = formato;
+  }
+
+var vuelta = 0; // variable global para controlar las vueltas de ronda_spin_game_fast
+function reset_vuelta_counter(){
+  vuelta = 0; // esta funcion resetea la variable gobal vuelta.
+}
+  function ronda_spin_game_fast(factor, sonido){
+   
+    
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_0").style.visibility =  "visible";
+       if( sonido == 1 ){
+         document.getElementById('sound4').play(); 
+       }  
+       if( sonido == 2 ){
+         document.getElementById('sound50').play(); 
+       }
+       
+      }, 0);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_0").style.visibility =  "hidden";
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 200/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_5").style.visibility =  "visible";
+       if( sonido == 1 ){
+         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 200/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_5").style.visibility =  "hidden";
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 400/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_12").style.visibility =  "visible";
+       if( sonido == 1 ){
+         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 400/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_12").style.visibility =  "hidden";
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 600/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_3").style.visibility =  "visible";
+       if( sonido == 1 ){
+         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 600/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_3").style.visibility =  "hidden";
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 800/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_10").style.visibility =  "visible";
+       if( sonido == 1 ){
+         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 800/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_10").style.visibility =  "hidden";
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1000/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_1").style.visibility =  "visible";
+       if( sonido == 1 ){
+         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1000/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_1").style.visibility =  "hidden";
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1200/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_8").style.visibility =  "visible";
+       if( sonido == 1 ){
+         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1200/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_8").style.visibility =  "hidden";
+       if( sonido == 1 ){
+ //        document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1400/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_9").style.visibility =  "visible";
+       if( sonido == 1 ){
+         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1400/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_9").style.visibility =  "hidden";
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1600/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_2").style.visibility =  "visible";
+       if( sonido == 1 ){
+         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1600/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_2").style.visibility =  "hidden";
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1800/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_7").style.visibility =  "visible";
+       if( sonido == 1 ){
+         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1800/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_7").style.visibility =  "hidden";
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 2000/factor);
+
+     setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_6").style.visibility =  "visible";
+       if( sonido == 1 ){
+         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 2000/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_6").style.visibility =  "hidden";
+       if( sonido == 1 ){
+ //        document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 2200/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_11").style.visibility =  "visible";
+       if( sonido == 1 ){
+         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 2200/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_11").style.visibility =  "hidden";
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 2400/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_4").style.visibility =  "visible";
+       if( sonido == 1 ){
+         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 2400/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_4").style.visibility =  "hidden";
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 2600/factor);
+
+    if (vuelta < 3) {
+        vuelta++;
+        setTimeout(function() {
+            //your code to be executed after x seconds
+           //document.getElementById("spin_4").style.visibility =  "hidden";  
+           ronda_spin_game_fast(factor);
+           //document.getElementById('sound4').play();
+          }, 2600/factor);
+    }
+
+    if (vuelta == 3) {
+        vuelta++;
+        setTimeout(function() {
+          
+            //your code to be executed after x seconds
+           //document.getElementById("spin_4").style.visibility =  "hidden";  
+           ronda_spin_game_fast((factor/2));
+           //document.getElementById('sound4').play();
+          }, 2600*2/factor );
+    }
+
+    if (vuelta == 4) {
+        vuelta++;
+        setTimeout(function() {
+          
+            //your code to be executed after x seconds
+           //document.getElementById("spin_4").style.visibility =  "hidden";  
+           ronda_spin_game_fast((factor/4));
+           //document.getElementById('sound4').play();
+          }, 2600*4/factor );
+    }
+
+     if (vuelta == 5) {
+        vuelta++;
+
+        setTimeout(function() {
+          
+            //your code to be executed after x seconds
+           //document.getElementById("spin_4").style.visibility =  "hidden";  
+           ronda_spin_game_fast((factor/8), 3);
+           //document.getElementById('sound4').play();
+          // document.getElementById('sound1').pause();
+           document.getElementById('sound1').load();
+           sonarporbtn(); // esto en iphone con safari IOS <~ 11.0 no quiere funcionar ambos sondios. probar con chrome o firefox en ios, mientras tanto el development continuara para androis samsung galaxy s5 con chrome, html audio tags are working ok there. ok ted para avanzar.
+          }, 2600*8/factor );
+    }
+
+     if (vuelta == 66) {
+        vuelta++;
+        setTimeout(function() {
+          
+            //your code to be executed after x seconds
+           //document.getElementById("spin_4").style.visibility =  "hidden";  
+           ronda_spin_game_fast((factor/16), 1);
+           
+          }, 2600*16/factor );  // (factor/32) y 2600*16/factor seria el prox ciclo
+    }
+//PDTE UNA SOLA MUSICA, QUITAR SONIDO LAST-1 ROUND Y CONTINUAR, IMAGINAR SONIDO TROCHE
+
+
+
+  } //fin de la funcion ronda_spin_game_fast. nota: 0,3 puede ser factor final
+
+  
+</script>
+
+
+

@@ -1,5 +1,6 @@
 set :application, "kollector"
-    set :repo_url, "git@github.com:ediliodev/klt.git"
+     set :repo_url, "git@github.com:ediliodev/kollector.git" # pdventa viejo 5anos old
+   # set :repo_url, "git@github.com:ediliodev/kposmulti.git"
 
     set :deploy_to, '/home/deploy/kollector'
 

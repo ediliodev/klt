@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+  // alert("Your screen resolution is: " + screen.width + "x" + screen.height);
+
+// Hecer un js que deteermine si es un IOS iframde(id) source = www.dns.st4.html o else st2.html(any android)
+ document.body.style.backgroundColor = "darkred"; 
+
+</script>
+
+  <body bgcolor="darkred">
+
+    GAMEROOM  
+
+
+    <!-- Redireccionar webpage link IOS or Andorid Javascript ok.-->
+<!--
+    <div id="br1" align="center">
+
+      <iframe src="http://10.0.7.213:3000/androidgamep.html" width="360" height="559">
+
+    </iframe>
+
+    </div>
+-->
+
+
+
+  
+  </body>
+
+
+  <script type="text/javascript">
+    //Identificar navegador to redirect proper page:
+    //establecer una resolucion minima. 360x559 (game res.) probar later con iphone5c
+
+    if( (screen.width < 320) || (screen.height < 568) ) {
+      //iphone 6 screen size ok
+     alert("Please try in other devise. Cannot play in this sreen resolution.");
+     // Simulate an HTTP redirect:
+     location.replace("https://google.com"); // ojo requiere el protocolo (url completa ok ted.)
+
+     }
+
+  //  alert(navigator.userAgent);
+  //  alert(navigator.vendor);
+  //  alert(navigator.platform);
+
+   var userAgent1 = navigator.vendor;
+   var userAgent2 = navigator.platform;
+
+      //iOS detection links:
+      // https://stackoverflow.com/questions/21741841/detecting-ios-android-operating-system
+     // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if( ( (/Apple|iPhone|iPod|iPad/.test(userAgent1) ) || (/Apple|iPhone|iPod|iPad/.test(userAgent2) ) ) && (!window.MSStream) ){
+        //return "iOS";
+        alert("Welcome - Apples - ok.");
+        alert("Your screen resolution is: " + screen.width + "x" + screen.height);
+       // location.replace("http://10.0.7.209:3000/iphonegame"); // ojo requiere el protocolo (url completa ok ted.)
+       // location.replace("http://190.80.200.181:3000/iphonegame"); // ojo requiere el protocolo (
+       //alert(location.host); //location.host retorna la ip y el port del url server connected ok.
+        location.replace("https://" + location.host + "\/iphonegame"); // ok ojo requiere el protocolo (url completa ok ted.)
+    }
+
+    else{
+        alert("Welcome - Generic - ok.");
+        alert("Your screen resolution is: " + screen.width + "x" + screen.height);
+        //alert(location.host); //location.host retorna la ip y el port del url server connected ok.
+        //location.replace("http://10.0.7.209:3000/androidgame"); // ojo requiere el protocolo (url completa ok ted.)
+        location.replace("https://" + location.host + "\/androidgame"); // ok ojo requiere el protocolo (url completa ok ted.)
+
+    }
+
+  </script>
+
+
+</html>
+
+<!-- 
+<body bgcolor="darkred">
+
+    <div align="center">
+      <iframe src="http://10.0.7.213:3000/st2.html" width="360" height="559">
+    
+  </iframe>
+
+    </div>
+
+  
+</body>
+
+
+  -->

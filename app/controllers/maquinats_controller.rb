@@ -5,7 +5,12 @@ class MaquinatsController < ApplicationController
   # GET /maquinats
   # GET /maquinats.json
   def index
-    @maquinats = Maquinat.all
+    
+    if verificar_violacion_simple
+      render plain: 'Locked System. Contact support.' #comando Ruleta de Luis.
+    end
+
+    @maquinats = Maquinat.all.order(:sucursal) #.reverse #organizar vista por sucursal despues asc ok.
   end
 
   # GET /maquinats/1
@@ -26,6 +31,17 @@ class MaquinatsController < ApplicationController
   # POST /maquinats.json
   def create
     @maquinat = Maquinat.new(maquinat_params)
+    
+     # la activacion de los modulos (seriales la haremos manual x banca para controllar el orden de los mismos en la calle y por seguridad) entonces asignamos uno aleatorio que no esta activado. ok ted
+    if @maquinat.serial.nil?
+
+      @maquinat.serial = "00-000-" + rand(9).to_s + rand(9).to_s + rand(9).to_s + rand(9).to_s # "00-000-0000" se asigno un serial aleatorio provisional no dentro del rengo de venta porque los de venta empiezan con 00-xxx-xxxx ok ted.
+
+        
+    end
+     
+
+
 
     respond_to do |format|
       if @maquinat.save
@@ -75,6 +91,6 @@ class MaquinatsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def maquinat_params
-      params.require(:maquinat).permit(:tipomaquinat_id, :descripcion, :serial, :activa, :lastseen)
+      params.require(:maquinat).permit(:tipomaquinat_id, :descripcion, :serial, :activa, :lastseen, :consorcio, :sucursal, :usuarioventa, :supervisor, :entrada, :salida )
     end
 end

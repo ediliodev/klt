@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Fondots</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cantidad</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fondots.each do |fondot| %>
+      <tr>
+        <td><%= fondot.cantidad %></td>
+        <td><%= link_to 'Show', fondot %></td>
+        <td><%= link_to 'Edit', edit_fondot_path(fondot) %></td>
+        <td><%= link_to 'Destroy', fondot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fondot', new_fondot_path %>

@@ -1,0 +1,43 @@
+<%= form_with(model: contribuyentet, local: true) do |form| %>
+  <% if contribuyentet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contribuyentet.errors.count, "error") %> prohibited this contribuyentet from being saved:</h2>
+
+      <ul>
+      <% contribuyentet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :consorcio %>
+    <%= form.text_field :consorcio, id: :contribuyentet_consorcio %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sucursal %>
+    <%= form.text_field :sucursal, id: :contribuyentet_sucursal %>
+  </div>
+
+  <div class="field">
+    <%= form.label :siglas %>
+    <%= form.text_field :siglas, id: :contribuyentet_siglas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :localidad %>
+    <%= form.text_field :localidad, id: :contribuyentet_localidad %>
+  </div>
+
+  <div class="field">
+    <%= form.label :serialmq %>
+    <%= form.text_field :serialmq, id: :contribuyentet_serialmq %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

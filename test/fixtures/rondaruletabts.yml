@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  jugador: MyString
+  win: MyString
+  credit: MyString
+  jugadas: MyString
+  totalbet: MyString
+  winnernumberspin: MyString
+  status: MyString
+
+two:
+  jugador: MyString
+  win: MyString
+  credit: MyString
+  jugadas: MyString
+  totalbet: MyString
+  winnernumberspin: MyString
+  status: MyString

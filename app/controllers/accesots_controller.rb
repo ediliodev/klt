@@ -17,6 +17,11 @@ class AccesotsController < ApplicationController
 
   # GET /accesots/new
   def new
+    
+     if verificar_violacion_simple
+      render plain: 'Locked System. Contact support.' #comando Ruleta de Luis.
+    end
+
     @accesot = Accesot.new
   end
 

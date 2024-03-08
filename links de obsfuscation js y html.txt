@@ -1,0 +1,15 @@
+js:
+
+
+
+html: (puedes ponerlo con todo y el js obsfucated para que el html salga doble asegurado ok. ted.
+
+html: 
+http://snapbuilder.com/code_snippet_generator/obfuscate_html_source_code/
+
+Este link es para decode:
+elegir URL y opcion Decode ok.
+http://coderstoolbox.net/string/#!encoding=url&action=decode&charset=us_ascii
+
+
+

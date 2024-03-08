@@ -1,0 +1,32 @@
+
+<p>Not allowed ok.</p>
+
+<%if false%>
+
+    <p id="notice"><%= notice %></p>
+
+    <h1>Rondaruletats</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @rondaruletats.each do |rondaruletat| %>
+          <tr>
+            <td><%= link_to 'Show', rondaruletat %></td>
+            <td><%= link_to 'Edit', edit_rondaruletat_path(rondaruletat) %></td>
+            <td><%= link_to 'Destroy', rondaruletat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'New Rondaruletat', new_rondaruletat_path %>
+    
+<%end%>

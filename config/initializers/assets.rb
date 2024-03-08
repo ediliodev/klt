@@ -1,5 +1,7 @@
 # Be sure to restart your server when you modify this file.
 
+Rails.application.config.middleware.delete(Rack::Runtime)# remover headers http rultea de luis ok.
+
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
 

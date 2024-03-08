@@ -1,14 +1,24 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Cantidad:</strong>
-  <%= @postransaccionest.cantidad %>
-</p>
+<p>Not allowed ok.</p>
 
-<p>
-  <strong>Serial:</strong>
-  <%= @postransaccionest.serial %>
-</p>
+<%if false%>
 
-<%= link_to 'Edit', edit_postransaccionest_path(@postransaccionest) %> |
-<%= link_to 'Back', postransaccionests_path %>
+	<p id="notice"><%= notice %></p>
+
+	<p>
+	  <strong>Cantidad:</strong>
+	  <%= @postransaccionest.cantidad %>
+	</p>
+
+	<p>
+	  <strong>Serial:</strong>
+	  <%= @postransaccionest.serial %>
+	</p>
+
+	<%= link_to 'Edit', edit_postransaccionest_path(@postransaccionest) %> |
+	<%= link_to 'Back', postransaccionests_path %>
+
+
+<%end%>
+
+

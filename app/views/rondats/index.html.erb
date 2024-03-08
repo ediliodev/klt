@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Rondats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Jugador</th>
+      <th>Credito</th>
+      <th>Cartucho</th>
+      <th>Posiciondisparo</th>
+      <th>Resultado</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rondats.each do |rondat| %>
+      <tr>
+        <td><%= rondat.jugador %></td>
+        <td><%= rondat.credito %></td>
+        <td><%= rondat.cartucho %></td>
+        <td><%= rondat.posiciondisparo %></td>
+        <td><%= rondat.resultado %></td>
+        <td><%= link_to 'Show', rondat %></td>
+        <td><%= link_to 'Edit', edit_rondat_path(rondat) %></td>
+        <td><%= link_to 'Destroy', rondat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rondat', new_rondat_path %>

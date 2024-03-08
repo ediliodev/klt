@@ -1,30 +1,48 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Maquinats</h1>
+<h1>Listado de M&aacute;quinas</h1>
 
-<table>
+<table border="1" >
   <thead>
     <tr>
+      <th>Cons.</th>
+      <th>Sucursal</th>
       <th>Tipo de maquina</th>
       <th>Descripcion</th>
-      <th>Serial</th>
+       <th>Serial</th> 
       <th>Activa</th>
-      <th>LastSeen</th>
       <th colspan="3"></th>
+      <th>LastSeen</th>
+      <th>UsuarioVenta</th>
+      <th>Supervisor</th>
+      <th>Entrada</th>
+      <th>Salida</th>
+      <th>Neto</th>
+
+      
     </tr>
   </thead>
 
   <tbody>
     <% @maquinats.each do |maquinat| %>
       <tr>
+        <td><%= maquinat.consorcio %></td>
+        <td><%= maquinat.sucursal %></td>
         <td><%= maquinat.tipomaquinat.tipomaquina %></td>
         <td><%= maquinat.descripcion %></td>
-        <td><%= maquinat.serial %></td>
+         <td> <%= '*' %> <%=  maquinat.serial.to_s[8..11] %></td>  <!--no mostrar serial, only '*'. ok. -->
         <td><%= maquinat.activa %></td>
-        <td><%= maquinat.lastseen %></td>
-        <td><% link_to 'Show', maquinat %></td>
+         <td><% link_to 'Show', maquinat %></td>
         <td><%= link_to 'Editar', edit_maquinat_path(maquinat) %></td>
         <td><%= link_to 'Desactivar', maquinat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= maquinat.lastseen %></td>
+        <td><%= maquinat.usuarioventa %></td>
+        <td><%= maquinat.supervisor %></td>
+        <td><%= maquinat.entrada %></td>
+        <td><%= maquinat.salida %></td>
+        <td><%= (maquinat.entrada.to_i - maquinat.salida.to_i )  %></td>
+
+       
       </tr>
     <% end %>
   </tbody>

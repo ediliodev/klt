@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BLACKJACK</title>
+        <link rel="stylesheet" href="css/reset.css" type="text/css">
+        <link rel="stylesheet" href="css/main.css" type="text/css">
+        <link rel="stylesheet" href="css/orientation_utils.css" type="text/css">
+        <link rel="stylesheet" href="css/ios_fullscreen.css" type="text/css">
+        <link rel='shortcut icon' type='image/x-icon' href='./favicon.ico' />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,minimal-ui" />
+	<meta name="msapplication-tap-highlight" content="no"/>
+
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/createjs-2015.11.26.min.js"></script>
+        <script type="text/javascript" src="js/platform.js"></script>
+        <script type="text/javascript" src="js/ios_fullscreen.js"></script>
+        <script type="text/javascript" src="js/howler.min.js"></script>
+        <script type="text/javascript" src="js/screenfull.js"></script>
+        <script type="text/javascript" src="js/ctl_utils.js"></script>
+        <script type="text/javascript" src="js/sprite_lib.js"></script>
+        <script type="text/javascript" src="js/settings.js"></script>
+        <script type="text/javascript" src="js/CLang.min.js"></script>
+        <script type="text/javascript" src="js/CPreloader.js"></script>
+        <script type="text/javascript" src="js/CMain.js"></script>
+        <script type="text/javascript" src="js/CTextButton.js"></script>
+        <script type="text/javascript" src="js/CGfxButton.js"></script>
+        <script type="text/javascript" src="js/CToggle.js"></script>
+        <script type="text/javascript" src="js/CMenu.js"></script>
+        <script type="text/javascript" src="js/CGame.js"></script>
+        <script type="text/javascript" src="js/CInterface.js"></script>
+        <script type="text/javascript" src="js/CTweenController.js"></script>
+        <script type="text/javascript" src="js/CSeat.js"></script>
+        <script type="text/javascript" src="js/CFichesController.js"></script>
+        <script type="text/javascript" src="js/CVector2.js"></script>
+        <script type="text/javascript" src="js/CGameSettings.js"></script>
+        <script type="text/javascript" src="js/CEasing.js"></script>
+        <script type="text/javascript" src="js/CHandController.js"></script>
+        <script type="text/javascript" src="js/CCard.js"></script>
+        <script type="text/javascript" src="js/CInsurancePanel.js"></script>
+        <script type="text/javascript" src="js/CGameOver.js"></script>
+        <script type="text/javascript" src="js/CMsgBox.js"></script>
+        <script type="text/javascript" src="js/CCreditsPanel.js"></script>
+        <script type="text/javascript" src="js/CFiche.js"></script>
+        <script type="text/javascript" src="js/CCTLText.js"></script>
+
+        
+
+        <audio id="sound7" src="./sounds/cobrocredit.mp3" preload="auto"></audio>
+    
+
+
+        <script type="text/javascript">
+          
+
+            function send_credit_confirmation_code(code){
+
+                //ponerle el valor que llevan los jp locales.
+
+                //document.getElementById("black_jackpot_display").innerHTML  =  ram_jackpot_negro;
+                //document.getElementById("red_jackpot_display").innerHTML    =  ram_jackpot_rojo;
+
+                // alert('klk');
+                var xhttp778 = new XMLHttpRequest();
+                xhttp778.onreadystatechange = function() {
+                  if (this.readyState == 4 && this.status == 200) {
+
+                   // alert("codigo enviado recibido");
+                    //verificar querespuesta sea un credito
+
+
+                  }
+                };
+
+
+              // var jugador_id_credit =  document.getElementById("footer_info").innerHTML;
+              //jugador_id_credit = '*' //multiplayer mode j* later ok.
+
+
+              var st_get_credit = "/transaccionests?serial=003-000-0001&confirmation=" + code;
+
+              // alert(st_get_credit);
+
+              // verifico si le toca actualizar para mostrar el megajackpot o le corresponde a los jackpot locales:
+              //if((contador_actualizar_display_megajackpot % 2) == 0 ) {
+              xhttp778.open("GET", st_get_credit, true);  // request get_credit balance.
+              xhttp778.send();
+              // }
+
+
+              // contador_actualizar_display_megajackpot += 1; // incremento
+
+            } // fin de la funcion get_megajackpot_balance() ok.
+
+
+
+
+
+            function enviar_pago(cantidad){
+
+                //ponerle el valor que llevan los jp locales.
+
+                //document.getElementById("black_jackpot_display").innerHTML  =  ram_jackpot_negro;
+                //document.getElementById("red_jackpot_display").innerHTML    =  ram_jackpot_rojo;
+
+                // alert('klk');
+                var xhttp779 = new XMLHttpRequest();
+                xhttp779.onreadystatechange = function() {
+                  if (this.readyState == 4 && this.status == 200) {
+
+                   // alert("codigo enviado recibido");
+                    //verificar querespuesta sea un credito
+
+
+                  }
+                };
+
+
+              // var jugador_id_credit =  document.getElementById("footer_info").innerHTML;
+              //jugador_id_credit = '*' //multiplayer mode j* later ok.
+
+
+              var st_get_credit = "/transaccionests?serial=003-000-0001&cashout=" + cantidad;
+              // http://127.0.0.1:3000/transaccionests?serial=003-000-0001&cashout=200
+              // alert(st_get_credit);
+
+              // verifico si le toca actualizar para mostrar el megajackpot o le corresponde a los jackpot locales:
+              //if((contador_actualizar_display_megajackpot % 2) == 0 ) {
+              xhttp779.open("GET", st_get_credit, true);  // request get_credit balance.
+              xhttp779.send();
+              // }
+
+
+              // contador_actualizar_display_megajackpot += 1; // incremento
+
+            } // fin de la funcion get_megajackpot_balance() ok.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          function request_credit(){
+
+  //ponerle el valor que llevan los jp locales.
+
+  //document.getElementById("black_jackpot_display").innerHTML  =  ram_jackpot_negro;
+  //document.getElementById("red_jackpot_display").innerHTML    =  ram_jackpot_rojo;
+
+  // alert('klk');
+  var xhttp777 = new XMLHttpRequest();
+   xhttp777.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+      //alert(this.responseText);
+      //verificar querespuesta sea un credito
+
+      if (this.responseText != "sincreditosporahora") {
+        
+        //alert("viene credito");
+        //procesar el credito y mandar confirmacion para atras ok
+        // @cash100^4643#
+        var texto_mensaje_credito = this.responseText.split('^')[0];  // @cash100
+        var mensaje_credito = texto_mensaje_credito.split('h')[1] // 100
+
+        var texto_codigo_confirmacion = this.responseText.split('^')[1];  // 4643#
+        var codigo_confirmacion = texto_codigo_confirmacion.split('#')[0]; // 4643
+
+        // alert("valor a acreditar: " + mensaje_credito);
+        s_oGame.subirMoney(parseInt(mensaje_credito));
+        //alert("codigo de confirmacion: " + codigo_confirmacion);
+        //sonido acrediation win:
+        document.getElementById('sound7').play();
+
+        send_credit_confirmation_code(codigo_confirmacion);
+
+      }
+    
+   // document.getElementById("black_jackpot_display").innerHTML  =  'verde'; //this.responseText.split('-')[0];
+   // alert("Multijacpok balance animation test");
+
+  //   setTimeout(function() {
+                   //document.getElementById("black_jackpot_display").innerHTML  =  'verde';
+                   //document.getElementById("black_jackpot_display").innerHTML  =  'pavarotti'; //this.responseText.split('-')[0];
+                  
+                   // verificar en la respuesta que el mega este habilitado en la mq para ser mostrado ok:
+                  // if (this.responseText.split('-')[0] == "enabled") {
+                    //document.getElementById("black_jackpot_display").innerHTML  =  this.responseText.split('-')[1];
+                    //document.getElementById("red_jackpot_display").innerHTML    =  this.responseText.split('-')[2];
+                  // }
+                  
+                   //alert("Multijacpok balance animation test");
+  //              }, 3000); 
+     
+    //  document.getElementById("black_jackpot_display").innerHTML  =  this.responseText.split('-')[6];
+    //  document.getElementById("red_jackpot_display").innerHTML    =  this.responseText.split('-')[7];
+
+      //habilitar todos los botones del panel luego de haberse actualizado los credits ok:
+     // enable_all_panel_button() ;
+     //enable_player_button();
+   //  habilitar_pointer_events_players(); // Luego de actualizar balaces onload, habilito los player para que apuesten con su real credit y no salga el 0000 el display mientras se actualizan teniendo credit ok.
+    }
+  };
+
+
+ // var jugador_id_credit =  document.getElementById("footer_info").innerHTML;
+  //jugador_id_credit = '*' //multiplayer mode j* later ok.
+  
+  var st_get_credit = "/rondaruletats?credit=get_creditmj*" // + String(jugador_id_credit);
+ 
+  st_get_credit = "/transaccionests?serial=003-000-0001";
+
+ // alert(st_get_credit);
+
+ // verifico si le toca actualizar para mostrar el megajackpot o le corresponde a los jackpot locales:
+ //if((contador_actualizar_display_megajackpot % 2) == 0 ) {
+   xhttp777.open("GET", st_get_credit, true);  // request get_credit balance.
+   xhttp777.send();
+// }
+  
+
+ // contador_actualizar_display_megajackpot += 1; // incremento
+    
+} // fin de la funcion get_megajackpot_balance() ok.
+
+
+
+  // Invocar la funcion de get_megajackpot para que se actualice y muestre periodicamente, segun fue definida en su funcion ok.
+   setInterval(function() {
+
+    request_credit();
+   // alert("haciendo el  request");
+                
+   }, 8000); 
+  // Con lo de arriba se mantiene mostrandolo por 15 segs el local y luego por 15 mas el de red ok.
+
+
+
+
+
+
+        </script>
+
+
+
+
+
+
+
+
+
+
+    </head>
+    <body ondragstart="return false;" ondrop="return false;" >
+	<div style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%"></div>
+          <script>
+            $(document).ready(function(){
+                var porcentaje_variable = Math.floor(Math.random() * 100);
+                    porcentaje_variable = 50; // fijo porahora ok
+                    //NOTA EL win_occurrence SE MANTIENE EN TODO EL GAMEOK UNLESSF5 RELOAD PAGE OK.
+                     // alert(porcentaje_variable);
+                     var oMain = new CMain({
+                                    win_occurrence: porcentaje_variable,          //WIN OCCURRENCE BETWEEN 0-100
+                                    min_bet: 1,                  //MIN BET PLAYABLE BY USER. DEFAULT IS 0.1$
+                                    max_bet: 500,                //MAX BET PLAYABLE BY USER. 
+                                    bet_time: 10000,             //WAITING TIME FOR PLAYER BETTING
+                                    money: 0,                 //STARING CREDIT FOR THE USER
+                                    blackjack_payout: 1.5,       //PAYOUT WHEN USER WINS WITH BLACKJACK (DEFAULT IS 3 TO 2). BLACKJACK OCCURS WHEN USER GET 21 WITH FIRST 2 CARDS
+                                    game_cash: 1000,              //GAME CASH AVAILABLE WHEN GAME STARTS
+                                    show_credits:true,           //ENABLE/DISABLE CREDITS BUTTON IN THE MAIN SCREEN
+                                    fullscreen:false,             //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
+                                    check_orientation:true,      //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
+                                    //////////////////////////////////////////////////////////////////////////////////////////
+                                    ad_show_counter: 3           //NUMBER OF HANDS PLAYED BEFORE AD SHOWN
+                                    //
+                                    //// THIS FUNCTIONALITY IS ACTIVATED ONLY WITH CTL ARCADE PLUGIN.///////////////////////////
+                                    /////////////////// YOU CAN GET IT AT: /////////////////////////////////////////////////////////
+                                    // http://codecanyon.net/item/ctl-arcade-wordpress-plugin/13856421 ///////////
+                                });
+
+
+					 
+                    $(oMain).on("recharge", function(evt) {
+                             //INSERT HERE YOUR RECHARGE SCRIPT THAT RETURN MONEY TO RECHARGE
+                            var iMoney = 0;
+                            if(s_oGame !== null){
+                              
+                             // s_oGame.subirMoney(iMoney);
+
+                            }
+                           // var valoi = s_oGame.leerMoney();
+                           // alert(s_oGame.leerMoney());
+                    });
+                    
+                    $(oMain).on("bet_placed", function (evt, iTotBet) {
+                        //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+                
+                    $(oMain).on("start_session", function(evt) {
+                        if(getParamValue('ctl-arcade') === "true"){
+                            parent.__ctlArcadeStartSession();
+                        }
+                        //...ADD YOUR CODE HERE EVENTUALLY
+                       // alert("inicio session");
+                        // on este evento leer valor acumulado en etiqueta p para acreditarlo en la funcion de abajo y asi comienza el pana ok.
+                       // s_oGame.subirMoney(500);
+                    });
+
+                    $(oMain).on("end_session", function(evt) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeEndSession();
+                           }
+                           //...ADD YOUR CODE HERE EVENTUALLY
+                           // _oRebetBut.click();
+                           //genrar boton limpiar apuestas (para cargartodo elcreditook)
+                           //confirm  cobrar y salir 
+
+                           //buscar la manera de mostrar Lpay ok
+                           // credito($200) enviado a cobrar
+
+                           //procesar el pago, si pago ok alert ok cant
+                           // si pago nookalter no okmanual?
+                           var pago = s_oGame.leerMoney();
+                           //alert(s_oGame.leerMoney());
+                           //evitar mandar pagos en cero:
+                           if (parseInt(pago) > parseInt(0)) {
+                               enviar_pago(pago);  // mandar pagos mayor que cero ok.
+                           }
+                           
+
+                    });
+
+
+                    $(oMain).on("save_score", function(evt,iScore) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeSaveScore({score:iScore});
+                           }
+                           //...ADD YOUR CODE HERE EVENTUALLY
+                           //alert("klk");
+                            //metodo request klk
+                           // var iMoney = 10;
+                           // var actual_credit = s_oSeat.getCredit();  
+                           // var total = Parseint(iMoney) + Parseint(actual_credit) ;
+                          // var  k = 88 // s_oSeat.getNumHands(); 
+                          // alert("credito: " );
+                          // setMoreMoney
+                          // alert("credito: " + _oSeat.getCredit()  );
+                           
+
+                          // alert(" savescroretrigered creditox: " + k  );
+                          //  if(s_oGame !== null){
+                             //   s_oGame.setMoremoney(iMoney);
+                          //  }
+
+                         //   alert(s_oGame.leerMoney());
+                       //  s_oGame.subirMoney(100);
+
+
+
+                    });
+
+                    $(oMain).on("show_interlevel_ad", function(evt) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeShowInterlevelAD();
+                           }
+                           //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+
+                    $(oMain).on("share_event", function(evt, iScore) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeShareEvent({   img: TEXT_SHARE_IMAGE,
+                                                                title: TEXT_SHARE_TITLE,
+                                                                msg: TEXT_SHARE_MSG1 + iScore + TEXT_SHARE_MSG2,
+                                                                msg_share: TEXT_SHARE_SHARE1 + iScore + TEXT_SHARE_SHARE1});
+                           }
+                    });
+                    
+                    if (isIOS()) {
+                        setTimeout(function () {
+                            sizeHandler();
+                        }, 200);
+                    } else {
+                        sizeHandler();
+                    }
+           });
+
+        </script>
+        
+        <div class="check-fonts">
+            
+        </div> 
+        
+        <canvas id="canvas" class='ani_hack' width="1700" height="768"> </canvas>
+        <div data-orientation="landscape" class="orientation-msg-container"><p class="orientation-msg-text">Please rotate your device</p></div>
+	<div id="block_game" style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%; display:none"></div>
+
+    </body>
+
+</html>

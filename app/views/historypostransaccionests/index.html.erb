@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<!--  <h1>Historypostransaccionests</h1> -->
+
+<h1>Transacciones Recientes (Credits IN/OUT)</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Creditin(coins)</th>
+      <th>Cashout(coins)</th>
+      <th>Jugador</th>
+      <th>Datetime(Fecha)</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @historypostransaccionests.each do |historypostransaccionest| %>
+      <tr>
+        <td><%= historypostransaccionest.creditin %></td>
+        <td><%= historypostransaccionest.cashout %></td>
+        <td><%= historypostransaccionest.jugador %></td>
+        <td><%= historypostransaccionest.created_at %></td>
+        <td>*<% link_to 'Show', historypostransaccionest %></td>
+        <td>*<% link_to 'Edit', edit_historypostransaccionest_path(historypostransaccionest) %></td>
+        <td>*<% link_to 'Destroy', historypostransaccionest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Historypostransaccionest', new_historypostransaccionest_path %>

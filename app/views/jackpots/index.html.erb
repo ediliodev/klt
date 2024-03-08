@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Jackpots</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Color</th>
+      <th>Totalinold</th>
+      <th>Totalinnow</th>
+      <th>Cantidad</th>
+      <th>Trigger</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @jackpots.each do |jackpot| %>
+      <tr>
+        <td><%= jackpot.color %></td>
+        <td><%= jackpot.totalinold %></td>
+        <td><%= jackpot.totalinnow %></td>
+        <td><%= jackpot.cantidad %></td>
+        <td>***ted*** <% jackpot.trigger %> </td>
+        <td><%= link_to 'Show', jackpot %></td>
+        <td><%= link_to 'Edit', edit_jackpot_path(jackpot) %></td>
+        <td><%= link_to 'Destroy', jackpot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Jackpot', new_jackpot_path %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  jugador: MyString
+  credito: MyString
+  cartucho: MyString
+  posiciondisparo: MyString
+  resultado: MyString
+
+two:
+  jugador: MyString
+  credito: MyString
+  cartucho: MyString
+  posiciondisparo: MyString
+  resultado: MyString

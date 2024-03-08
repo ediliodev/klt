@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Singlepostransaccionests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Creditin</th>
+      <th>Cashout</th>
+      <th>Datetime</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @singlepostransaccionests.each do |singlepostransaccionest| %>
+      <tr>
+        <td><%= singlepostransaccionest.creditin %></td>
+        <td><%= singlepostransaccionest.cashout %></td>
+        <td><%= singlepostransaccionest.updated_at %></td>
+        <td><%= link_to 'Show', singlepostransaccionest %></td>
+        <td><%= link_to 'Edit', edit_singlepostransaccionest_path(singlepostransaccionest) %></td>
+        <td><%= link_to 'Destroy', singlepostransaccionest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Singlepostransaccionest', new_singlepostransaccionest_path %>

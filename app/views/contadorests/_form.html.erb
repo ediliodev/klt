@@ -1,0 +1,32 @@
+<%= form_with(model: contadorest, local: true) do |form| %>
+  <% if contadorest.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contadorest.errors.count, "error") %> prohibited this contadorest from being saved:</h2>
+
+      <ul>
+      <% contadorest.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :totalin %>
+    <%= form.text_field :totalin, id: :contadorest_totalin %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalout %>
+    <%= form.text_field :totalout, id: :contadorest_totalout %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalnet %>
+    <%= form.text_field :totalnet, id: :contadorest_totalnet %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

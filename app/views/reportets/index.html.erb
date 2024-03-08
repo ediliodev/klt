@@ -9,16 +9,22 @@
 
 
 
-<h1 style="color:blue;">Cuadre de ventas</h1>
+<h1 style="color:blue;">Cuadre de venta</h1>
+<h3>Reporte:  <%= session[:tipo_reporte].to_s %> </h3> 
+
 <h2>Desde:  <%= @dia1.to_s %> </h2>
 <h2>Hasta:  <%= @dia2.to_s %> </h2>
-<h2>Sucursal:  <%= Localidadt.last.sucursal %> </h2>
+<!-- <h2>Suc:  <%= Localidadt.last.sucursal %> </h2> -->
 
-<h2>Total IN: $ <%= number_to_currency(@total_in , :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>  </h2>
 
-<h2>Total OUT: $ <%= number_to_currency(@total_out, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>  </h2>
 
-<h2>Total NET: $ <%= number_to_currency(@total_net, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>  </h2>
+<% session[:tipo_reporte] = nil # limpiar  %>
+
+<h2>Total vendido: $ <%= number_to_currency(@total_in , :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>  </h2>
+
+<h2>Total pagado: $ <%= number_to_currency(@total_out, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>  </h2>
+
+<h2>Total NETO: $ <%= number_to_currency(@total_net, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>  </h2>
 
 
 <h2 style="color:blue;" >Balance Total: $ <%= number_to_currency(( @total_net ), :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> </h2>
@@ -30,7 +36,7 @@
 
 
 <h4>Consultado el: <%= Time.now.strftime("%d/%m/%Y (%H:%M:%S)") %> </h4>
-
+<h4>usuario:  <%= session[:usuario_actual].to_s %> </h4> 
 
  <h4> <%= link_to 'inicio', root_path %> </h4>
 
@@ -39,193 +45,227 @@
 
 
 
-<!-- Completivo - informativo only: -->
+      <!-- Completivo - informativo only: -->
 
 
 
-<div id="div_informativo_no_de_impresion_ok" >
+      <div id="div_informativo_no_de_impresion_ok" >
 
-   
+         
 
-    <h3>Detallado x maquina:</h3>
+          <h3>Detallado x m&aacute;quina:</h3>
 
-      <% @ids_maquinas_activas.each do |id_maquina|  %> 
+            <% @ids_maquinas_activas.each do |id_maquina|  %> 
+                <% m = Maquinat.find(id_maquina) %>
+                <h3><%= "[" + m.sucursal + "] " + m.descripcion %></h3>
 
-          <h3><%= Maquinat.find(id_maquina).descripcion %></h3>
+      <% #modificacion especial por el Strgin.su, error de porstres, esta ves de una mejor forma, usando map, ver este link: https://www.rubyguides.com/2018/10/ruby-map-method/  %>
+            
 
-<% #modificacion especial por el Strgin.su, error de porstres, esta ves de una mejor forma, usando map, ver este link: https://www.rubyguides.com/2018/10/ruby-map-method/  %>
-      
+                   <% @total_in_x_maquina = Transaccionest.between_times(session[:fecha_venta_detalladaxmaquina_dia_1], session[:fecha_venta_detalladaxmaquina_dia_2]).where(:maquinat_id => id_maquina ,  :tipotransaccion => "credito", :status => "ok").map { |objeto| objeto.cantidad.to_i }.sum  %>
 
-             <% @total_in_x_maquina = Transaccionest.between_times(session[:fecha_venta_detalladaxmaquina_dia_1], session[:fecha_venta_detalladaxmaquina_dia_2]).where(:maquinat_id => id_maquina ,  :tipotransaccion => "credito", :status => "ok").map { |objeto| objeto.cantidad.to_i }.sum  %>
+      <!-- 
+      irb(main):008:0> (nil || [] ).map { |objeto| objeto.cantidad.to_i }.sum 
+      => 0  # ok ted.
+      De todas formas @ids_maquinas_activas retorna un active relacion [] vacio si no encuentra nada con la condicion .where ok ted.
+      -->
 
-             <% @total_out_x_maquina = Transaccionest.between_times(session[:fecha_venta_detalladaxmaquina_dia_1], session[:fecha_venta_detalladaxmaquina_dia_2]).where(:maquinat_id => id_maquina ,  :tipotransaccion => "debito").map { |objeto| objeto.cantidad.to_i }.sum  %>
+                   <% @total_out_x_maquina = ( (Postransaccionest.between_times(session[:fecha_venta_detalladaxmaquina_dia_1], session[:fecha_venta_detalladaxmaquina_dia_2]).where(:serial => Maquinat.find(id_maquina).serial)) || [] ).map { |objeto| objeto.cantidad.to_i }.sum  %>
 
-             <% @total_net_x_maquina = @total_in_x_maquina.to_i - @total_out_x_maquina.to_i   %>
+                   <% @total_net_x_maquina = @total_in_x_maquina.to_i - @total_out_x_maquina.to_i   %>
 
-          <p>IN: $ <%= number_to_currency(@total_in_x_maquina , :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> | OUT: $ <%= number_to_currency(@total_out_x_maquina, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>   </p>
+                <p>IN: $ <%= number_to_currency(@total_in_x_maquina , :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> | OUT: $ <%= number_to_currency(@total_out_x_maquina, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>   </p>
+                
+                <%  @porciento = 0 %>
+                <% # Evitar error de division/0 ok. %>
+                <%if @total_in_x_maquina.to_i > 0 %>
+                    <% @porciento = ( (@total_net_x_maquina.to_d / @total_in_x_maquina.to_d )*100 ).round%>
+                <%end%>
+
+                <p>NETO: $ <%= number_to_currency(@total_net_x_maquina, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>  ( <%= @porciento %> %)  </p>
+
+                <p>___________________</p>
+
+            <% end %>
+
+
+      </div>
+
+
+      <!-- Seccion de reporte detallado -->
+      <% if session[:reporte_detallado].to_s == "si" %>
+
+        <div>
+
+          <button>*</button>
+
+        </div>
+
           
-          <% @porciento = 0 %>
-          <% # Evitar error de division/0 ok. %>
-          <%if @total_in_x_maquina.to_i > 0 %>
-              <% @porciento = ( (@total_net_x_maquina.to_i / @total_in_x_maquina.to_i )*100 ).round%>
-          <%end%>
+           <div id="tabla_recientes" class="tabla_transacciones">
 
-          <p>NETO: $ <%= number_to_currency(@total_net_x_maquina, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>  ( <%= @porciento %> %)  </p>
+             <h3 id="conteo_reciente">Detalles de env&iacute;os (cr&eacute;ditos):</h3>
+           
 
-          <p>___________________</p>
+              <table>
+                  <thead>
+                    <tr>
+                      <th>Fecha</th>
+                      <th>MQ.</th>
+                      <th></th>
+                      <th>$$</th>  
+                      <th>Status</th>
+                      <th colspan="3"></th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% @array_consultas_transacciones.each do |transaccionest| %>
+                      <tr>
+                        <td><%= transaccionest.created_at.to_s.split(" -")[0] %></td>
+                        <td><%= transaccionest.maquinat.descripcion.split(" ").map { |x| "#{x[0]}" }.join() %></td> <!-- Eso abrevia asi: "1- Pot of Gold # 1" => "1PoG#1" ok ted. -->
+                        <td><%= (transaccionest.tipotransaccion.to_s == "credito"? "+" : "-") %></td>
+                        <td><%= transaccionest.cantidad %></td>
+                        <td> &nbsp; <%= transaccionest.status %></td>
+                        
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+            
+
+            <% if @array_consultas_postransacciones %> 
+
+             <h3> Detalles de pagos (d&eacute;bitos):</h3>
+           
+           
+              <table>
+                  <thead>
+                    <tr>
+                      <th>Fecha</th>
+                      <th>MQ.</th>
+                      <th></th>
+                      <th>$$</th>  
+                      <th>Status</th>
+                      <th colspan="3"></th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% @array_consultas_postransacciones.each do |postransaccionest| %>     
+                      <tr>
+                        <td><%= postransaccionest.created_at.to_s.split(" -")[0] %></td>
+                        <td><%= Maquinat.where(:serial => postransaccionest.serial).first.descripcion.split(" ").map { |x| "#{x[0]}" }.join() %></td>
+                        <td>-</td>
+
+                        <%if postransaccionest.cantidad.nil?%>
+                          <td> <%= "*" %> </td>
+                          <%else%>
+                          <td> <%= postransaccionest.cantidad.split(".")[0] %> </td>
+                        <%end%>
+
+                        <%if postransaccionest.cantidad.nil?%>
+                          <td> &nbsp; <%= "*" %> </td>
+                          <%else%>
+                            <% @abreviar = postransaccionest.cantidad.split("..")[1]%>  <!-- 500..devolucion => "Devol." abreviado -->
+                          <td> <%= (@abreviar == nil ? " " : @abreviar[0..4] + "." ) %> </td>
+
+                       <%end%>  
+
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+
+            <% end %> <!-- end del if condition del postransaccionest ok-->
+            
+            </br> <!-- espacio -->
+            <p>Kollector Systems</p>
+          </div>
+
+
+          <button class="button" type="button" onclick="PrintElemConTabla('div_a_imprimir')" style="color:white;background-color:blue; height:35px;">  Imprimir con Tabla  </button> 
 
       <% end %>
 
 
-</div>
+  <% end %> 
 
 
 
 
 
-  
-   <div id="tabla_recientes" class="tabla_transacciones">
+  <div id="div_a_imprimir" style="display:none ">
 
-     <h3 id="conteo_reciente">Detalles de envios (creditos):</h3>
-   
+      <h2> <%=Localidadt.last.sucursal.to_s.upcase %> </h2>  
 
-      <table>
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>MQ.</th>
-              <th></th>
-              <th>$$</th>  
-              <th>Status</th>
-              <th colspan="3"></th>
-            </tr>
-          </thead>
+      <h4> <b>MEGA ROULETTE</h4>
+      <p> Desde: <%=@dia1  %> </br> 
+          Hasta: <%= @dia2 %> </p>
 
-          <tbody>
-            <% @array_consultas_transacciones.each do |transaccionest| %>
-              <tr>
-                <td><%= transaccionest.created_at.to_s.split(" -")[0] %></td>
-                <td><%= transaccionest.maquinat.descripcion.split(" ").map { |x| "#{x[0]}" }.join() %></td> <!-- Eso abrevia asi: "1- Pot of Gold # 1" => "1PoG#1" ok ted. -->
-                <td><%= (transaccionest.tipotransaccion.to_s == "credito"? "+" : "-") %></td>
-                <td><%= transaccionest.cantidad %></td>
-                <td><%= transaccionest.status %></td>
-                
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-    
+      <p>Entrada (IN): $ <%= number_to_currency(@total_in , :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> <br>
+         Salida (OUT): $ <%= number_to_currency(@total_out, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> 
+      </p>  
 
-    <% if @array_consultas_postransacciones %> 
+      <h3>TOTAL: $ <%= number_to_currency(@total_net, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>  </h3>
+      
+      <p>Fecha de consulta: <br>
+         <%= Time.now.strftime("%d/%m/%Y (%H:%M:%S)") %> <br>
+         ___________________________________
+      </p>
 
-     <h3> Detalles de pagos (debitos):</h3>
-   
-   
-      <table>
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>MQ.</th>
-              <th></th>
-              <th>$$</th>  
-              <th>Status</th>
-              <th colspan="3"></th>
-            </tr>
-          </thead>
+      
+    <% if session[:reporte_detallado].to_s == "si" %>
 
-          <tbody>
-            <% @array_consultas_postransacciones.each do |postransaccionest| %>     
-              <tr>
-                <td><%= postransaccionest.created_at.to_s.split(" -")[0] %></td>
-                <td><%= Maquinat.where(:serial => postransaccionest.serial).first.descripcion.split(" ").map { |x| "#{x[0]}" }.join() %></td>
-                <td>-</td>
+      <h3>Detallado x m&aacute;quina:</h3>
 
-                <%if postransaccionest.cantidad.nil?%>
-                  <td> <%= "*" %> </td>
-                  <%else%>
-                  <td> <%= postransaccionest.cantidad.split(".")[0] %> </td>
-                <%end%>
+        <% @ids_maquinas_activas.each do |id_maquina|  %> 
 
-                <%if postransaccionest.cantidad.nil?%>
-                  <td> <%= "*" %> </td>
-                  <%else%>
-                  <td> <%= postransaccionest.cantidad.split("..")[1] %> </td>
-                <%end%>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+            <h3><%= Maquinat.find(id_maquina).descripcion %></h3>
 
-    <% end %> <!-- end del if condition del postransaccionest ok-->
-    
-    </br> <!-- espacio -->
-    <p>Kollector Systems</p>
+               <% @total_in = Transaccionest.between_times(session[:fecha_venta_detalladaxmaquina_dia_1], session[:fecha_venta_detalladaxmaquina_dia_2]).where(:maquinat_id => id_maquina ,  :tipotransaccion => "credito", :status => "ok").map { |objeto| objeto.cantidad.to_i }.sum  %>
+
+              <% @total_out = ( (Postransaccionest.between_times(session[:fecha_venta_detalladaxmaquina_dia_1], session[:fecha_venta_detalladaxmaquina_dia_2]).where(:serial => Maquinat.find(id_maquina).serial)) || [] ).map { |objeto| objeto.cantidad.to_i }.sum  %>
+
+
+               <% @total_net = @total_in.to_i - @total_out.to_i   %>
+
+            <p>IN  : $ <%= number_to_currency(@total_in , :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></br>
+               OUT: $ <%= number_to_currency(@total_out, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></br>
+            
+              <% @porciento = 0 %>
+              <% # Evitar error de division/0 ok. %>
+              <%if @total_in.to_i > 0 %>
+                <% @porciento = ( (@total_net.to_d / @total_in.to_d )*100 ).round%>
+              <%end%>
+
+               PCTO: (<%=@porciento%>%)   </br>
+               NETO: $ <%= number_to_currency(@total_net, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>
+            </p>
+
+            <p>___________________________________</p>
+
+        <% end %>
+
+            <p> -  Kollector Systems (c) -</p>
+      <p></p>
+      
+    <% end %>
+
   </div>
 
 
-<button class="button" type="button" onclick="PrintElemConTabla('div_a_imprimir')" style="color:white;background-color:blue; height:35px;">  Imprimir con Tabla  </button> 
-
-<% end %>
 
 
-<h3>Consultado el: <%= Time.now.strftime("%d/%m/%Y (%H:%M:%S)") %> </h3>
 
-
-<div id="div_a_imprimir" style="display:none ">
-
-    <h2> <%=Localidadt.last.sucursal.to_s.upcase %> </h2>  
-    <h4> Cuadre de Ventas Maquinas. </h4>
-    <h4> Del <%=@dia1  %> al <%= @dia2 %> </h4>
-
-
-    <p>Entrada Global (IN): $ <%= number_to_currency(@total_in , :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>  </p>
-
-    <p>Salida Global (OUT): $ <%= number_to_currency(@total_out, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>  </p>
-
-    <h3>Total NETO: $ <%= number_to_currency(@total_net, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>  </h3>
-
-    <h4>Consultado el: <%= Time.now.strftime("%d/%m/%Y (%H:%M:%S)") %> </h4>
-
-    <p>___________________________________</p>
-
-
-    <h3>Detallado x maquina:</h3>
-
-      <% @ids_maquinas_activas.each do |id_maquina|  %> 
-
-          <h3><%= Maquinat.find(id_maquina).descripcion %></h3>
-
-             <% @total_in = Transaccionest.between_times(session[:fecha_venta_detalladaxmaquina_dia_1], session[:fecha_venta_detalladaxmaquina_dia_2]).where(:maquinat_id => id_maquina ,  :tipotransaccion => "credito", :status => "ok").map { |objeto| objeto.cantidad.to_i }.sum  %>
-
-             <% @total_out = Transaccionest.between_times(session[:fecha_venta_detalladaxmaquina_dia_1], session[:fecha_venta_detalladaxmaquina_dia_2]).where(:maquinat_id => id_maquina ,  :tipotransaccion => "debito").map { |objeto| objeto.cantidad.to_i }.sum %>
-
-             <% @total_net = @total_in.to_i - @total_out.to_i   %>
-
-          <p>IN: $ <%= number_to_currency(@total_in , :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> | OUT: $ <%= number_to_currency(@total_out, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>   </p>
-          
-          <% @porciento = 0 %>
-          <% # Evitar error de division/0 ok. %>
-          <%if @total_in.to_i > 0 %>
-              <% @porciento = ( (@total_net.to_i / @total_in.to_i )*100 ).round%>
-          <%end%>
-
-          <p>NETO: $ <%= number_to_currency(@total_net, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>  ( <%= @porciento %> %)  </p>
-
-          <p>___________________</p>
-
-      <% end %>
-
-    <p>Kollector Systems</p>
-
-</div>
 
 
  <h3>Reporte Tipo Excell:</h3>
 
 <% @report_total_in = @report_total_out = @report_total_net = 0 %>
 
- <table>
-     <tr> <th>Fecha</th> <th>Total IN</th> <th>Total OUT</th> <th>NET</th><th>%</th></tr>
+ <table border="1" >
+     <tr> <th>FECHA</th> <th>VENDIDO</th> <th>PAGADO</th> <th>NETO</th><th>%</th></tr>
      
      <%@reporte_tipo_excell.each do |valor|%>
           <% @porciento = 0 %>
@@ -238,7 +278,7 @@
       <% @report_total_net += valor.net.to_i %>
 
 
-             <tr> <td><%= valor.fecha %></td> <td><%= valor.in %></td> <td><%= valor.out %></td> <td><%= valor.net %></td><td>  <%= @porciento %>% </td>  </tr>
+             <tr> <td><%= valor.fecha.to_s.split("-").reverse.join("-") %></td> <td><%= valor.in %></td> <td><%= valor.out %></td> <td><%= valor.net %></td><td>  <%= @porciento %>% </td>  </tr>
            
            <%end%>
        
@@ -249,13 +289,14 @@
               <% @porciento = 0 %>
       <%end%>
 
+ <tr> <td style='font-weight:bold;' >TOTAL:</td> <td style='font-weight:bold;'><%= number_to_currency(@report_total_in, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %></td> <td style='font-weight:bold;'><%= number_to_currency(@report_total_out, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></td> <td style='font-weight:bold;'><%= number_to_currency(@report_total_net, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></td><td style='font-weight:bold;'> <%= number_to_currency(@porciento, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>%</td>  </tr>
 
-
-       <tr> <td style='font-weight:bold;' >TOTAL:</td> <td style='font-weight:bold;'><%= @report_total_in %></td> <td style='font-weight:bold;'><%= @report_total_out %></td> <td style='font-weight:bold;'><%= @report_total_net %></td><td style='font-weight:bold;'> <%= @porciento  %> %</td>  </tr>
 
 
  </table>
 
+
+<h4>Consultado el: <%= Time.now.strftime("%d/%m/%Y (%H:%M:%S)") %> </h4>
 
 
 <!-- ---------------------------------- -->

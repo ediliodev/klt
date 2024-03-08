@@ -1,20 +1,38 @@
 <%= form_with(model: transaccionest, local: true) do |form| %>
-  <% if transaccionest.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(transaccionest.errors.count, "error") %> prohibited this transaccionest from being saved:</h2>
+  
+  <%if transaccionest %>
+  
+    <% if transaccionest.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(transaccionest.errors.count, "error") %> prohibited this transaccionest from being saved:</h2>
 
-      <ul>
-      <% transaccionest.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+        <ul>
+        <% transaccionest.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
   <% end %>
+
 
   <div class="field">
     <% form.label "Maquina:" %>
     <%="MAQUINA: "%>
-    <%= form.select :maquinat_id, Maquinat.order(:descripcion).collect{ |item|  [ " --> " + item.descripcion , item.id ] } %> 
+     <!-- Antes: no filtraba solo amquinas activas como ahora ok. Maquinat.order(:descripcion).collect{... etc -->
+    <%= form.select :maquinat_id, Maquinat.where(:usuarioventa => session[:usuario_actual].to_s ).where(:activa => 'si').order(:descripcion).collect{ |item|  [ " --> " + item.descripcion , item.id ] } %> 
+  
+
+    <% # form.label "jugador:" %>
+    <% "@J: "%>
+   <!-- Antes: hasta 25 jugadores asi ok: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25] --> 
+    <% # form.select :jugador, [1,2,3,4,5,6] %> 
+    --->
+    <% form.label :cantidad %>
+    <%="CANTIDAD:"%>
+    <%= form.text_field :cantidad, id: :transaccionest_cantidad, :readonly => true %>
+
   </div>
 
   <div class="field">
@@ -22,11 +40,7 @@
     <%= form.text_field :tipotransaccion, id: :transaccionest_tipotransaccion, :hidden => true %>
   </div>
 
-  <div class="field">
-    <% form.label :cantidad %>
-    <%="CANTIDAD:"%>
-    <%= form.text_field :cantidad, id: :transaccionest_cantidad, :readonly => true %>
-  </div>
+ 
 
 
   <div class="field">
@@ -39,6 +53,7 @@
     <%= form.text_field :status, id: :transaccionest_status, :hidden => true %>
   </div>
 
+</br>
 
 <div class="klk">
    <button style="color:blue;" class="button" type="button" onclick= cash_modifySend('05')>05</button> 
@@ -48,13 +63,21 @@
    <button style="color:blue;" class="button" type="button" onclick= cash_modifySend(100)>100</button> 
    <button style="color:blue;" class="button" type="button" onclick= cash_modifySend(200)>200</button> 
    <button style="color:blue;" class="button" type="button" onclick= cash_modifySend(500)>500</button> 
+   <button style="color:blue;" class="button" type="button" onclick= cash_modifySend(1000)>1000</button> 
+
+   <button style="color:blue;" class="button" type="button" onclick= command_switch_supervisor('s18a')>A</button>
+   <button style="color:blue;" class="button" type="button" onclick= command_switch_supervisor_disable_machine('s18b')>B</button>
+   <button style="color:blue;" class="button" type="button" onclick= command_switch_admin('s14')>C</button>
+  <!--  <button style="color:blue;" class="button" type="button" onclick= command_switch_pantalla('kvm')>P</button> -->
+   <button style="color:red;" class="button" type="button" onclick= basic_logout_js()>X</button> 
+
 </div>
 
 </br>
 
   <div class="actions">
      <button style="color:red;" class="button" type="button" onclick= reset_modifySend()>x Reset</button>  
-    <%= form.submit "       Enviar ->      " %>
+     <%= form.submit "       Enviar ->      " %>
   </div>
 
 <% end %>

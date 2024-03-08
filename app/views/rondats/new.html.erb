@@ -1,0 +1,444 @@
+<h3>Hunter</h3>
+
+
+<audio id="sound1" src="../escopetadisparo.mp3" preload="auto"></audio>
+<audio id="sound2" src="../escopetavacia.mp3" preload="auto"></audio>
+<audio id="sound3" src="../escopetacargar.mp3" preload="auto"></audio>
+<audio id="sound4" src="../sonidoseleccion.mp3" preload="auto"></audio>
+<audio id="sound5" src="../sonidoseleccion.mp3" preload="auto"></audio>
+<audio id="sound6" src="../sonidoseleccion.mp3" preload="auto"></audio>
+<audio id="sound7" src="../sonidoseleccion.mp3" preload="auto"></audio>
+<audio id="sound8" src="../sonidoseleccion.mp3" preload="auto"></audio>
+<audio id="sound9" src="../sonidoseleccion.mp3" preload="auto"></audio>
+<audio id="sound10" src="../sonidoseleccion.mp3" preload="auto"></audio>
+<audio id="sound11" src="../sonidoseleccion.mp3" preload="auto"></audio>
+<audio id="sound12" src="../sonidoseleccion.mp3" preload="auto"></audio>
+<audio id="sound13" src="../sonidoseleccion.mp3" preload="auto"></audio>
+<audio id="sound14" src="../sonidoseleccion.mp3" preload="auto"></audio>
+<audio id="sound15" src="../sonidoseleccion.mp3" preload="auto"></audio>
+
+
+<div id="global_view">
+
+    <div id="arbustos">
+
+
+		<table>
+
+		<!--Primera fila de arbustos -->
+
+		      <tr>
+		        <td><button id="b01" onclick="sonidoytarget('img01')"> <img id="img01" src="../arbusto1.jpg" width="80" height="80"/> </button></td>
+		        <td></td>
+		        <td>  <img id="img02" src="../br1.png" width="600" height="600"/>  </td>
+		        <td></td>
+		        <td><button id="b02" onclick="sonidoytarget('img02')"> <img id="img02" src="../arbusto1.jpg" width="80" height="80"/> </button></td>
+		      </tr>
+		   
+		      
+		      <tr>
+		      	<td></td>
+		        <td><button id="b03" onclick="sonidoytarget('img03')"> <img id="img03" src="../arbusto1.jpg" width="80" height="80"/> </button></td>
+		        <td><button id="b04" onclick="sonidoytarget('img04')"> <img id="img04" src="../arbusto1.jpg" width="80" height="80"/> </button></td>
+		        <td><button id="b05" onclick="sonidoytarget('img05')"> <img id="img05" src="../arbusto1.jpg" width="80" height="80"/> </button></td>
+		        <td></td>
+		      </tr>
+		   
+		   <tr>
+		      	<td></td>
+		        <td><button id="b06" onclick="sonidoytarget('img06')"> <img id="img06" src="../arbusto1.jpg" width="80" height="80"/> </button></td>
+		        <td><button id="b07" onclick="sonidoytarget('img07')"> <img id="img07" src="../arbusto1.jpg" width="80" height="80"/> </button></td>
+		        <td><button id="b08" onclick="sonidoytarget('img08')"> <img id="img08" src="../arbusto1.jpg" width="80" height="80"/> </button></td>
+		        <td></td>
+		      </tr>
+		   
+
+
+		<!--Ultima fila de arbustos -->
+
+		     <tr>
+		        <td><button id="b09" onclick="sonidoytarget('img09')"> <img id="img09" src="../arbusto1.jpg" width="80" height="80"/> </button></td>
+		        <td></td>
+		        <td></td>
+		        <td></td>
+		        <td><button id="b10" onclick="sonidoytarget('img10')"> <img id="img10" src="../arbusto1.jpg" width="80" height="80"/> </button></td>
+		      </tr>
+		   
+		  
+	</table>
+
+
+				
+    </div>
+ 
+ 
+
+	</br>
+	</br>
+		</br>
+
+
+<table>
+	<tr>
+		<td>
+			<button onclick="document.getElementById('sound4').play();"><b>x <img src="../cartucho.jpg" width="60" height="60"/>70</button>
+		</td>
+		
+		<td>	
+			 <button onclick="presionarGatillo()"> <img src="../presionar.jpg" width="80" height="80"/> </button>
+		</td>
+
+		<td>
+			 <button onclick="document.getElementById('sound4').play();"> <img src="../perrocazador.png" width="80" height="80"/> </button>
+			
+		</td>
+
+		<td>
+			 <button onclick="document.getElementById('sound4').play();"><img src="../coin.png" width="80" height="80"/><b>(700)</button>			
+		</td>
+
+
+
+
+	</tr>
+</table>
+
+<button id="btncolor" style='background-color: blue'  > EL BOTON DE COLOR </button></td>
+
+<!-- btn disparo to avoid autoload sound block -->
+<button id="btndisparo" onclick="dispararbtn()"> </button></td>
+
+
+
+	<img id="img101"  src="../arbusto1.jpg" width="80" height="80"/>
+
+	<img id="img102" src="../target.png" width="80" height="80"/>
+
+	 
+
+
+<td>
+			 <button onclick="document.getElementById('sound4').play();"> <img src="../cazado.jpeg" width="80" height="80"/> </button>
+			
+		</td>
+
+
+	 
+
+
+<td><button id="b09" onclick="sonidoytarget('img09')"> <img id="img09" src="../fallido.jpeg" width="80" height="80"/> </button></td>
+
+
+
+<td><button id="b09" onclick="sonidoytarget('img09')"> <img id="img09" src="../pluma1.jpg" width="80" height="80"/> </button></td>
+
+
+
+<td><button id="b09" onclick="sonidoytarget('img09')"> <img id="img09" src="../pluma2.jpg" width="80" height="80"/> </button></td>
+
+
+	</br>
+	</br>
+
+
+
+
+
+	</br>
+	<%= link_to 'Back', rondats_path %>
+	
+
+</div> <!-- Cierre del global div ted ok -->
+
+
+<!--hacer el render del form en un div no visible en el game -->
+
+<div id="div_formulario_ronda" style="display:block;">
+	
+   <%= render 'form', rondat: @rondat %>
+
+</div>
+
+
+<script type="text/javascript">   </script>
+
+<script type="text/javascript">
+	 document.getElementById("img101").style.visibility = "true"; 
+	 document.getElementById("img102").style.visibility = "true"; 
+
+	// resetear posicion disparo en cero con este defatul value, si esta en cero escopeta no dispara, porque no hay ningun img01-10 selelcionado para disparar.
+	document.getElementById('rondat_posiciondisparo').value=0; 
+	var puede_disparar=false;
+//	window.onload="disparar()";
+ // <body onload="myFunction()"> 
+
+
+</script>
+
+
+<script type="text/javascript">
+
+	function sonidoytarget(id_img){
+		// play audio de seleccion
+		document.getElementById('sound4').play();
+        
+        //hacer un repaint para limpiar.
+        for (var i = 1; i < 10; i++) {
+        	st = "img0" + String(i); 
+        	document.getElementById(st).src="../arbusto1.jpg";
+        }
+        //limpio la psocion numero 10 tambien ok.
+        document.getElementById('img10').src="../arbusto1.jpg";
+
+		// setear imagen de target
+		//document.getElementById(id_seleccion).play();
+		document.getElementById(id_img).src="../target.png";
+		
+		//asignar la posicion de disparo actual del target para el formulario.
+		document.getElementById('rondat_posiciondisparo').value=id_img;  // 'img09' por ejemplo
+		 puede_disparar=true;
+		
+	}
+
+	function presionarGatillo(){
+		if (puede_disparar == true) {
+			//sobar sonido
+		//	document.getElementById('sound3').play();
+			
+			//hacer delay esperar reproduccion de arriba y submit el  formulario.
+						
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+		//	  document.getElementById('myform1ted').submit(); // esto envia el 
+			}, 1000);  
+
+
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 document.getElementById('btncolor').style.backgroundColor = 'red'; // = 'red'; // esto envia el 
+			 document.getElementById('sound4').play();
+			}, 50);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el
+			  document.getElementById('btncolor').style.backgroundColor = 'blue'; 
+			 document.getElementById('sound5').play();
+			}, 100);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('btncolor').style.backgroundColor = 'red'; // = 'red'; 
+			 document.getElementById('sound6').play();
+			}, 150);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			  document.getElementById('btncolor').style.backgroundColor = 'blue'; 
+			 document.getElementById('sound7').play();
+			}, 200);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('btncolor').style.backgroundColor = 'red'; // = 'red'; 
+			 document.getElementById('sound8').play();
+			}, 250);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			  document.getElementById('btncolor').style.backgroundColor = 'blue'; 
+			 document.getElementById('sound9').play();
+			}, 300);
+
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('btncolor').style.backgroundColor = 'red'; // = 'red'; 
+			 document.getElementById('sound4').play();
+			}, 360+100);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			  document.getElementById('btncolor').style.backgroundColor = 'blue'; 
+			 document.getElementById('sound5').play();
+			},420+100);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el
+			 document.getElementById('btncolor').style.backgroundColor = 'red'; // = 'red';  
+			 document.getElementById('sound6').play();
+			}, 480+100);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			  document.getElementById('btncolor').style.backgroundColor = 'blue'; 
+			 document.getElementById('sound7').play();
+			},540+100);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('btncolor').style.backgroundColor = 'red'; // = 'red'; 
+			 document.getElementById('sound8').play();
+			}, 610+100);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			  document.getElementById('btncolor').style.backgroundColor = 'blue'; 
+			 document.getElementById('sound9').play();
+			}, 680+100);
+
+
+		
+
+
+
+
+
+		}else {
+
+			document.getElementById('sound2').play();
+		}
+
+
+      
+
+	 } // fin funcion presionarGatillo
+
+     function disparar(){
+	
+		//sobar sonido
+		document.getElementById('sound1').play();
+	 } // fin funcion disparar
+ 
+    function dispararbtn(){
+	
+		//sobar sonido
+		document.getElementById('sound1').play();
+	 } // fin funcion disparar
+ 
+
+
+   	/**
+		var counter = 1;
+
+		function start(counter){
+		  if(counter < 10){
+		    setTimeout(function(){
+		      counter++;
+		      console.log(counter);
+		      document.getElementById('sound4').play();
+		      
+		      start(counter);
+		    }, 500);
+		  }
+		}
+		start(0);
+    **/
+ 
+</script>
+<body onload="disparar();"> </body>
+<!-- 
+
+
+<body onload="document.getElementById('btndisparo').click();"> </body>
+
+-->
+
+
+
+
+/** Antigua funcion gatillo con efecto sonido bergmann r. ok ted. test only
+
+
+
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('sound4').play();
+			}, 50);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('sound5').play();
+			}, 100);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('sound6').play();
+			}, 150);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('sound7').play();
+			}, 200);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('sound8').play();
+			}, 250);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('sound9').play();
+			}, 300);
+
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('sound4').play();
+			}, 360+100);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('sound5').play();
+			},420+100);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('sound6').play();
+			}, 480+100);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('sound7').play();
+			},540+100);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('sound8').play();
+			}, 610+100);
+
+			setTimeout(function() {
+			  //your code to be executed after x seconds
+			 // document.getElementById('myform1ted').submit(); // esto envia el 
+			 document.getElementById('sound9').play();
+			}, 680+100);
+
+
+		
+
+
+
+ **/

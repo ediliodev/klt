@@ -1,0 +1,2 @@
+module SinglepostransaccionestsHelper
+end

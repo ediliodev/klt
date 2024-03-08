@@ -1,0 +1,29 @@
+https://www.linkedin.com/pulse/prevent-your-arduino-uno-project-from-being-cloned-jan-dekkers
+
+Prevent your Arduino UNO project from being cloned.
+
+These days it’s very easy to pick-up an Arduino UNO clone on the web for less than 10 bucks, design a shield and have 100 of them made in China for a dime on the dollar.
+
+What is often overlooked is protecting code you have written. The UNO has a bootloader on it which, besides uploading of your binary project, can also be used to download your precious property.
+
+If the bootloader is accessible it’s possible to read out the contents of the flash memory in a binary or hex format without resorting to an external programmer using avrdude as the bootloader is an STK500 Communication Protocol variant. This hex file can be altered and uploaded to an Arduino UNO without investing in the research, development and debugging competing with your product for way less money you are asking for. 
+
+A pirated clone example, can be located at https://en.wikipedia.org/wiki/ELM327. An OEM Elm programed PIC (IC Only) costs around $15 while cloned complete devices (including the cloned IC) costs about $3. There is no way an OEM can compete with pirates cloning their intellectual properties.
+
+You should always have some copy protection enabled because you never know if your device becomes the next great gadget on the market. In order to prevent downloading one can remove the bootloader and set lock bits.
+
+I developed a CO2 Laser Tube monitor to prevent Laser Tube overheating/cracking and a stepper motor driver for the Z Axis using an Arduino UNO. Why Arduino UNO should you ask, well I don’t need to develop a board as I can buy Arduino UNO clones in China for around $3.50 which includes shipping. Just create a simple shield and you have a product you can sell (See JDro® Laser Savior on jandekkersdro.com). Instead of creating a sketch in Arduino Software (IDE), I used Atmel Studio which allows me to use Atmel ICE debugger/programmer and set the lock bits. The Atmel ICE debugger/programmer ($90) is an investment well spend.
+
+After building your sketch in release mode, click start without debugging using your Atmel ICE. Check if your program is running correctly on your Arduino UNO and click the “Tools” Menu Item and select “Device Programming” in Atmel Studio. The Atmel Ice Device Programming dialog will show up, click the Lock Bits from the menu and set the:
+
+·        LB:         to Further Programming and Verification Disabled
+
+·        MLB0:  to LPM and SPM prohibited in Application Section
+
+·        BLB1:    to LPM and SPM prohibited in Boot Section
+
+After above 3 lock bits are set click the Program button and that’s all there is to it. Atmel Ice did upload your sketch in hex format and removed the bootloader when you did click “start without debugging” and your code is now protected. Please note that each time you press “start without debugging” the 3 fuses are reset to its unprotected defaults. Setting the 3 fuses will not protect your board to be flashed with firmware written by others, but it protects your firmware from being downloaded and cloned.
+
+If you enjoyed this post, I’d be very grateful if you’d help it spread by emailing it to a friend, or sharing it on LinkedIn, Twitter or Facebook. Thank you!
+
+Jan Dekkers

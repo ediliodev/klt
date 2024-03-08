@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Cashboxts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cantidad</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cashboxts.each do |cashboxt| %>
+      <tr>
+        <td><%= cashboxt.cantidad %></td>
+        <td><%= link_to 'Show', cashboxt %></td>
+        <td><%= link_to 'Edit', edit_cashboxt_path(cashboxt) %></td>
+        <td><%= link_to 'Destroy', cashboxt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cashboxt', new_cashboxt_path %>

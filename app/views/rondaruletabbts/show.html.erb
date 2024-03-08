@@ -1,0 +1,48 @@
+
+<p>Not allowed ok.</p>
+
+<%if false%>
+
+
+
+    <p id="notice"><%= notice %></p>
+
+    <p>
+      <strong>Jugador:</strong>
+      <%= @rondaruletabbt.jugador %>
+    </p>
+
+    <p>
+      <strong>Win:</strong>
+      <%= @rondaruletabbt.win %>
+    </p>
+
+    <p>
+      <strong>Credit:</strong>
+      <%= @rondaruletabbt.credit %>
+    </p>
+
+    <p>
+      <strong>Jugadas:</strong>
+      <%= @rondaruletabbt.jugadas %>
+    </p>
+
+    <p>
+      <strong>Totalbet:</strong>
+      <%= @rondaruletabbt.totalbet %>
+    </p>
+
+    <p>
+      <strong>Winnernumberspin:</strong>
+      <%= @rondaruletabbt.winnernumberspin %>
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+      <%= @rondaruletabbt.status %>
+    </p>
+
+    <%= link_to 'Edit', edit_rondaruletabbt_path(@rondaruletabbt) %> |
+    <%= link_to 'Back', rondaruletabbts_path %>
+    
+<%end%>

@@ -1,0 +1,2 @@
+class Cashboxt < ApplicationRecord
+end

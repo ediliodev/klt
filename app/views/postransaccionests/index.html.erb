@@ -1,29 +1,32 @@
-<p id="notice"><%= notice %></p>
+<p>Not allowed ok.</p>
+<%if false%>
+    <p id="notice"><%= notice %></p>
 
-<h1>Postransaccionests</h1>
+    <h1>Postransaccionests</h1>
 
-<table>
-  <thead>
-    <tr>     
-      <th>Serial</th>
-       <th>Cantidad</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <table>
+      <thead>
+        <tr>     
+          <th>Serial</th>
+           <th>Cantidad</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @postransaccionests.each do |postransaccionest| %>
-      <tr>
-        <td><%= postransaccionest.serial %></td>
-        <td><%= postransaccionest.cantidad %></td>
-        <td><%= link_to 'Show', postransaccionest %></td>
-        <td><%= link_to 'Edit', edit_postransaccionest_path(postransaccionest) %></td>
-        <td><%= link_to 'Destroy', postransaccionest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @postransaccionests.each do |postransaccionest| %>
+          <tr>
+            <td><%= postransaccionest.serial %></td>
+            <td><%= postransaccionest.cantidad %></td>
+            <td><%= link_to 'Show', postransaccionest %></td>
+            <td><%= link_to 'Edit', edit_postransaccionest_path(postransaccionest) %></td>
+            <td><%= link_to 'Destroy', postransaccionest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<br>
+    <br>
 
-<%= link_to 'New Postransaccionest', new_postransaccionest_path %>
+    <%= link_to 'New Postransaccionest', new_postransaccionest_path %>
+<%end%>

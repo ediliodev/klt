@@ -1,0 +1,2 @@
+class Singlepostransaccionest < ApplicationRecord
+end

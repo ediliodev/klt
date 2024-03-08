@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  consorcio: MyString
+  sucursal: MyString
+  siglas: MyString
+  localidad: MyString
+  serialmq: MyString
+  countermeterold: MyString
+  countermeternew: MyString
+  aportemega: MyString
+
+two:
+  consorcio: MyString
+  sucursal: MyString
+  siglas: MyString
+  localidad: MyString
+  serialmq: MyString
+  countermeterold: MyString
+  countermeternew: MyString
+  aportemega: MyString

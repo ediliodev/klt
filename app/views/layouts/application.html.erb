@@ -1,5 +1,15 @@
 <!DOCTYPE html>
-<html>
+
+
+<%if @sin_layout %>
+	<html>  <!--Mostrar Ruleta -->
+
+		  <%= yield %>   
+
+	</html>
+
+<% else %>
+	<html>
 
 	  <head>
 	    <title>Kollector - <%= Localidadt.last.sucursal%></title>
@@ -13,7 +23,7 @@
 	    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 	  </head>
-<div align="center">
+     <div align="center">
 	  <body style="background-color: #FFECAC; ">
 	  	
 	    <%= yield %>   
@@ -29,3 +39,5 @@
 
 
 </html>
+
+<% end %>

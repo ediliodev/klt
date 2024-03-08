@@ -1,0 +1,22 @@
+<%= form_with(model: cashboxt, local: true) do |form| %>
+  <% if cashboxt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cashboxt.errors.count, "error") %> prohibited this cashboxt from being saved:</h2>
+
+      <ul>
+      <% cashboxt.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :cantidad %>
+    <%= form.text_field :cantidad, id: :cashboxt_cantidad %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

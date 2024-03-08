@@ -1,0 +1,2 @@
+class Rondaruletabbt < ApplicationRecord
+end

@@ -1,0 +1,52 @@
+<%= form_with(model: ganadoresmegajackpot, local: true) do |form| %>
+  <% if ganadoresmegajackpot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ganadoresmegajackpot.errors.count, "error") %> prohibited this ganadoresmegajackpot from being saved:</h2>
+
+      <ul>
+      <% ganadoresmegajackpot.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :fecha %>
+    <%= form.text_field :fecha, id: :ganadoresmegajackpot_fecha %>
+  </div>
+
+  <div class="field">
+    <%= form.label :consorcio %>
+    <%= form.text_field :consorcio, id: :ganadoresmegajackpot_consorcio %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sucursal %>
+    <%= form.text_field :sucursal, id: :ganadoresmegajackpot_sucursal %>
+  </div>
+
+  <div class="field">
+    <%= form.label :localidad %>
+    <%= form.text_field :localidad, id: :ganadoresmegajackpot_localidad %>
+  </div>
+
+  <div class="field">
+    <%= form.label :serialmq %>
+    <%= form.text_field :serialmq, id: :ganadoresmegajackpot_serialmq %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cantidad %>
+    <%= form.text_field :cantidad, id: :ganadoresmegajackpot_cantidad %>
+  </div>
+
+  <div class="field">
+    <%= form.label :montoxcontribuyente %>
+    <%= form.text_field :montoxcontribuyente, id: :ganadoresmegajackpot_montoxcontribuyente %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,6 +1,30 @@
+
+
 <h1>Cuadre de Ventas</h1>
 
 <%= render 'form', reportet: @reportet %>
 
+<%if @mostrar_offline_activation_code%>
+ <h2> Activation code: <%= @offline_activation_code  %> </h2>  
+<%end%>    
 
 <p id="notice"><%= notice %></p>
+
+<!--Auto send page to home every x time, ventana principal de ventas ok -->
+
+
+ 
+
+<script>
+
+function llevar_a_home_page() {
+  //alert("klk");
+  window.location.href = window.location.origin;
+}
+
+setTimeout(llevar_a_home_page, 300000); // enviar al home page en 5 (60s* 5) minutos si no hay consulta de reporte ok
+
+
+</script> 
+
+

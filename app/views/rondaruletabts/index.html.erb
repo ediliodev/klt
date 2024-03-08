@@ -1,0 +1,40 @@
+<!--This view will never be shown, cancelled in routes ok. -->
+<p id="notice"><%= notice %></p>
+
+<h1>Rondaruletabts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Jugador</th>
+      <th>Win</th>
+      <th>Credit</th>
+      <th>Jugadas</th>
+      <th>Totalbet</th>
+      <th>Winnernumberspin</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rondaruletabts.each do |rondaruletabt| %>
+      <tr>
+        <td><%= rondaruletabt.jugador %></td>
+        <td><%= rondaruletabt.win %></td>
+        <td><%= rondaruletabt.credit %></td>
+        <td><%= rondaruletabt.jugadas %></td>
+        <td><%= rondaruletabt.totalbet %></td>
+        <td><%= rondaruletabt.winnernumberspin %></td>
+        <td><%= rondaruletabt.status %></td>
+        <td><%= link_to 'Show', rondaruletabt %></td>
+        <td><%= link_to 'Edit', edit_rondaruletabt_path(rondaruletabt) %></td>
+        <td><%= link_to 'Destroy', rondaruletabt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rondaruletabt', new_rondaruletabt_path %>

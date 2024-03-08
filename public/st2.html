@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+      <style>
+          body, html {
+            height: 100%;
+            margin: 0;
+          }
+
+          .bg {
+            /* The image used */
+            background-image: url("../br1.jpg"); 
+
+            /* Full height */
+            height: 100%; 
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+
+           .win_display_iphone6s{
+            background-color: red;
+            color: white;
+            font-size: 16px;
+            border-radius: 10%;
+            padding: 1px 1px;
+            position: absolute;
+            left: 84px;
+            top: 79px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             border: 0px transparent; */             
+          }
+
+           .credit_display_iphone6s{
+            background-color: red;
+            color: white;
+            font-size: 16px;
+            border-radius: 10%;
+            padding: 1px 1px;
+            position: absolute;
+            left: 247px;
+            top: 79px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             border: 0px transparent; */           
+          }
+
+          .black_jackpot_display{
+            background-color: black;
+            color: white;
+            font-size: 20px;
+            border-radius: 10%;
+            padding: 3px 3px;
+            position: absolute;
+            left: 125px;
+            top: 145px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             border: 0px transparent; */             
+          }
+
+          .red_jackpot_display{
+            background-color: darkred;
+            color: white;
+            font-size: 20px;
+            border-radius: 10%;
+            padding: 3px 3px;
+            position: absolute;
+            left: 202px;
+            top: 145px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             border: 0px transparent; */             
+          }
+
+           .spin_display_iphone6s{
+            color: yellow;
+            font-size: 10px;
+            border-radius: 50%;
+            padding: 2px 2px;
+            position: absolute;
+            background-color: yellow;
+            /* left: 194px;  ajustar esta coodenada para cada btn */ 
+            /* top: 62px;    ajustar esta coodenada para cada btn */ 
+             /*border: 2px transparent; */  
+              border: 0.5px solid gray;*/
+           /*  border: 0px transparent; */             
+          }
+
+
+
+
+           .button_cancel_iphone6s{
+            font-size: 6px;
+            border-radius: 10%;
+            padding: 5px 4px;
+            position: absolute;
+            left: 65px;
+            top: 144px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             
+              background-color: yellow;
+
+            /* font-size: 8px; border-radius: 10%; padding: 2px 2px;  */
+          }
+
+          .button_start_iphone6s{
+            font-size: 6px;
+            border-radius: 10%;
+            padding: 5px 4px;
+            position: absolute;
+            left: 265px;
+            top: 144px;
+            visibility: hidden;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             
+              background-color: red;
+
+            /* font-size: 8px; border-radius: 10%; padding: 2px 2px;  */
+          }
+
+          .button_prestart_iphone6s{
+            font-size: 6px;
+            border-radius: 10%;
+            padding: 5px 4px;
+            position: absolute;
+            left: 265px;
+            top: 144px;
+             /* visibility: hidden; Debe de verse este ok. */
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             
+              background-color: red;
+
+            /* font-size: 8px; border-radius: 10%; padding: 2px 2px;  */
+          }
+
+
+
+          .button_iphone6s{
+            font-size: 7px; /*Estaba en 6 iph anteriromente ok ted */
+            border-radius: 10%;
+            padding: 3px 5px;
+            position: absolute;
+          /*  left: 124px; ajustar esta coodenada para cada btn */ 
+          /*  top: 155px;  ajustar esta coodenada para cada btn */  
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             
+            background-color: yellow;
+
+            /* font-size: 8px; border-radius: 10%; padding: 2px 2px;  */
+          }
+
+
+
+          .button_ejemplo {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 4px 4px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 5px;
+          }
+
+          @font-face{
+           font-family:'digital-clock-font';
+           src: url('digital-7.mono.ttf');
+          }
+
+      </style>
+
+  </head>
+
+<script type="text/javascript">
+  //  alert("Your screen resolution is: " + screen.width + "x" + screen.height);
+</script>
+
+
+  <!--ESTA PARTE JS CONTROLA (NO IOS) EL VERTICAL MODE OPERATION OK.: -->
+  <script type="text/javascript">
+
+      window.onorientationchange = function() { 
+       //  alert("the orientation of the device is now " + screen.orientation.angle);
+         if(screen.orientation.angle == 0){
+          //reload page;
+          window.location.reload(); 
+         }else{
+          document.write("Cannot Play horizontal mode." +  '<script type="text/javascript"> window.onorientationchange = function() {  window.location.reload();};' + " <\/script>" );
+         }
+      };
+
+  </script>
+
+  <body onload="refresh_credit();" > 
+
+  <!--   <audio id="sound1" src="../musicafondojuego.mp3" preload="auto"></audio> -->
+    <audio id="sound2" src="../ruletasonido.mp3" preload="auto"></audio>
+    <audio id="sound3" src="../vacia.mp3" preload="auto"></audio>
+    <audio id="sound4" src="../sonidoseleccion.mp3" preload="auto"></audio>
+    <audio id="sound5" src="../winnerspinsound.mp3" preload="auto"></audio>
+    <audio id="sound6" src="../cobrowin.mp3" preload="auto"></audio> <!--coins -->
+    <audio id="sound7" src="../cobrocredit.mp3" preload="auto"></audio>
+    <audio id="sound8" src="../tadan.mp3" preload="auto"></audio> <!--tadan -->
+
+
+    <audio id="sound50" src="../xp.mp3" preload="auto"></audio>
+
+     <audio id="sound20" src="../sonidoseleccion.mp3" preload="auto"></audio>
+     <audio id="sound21" src="../sonidoseleccion.mp3" preload="auto"></audio>
+     <audio id="sound22" src="../sonidoseleccion.mp3" preload="auto"></audio>
+     <audio id="sound23" src="../sonidoseleccion.mp3" preload="auto"></audio>
+     <audio id="sound24" src="../sonidoseleccion.mp3" preload="auto"></audio>
+     <audio id="sound25" src="../sonidoseleccion.mp3" preload="auto"></audio>
+     <audio id="sound26" src="../sonidoseleccion.mp3" preload="auto"></audio>
+     <audio id="sound27" src="../sonidoseleccion.mp3" preload="auto"></audio>
+     <audio id="sound28" src="../sonidoseleccion.mp3" preload="auto"></audio>
+     <audio id="sound29" src="../sonidoseleccion.mp3" preload="auto"></audio>
+     <audio id="sound30" src="../sonidoseleccion.mp3" preload="auto"></audio>
+     <audio id="sound31" src="../sonidoseleccion.mp3" preload="auto"></audio>
+     <audio id="sound32" src="../sonidoseleccion.mp3" preload="auto"></audio>
+
+
+<!--  sound40
+<p style="font-family:'digital-clock-font'"> TEST 1234</p>
+-->
+
+<!-- 
+<div id="demo">
+<h3>The XMLHttpRequest Object</h3>
+<button type="button" onclick="loadDoc()">Change Content</button>
+</div>
+
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+      //llamar rondas etc...
+    }
+  };
+  xhttp.open("GET", "/rondaruletats/", true);
+  xhttp.send();
+}
+</script>
+
+
+-->
+<script type="text/javascript">
+//  alert("Your screen resolution is: " + screen.width + "x" + screen.height);
+  //alert("Your Plataform is: " + navigator.appVersion);
+  
+</script>
+
+
+<div class="bg">  
+
+
+<!--WIN DISPLAY BUTTON -->
+ <button style="font-family:'digital-clock-font'" id="win_display" class="win_display_iphone6s" onclick="sonartbn();" >0000</button>
+
+
+<!--CREDIT DISPLAY BUTTON -->
+ <button style="font-family:'digital-clock-font'" id="credit_display" class="credit_display_iphone6s" onclick="sonartbn();cobrar_cashout();" >0000</button>
+
+<!--SPIN DISPLAY BUTTONS -->
+ <button id="spin_0" class="spin_display_iphone6s"  disabled="true" style="left: 178px; top: 36px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_5" class="spin_display_iphone6s"  disabled="true" style="left: 200px; top: 42px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_12" class="spin_display_iphone6s"  disabled="true" style="left: 215px; top: 55px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_3" class="spin_display_iphone6s"  disabled="true" style="left: 223px; top: 76px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_10" class="spin_display_iphone6s"  disabled="true" style="left: 220px; top: 98px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_1" class="spin_display_iphone6s"  disabled="true" style="left: 208px; top: 116px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_8" class="spin_display_iphone6s"  disabled="true" style="left: 189px; top: 126px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_9" class="spin_display_iphone6s"  disabled="true" style="left: 167px; top: 126px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_2" class="spin_display_iphone6s"  disabled="true" style="left: 148px; top: 117px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_7" class="spin_display_iphone6s"  disabled="true" style="left: 135px; top: 98px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_6" class="spin_display_iphone6s"  disabled="true" style="left: 133px; top: 76px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_11" class="spin_display_iphone6s"  disabled="true" style="left: 140px; top: 56px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+ <button id="spin_4" class="spin_display_iphone6s"  disabled="true" style="left: 156px; top: 42px; visibility: hidden; " onclick="sonartbn();" ></button>
+
+
+
+
+<!--CANCEL BUTTON -->
+ <button id="btn_cancel" class="button_cancel_iphone6s" onclick="fast_disable_this_btn();sonartbn();refresh_con_delay();" ><b>CANCEL</button> <!--fast_disable_this_btn is for prestart ok. ->
+
+
+<!--START BUTTON -->
+ <button id="btn_start" class="button_start_iphone6s" onclick="sonartbn55();ronda_spin_animation1_off();reset_vuelta_counter();disable_all_panel_button();ronda_spin_game_fast(4, 100, 100);" >START</button>
+
+<!--JACKPOTS PANEL -->
+
+<!--BLACK JACKPOT DISPLAY BUTTON -->
+ <button style="font-family:'digital-clock-font'" id="black_jackpot_display" disabled="true" class="black_jackpot_display" onclick="sonartbn();" >000</button>
+
+ <!--RED JACKPOT DISPLAY BUTTON -->
+ <button style="font-family:'digital-clock-font'" id="red_jackpot_display" disabled="true" class="red_jackpot_display" onclick="sonartbn();" >000</button>
+
+
+
+
+<!--PRESTART BUTTON Este analizara el escenario antes de iniciar musica init, ajax(modify var globar de ronda, ronda-->
+ <button id="btn_prestart" class="button_prestart_iphone6s" onclick="fast_disable_this_btn();sonido_animacion1();funcion_ajax();sonartbn();" ><b>START</button> <!--PRESTART BUTTON OK-->
+
+<!--0_BUTTON -->
+      <button id="btn_0_1" class="button_iphone6s" style="left: 137px; top: 190px;" onclick="sonartbn();toggle_selection('btn_0_1');" >1</button>
+      <button id="btn_0_2" class="button_iphone6s" style="left: 207px; top: 190px;" onclick="sonartbn();toggle_selection('btn_0_2');" >2</button>
+
+      <button id="btn_0_3" class="button_iphone6s" style="left: 137px; top: 225px;" onclick="sonartbn();toggle_selection('btn_0_3');" >3</button>
+      <button id="btn_0_4" class="button_iphone6s" style="left: 207px; top: 225px;" onclick="sonartbn();toggle_selection('btn_0_4');" >4</button>
+
+
+<!--1_BUTTON -->
+      <button id="btn_1_1" class="button_iphone6s" style="left: 83px; top: 261px;" onclick="sonartbn();toggle_selection('btn_1_1');" >1</button>
+      <button id="btn_1_2" class="button_iphone6s" style="left: 119px; top: 261px;" onclick="sonartbn();toggle_selection('btn_1_2');" >2</button>
+
+      <button id="btn_1_3" class="button_iphone6s" style="left: 83px; top: 295px;" onclick="sonartbn();toggle_selection('btn_1_3');" >3</button>
+      <button id="btn_1_4" class="button_iphone6s" style="left: 119px; top: 295px;" onclick="sonartbn();toggle_selection('btn_1_4');" >4</button>
+
+
+<!--2_BUTTON -->
+      <button id="btn_2_1" class="button_iphone6s" style="left: 154px; top: 260px;" onclick="sonartbn();toggle_selection('btn_2_1');" >1</button>
+      <button id="btn_2_2" class="button_iphone6s" style="left: 190px; top: 260px;" onclick="sonartbn();toggle_selection('btn_2_2');" >2</button>
+
+      <button id="btn_2_3" class="button_iphone6s" style="left: 154px; top: 295px;" onclick="sonartbn();toggle_selection('btn_2_3');" >3</button>
+      <button id="btn_2_4" class="button_iphone6s" style="left: 190px; top: 295px;" onclick="sonartbn();toggle_selection('btn_2_4');" >4</button>
+
+
+
+<!--3_BUTTON -->
+      <button id="btn_3_1" class="button_iphone6s" style="left: 225px; top: 260px;" onclick="sonartbn();toggle_selection('btn_3_1');" >1</button>
+      <button id="btn_3_2" class="button_iphone6s" style="left: 261px; top: 260px;" onclick="sonartbn();toggle_selection('btn_3_2');" >2</button>
+
+      <button id="btn_3_3" class="button_iphone6s" style="left: 225px; top: 294px;" onclick="sonartbn();toggle_selection('btn_3_3');" >3</button>
+      <button id="btn_3_4" class="button_iphone6s" style="left: 261px; top: 294px;" onclick="sonartbn();toggle_selection('btn_3_4');" >4</button>
+
+
+
+
+<!--4_BUTTON -->
+      <button id="btn_4_1" class="button_iphone6s" style="left: 83px; top: 330px;" onclick="sonartbn();toggle_selection('btn_4_1');" >1</button>
+      <button id="btn_4_2" class="button_iphone6s" style="left: 119px; top: 330px;" onclick="sonartbn();toggle_selection('btn_4_2');" >2</button>
+
+      <button id="btn_4_3" class="button_iphone6s" style="left: 83px; top: 365px;" onclick="sonartbn();toggle_selection('btn_4_3');" >3</button>
+      <button id="btn_4_4" class="button_iphone6s" style="left: 119px; top: 365px;" onclick="sonartbn();toggle_selection('btn_4_4');" >4</button>
+
+
+<!--5_BUTTON -->
+      <button id="btn_5_1" class="button_iphone6s" style="left: 154px; top: 330px;" onclick="sonartbn();toggle_selection('btn_5_1');" >1</button>
+      <button id="btn_5_2" class="button_iphone6s" style="left: 190px; top: 330px;" onclick="sonartbn();toggle_selection('btn_5_2');" >2</button>
+
+      <button id="btn_5_3" class="button_iphone6s" style="left: 154px; top: 365px;" onclick="sonartbn();toggle_selection('btn_5_3');" >3</button>
+      <button id="btn_5_4" class="button_iphone6s" style="left: 190px; top: 365px;" onclick="sonartbn();toggle_selection('btn_5_4');" >4</button>
+
+
+
+<!--6_BUTTON -->
+      <button id="btn_6_1" class="button_iphone6s" style="left: 225px; top: 330px;" onclick="sonartbn();toggle_selection('btn_6_1');" >1</button>
+      <button id="btn_6_2" class="button_iphone6s" style="left: 261px; top: 330px;" onclick="sonartbn();toggle_selection('btn_6_2');" >2</button>
+
+      <button id="btn_6_3" class="button_iphone6s" style="left: 225px; top: 365px;" onclick="sonartbn();toggle_selection('btn_6_3');" >3</button>
+      <button id="btn_6_4" class="button_iphone6s" style="left: 261px; top: 365px;" onclick="sonartbn();toggle_selection('btn_6_4');" >4</button>
+
+
+
+
+<!--7_BUTTON -->
+      <button id="btn_7_1" class="button_iphone6s" style="left: 83px; top: 401px;" onclick="sonartbn();toggle_selection('btn_7_1');" >1</button>
+      <button id="btn_7_2" class="button_iphone6s" style="left: 119px; top: 401px;" onclick="sonartbn();toggle_selection('btn_7_2');" >2</button>
+
+      <button id="btn_7_3" class="button_iphone6s" style="left: 83px; top: 435px;" onclick="sonartbn();toggle_selection('btn_7_3');" >3</button>
+      <button id="btn_7_4" class="button_iphone6s" style="left: 119px; top: 435px;" onclick="sonartbn();toggle_selection('btn_7_4');" >4</button>
+
+
+<!--8_BUTTON -->
+      <button id="btn_8_1" class="button_iphone6s" style="left: 154px; top: 401px;" onclick="sonartbn();toggle_selection('btn_8_1');" >1</button>
+      <button id="btn_8_2" class="button_iphone6s" style="left: 190px; top: 401px;" onclick="sonartbn();toggle_selection('btn_8_2');" >2</button>
+
+      <button id="btn_8_3" class="button_iphone6s" style="left: 154px; top: 435px;" onclick="sonartbn();toggle_selection('btn_8_3');" >3</button>
+      <button id="btn_8_4" class="button_iphone6s" style="left: 190px; top: 435px;" onclick="sonartbn();toggle_selection('btn_8_4');" >4</button>
+
+
+
+<!--9_BUTTON -->
+      <button id="btn_9_1" class="button_iphone6s" style="left: 225px; top: 401px;" onclick="sonartbn();toggle_selection('btn_9_1');" >1</button>
+      <button id="btn_9_2" class="button_iphone6s" style="left: 261px; top: 401px;" onclick="sonartbn();toggle_selection('btn_9_2');" >2</button>
+
+      <button id="btn_9_3" class="button_iphone6s" style="left: 225px; top: 435px;" onclick="sonartbn();toggle_selection('btn_9_3');" >3</button>
+      <button id="btn_9_4" class="button_iphone6s" style="left: 261px; top: 435px;" onclick="sonartbn();toggle_selection('btn_9_4');" >4</button>
+
+
+
+
+<!--10_BUTTON -->
+      <button id="btn_10_1" class="button_iphone6s" style="left: 83px;  top: 471px;" onclick="sonartbn();toggle_selection('btn_10_1');" >1</button>
+      <button id="btn_10_2" class="button_iphone6s" style="left: 119px; top: 471px;" onclick="sonartbn();toggle_selection('btn_10_2');" >2</button>
+
+      <button id="btn_10_3" class="button_iphone6s" style="left: 83px; top:  506px;" onclick="sonartbn();toggle_selection('btn_10_3');" >3</button>
+      <button id="btn_10_4" class="button_iphone6s" style="left: 119px; top: 506px;" onclick="sonartbn();toggle_selection('btn_10_4');" >4</button>
+
+
+<!--11_BUTTON -->
+      <button id="btn_11_1" class="button_iphone6s" style="left: 154px; top: 471px;" onclick="sonartbn();toggle_selection('btn_11_1');" >1</button>
+      <button id="btn_11_2" class="button_iphone6s" style="left: 190px; top: 471px;" onclick="sonartbn();toggle_selection('btn_11_2');" >2</button>
+
+      <button id="btn_11_3" class="button_iphone6s" style="left: 154px; top: 506px;" onclick="sonartbn();toggle_selection('btn_11_3');" >3</button>
+      <button id="btn_11_4" class="button_iphone6s" style="left: 190px; top: 506px;" onclick="sonartbn();toggle_selection('btn_11_4');" >4</button>
+
+
+
+<!--12_BUTTON -->
+      <button id="btn_12_1" class="button_iphone6s" style="left: 225px; top: 471px;" onclick="sonartbn();toggle_selection('btn_12_1');" >1</button>
+      <button id="btn_12_2" class="button_iphone6s" style="left: 261px; top: 471px;" onclick="sonartbn();toggle_selection('btn_12_2');" >2</button>
+
+      <button id="btn_12_3" class="button_iphone6s" style="left: 225px; top: 506px;" onclick="sonartbn();toggle_selection('btn_12_3');" >3</button>
+      <button id="btn_12_4" class="button_iphone6s" style="left: 261px; top: 506px;" onclick="sonartbn();toggle_selection('btn_12_4');" >4</button>
+
+
+
+
+
+
+    </div>
+
+  </body>
+
+</html>
+
+<script type="text/javascript">
+  //crear el array de hash de botones toggeados en la ruleta para seleccionar en apuestas:
+  //declaracion de hash y asignacion de valores default no seleccionado.
+  var hash_bnt_status =  {btn_0_1: 'n', btn_0_2: 'n', btn_0_3: 'n', btn_0_4: 'n' ,
+                          btn_1_1: 'n', btn_1_2: 'n', btn_1_3: 'n', btn_1_4: 'n' ,
+                          btn_2_1: 'n', btn_2_2: 'n', btn_2_3: 'n', btn_2_4: 'n' ,
+                          btn_3_1: 'n', btn_3_2: 'n', btn_3_3: 'n', btn_3_4: 'n' ,
+                          btn_4_1: 'n', btn_4_2: 'n', btn_4_3: 'n', btn_4_4: 'n' ,
+                          btn_5_1: 'n', btn_5_2: 'n', btn_5_3: 'n', btn_5_4: 'n' ,
+                          btn_6_1: 'n', btn_6_2: 'n', btn_6_3: 'n', btn_6_4: 'n' ,
+                          btn_7_1: 'n', btn_7_2: 'n', btn_7_3: 'n', btn_7_4: 'n' ,
+                          btn_8_1: 'n', btn_8_2: 'n', btn_8_3: 'n', btn_8_4: 'n' ,
+                          btn_9_1: 'n', btn_9_2: 'n', btn_9_3: 'n', btn_9_4: 'n' ,
+                          btn_10_1: 'n', btn_10_2: 'n', btn_10_3: 'n', btn_10_4: 'n', 
+                          btn_11_1: 'n', btn_11_2: 'n', btn_11_3: 'n', btn_11_4: 'n', 
+                          btn_12_1: 'n', btn_12_2: 'n', btn_12_3: 'n', btn_12_4: 'n', 
+                         };
+
+  var cantidad_de_jugadas_para_iniciar = 0; // recorre el hash_bnt_status y me dice si se puede iniciar spin round.
+
+  function sonartbn(){
+    document.getElementById('sound4').play();
+   // document.getElementById("spin_0").style.visibility = "visible"; 
+    ronda_spin_animation1();
+  
+  }
+
+  function sonartbn2(){
+    document.getElementById('sound3').play();
+   // document.getElementById("spin_0").style.visibility = "visible"; 
+    ronda_spin_animation1();
+  }
+
+  
+  function sonartbn3(){
+  //  document.getElementById('sound1').play();
+   // document.getElementById("spin_0").style.visibility = "visible"; 
+    ronda_spin_animation1();
+  }
+
+
+function sonartbn55(){
+    //nada
+    document.getElementById('sound2').play();
+  }
+
+function sonarporbtn() {
+
+// document.getElementById('sound1').play();
+  //document.getElementById('sound3').play();
+  // body...
+}
+
+function cobrar_cashout(){
+   //desactivar botones al inciio y reactivarlos al final de esta funcion ok ted:
+   disable_all_panel_button(); // esto para evitar punchaderas mientras se procesa el cobro cashout
+    // debo dsaber que con el refresh page se habilitan todos los botones, pero en caso de no haber conexion debo setear un timeout para reactival el panel button para intentar cashout nuevamente y asi no precibir un estado de maquina 'frizada' cuando se este offline por cualquier problema de conexion o demas. ok. Asi:
+    setTimeout(function() {
+             enable_all_panel_button();
+      },5000); // si no hay conexion, pasado ese tiempo el panel button de reactiva para futuro intento de reconexion play o cashout ok.
+
+
+   var volatil1 = convertir_hash_to_string_ted(); // esto solo para que recorra el panel de botones y revisar si hay jugadas preseleccionadas o no. ok ted. Esta funcion es la que modifica la variable de control: cantidad_de_jugadas_para_iniciar ok.
+
+   if(cantidad_de_jugadas_para_iniciar > 0){
+   // alert("klkkom");
+   //hacer un delay de 0.5 seg para esperar sonido seleccion termine(otra funcion en el btn.click event ok) y hacer el refresh page:
+     setTimeout(function() {
+             window.location.reload(); 
+      }, 500); 
+
+     
+   }else{ 
+         // si llega hasta aqui es porque el win_credit_display esta completo para el cashout ok:  
+         //mandar un json comando cobrar que pone balance en cero alla y alla mismo actualizar last paid, total_out counter, etc... :
+          //confirmar con el usuario si desea cobrar si o no:
+            var confirmar_pago = confirm("Desea enviarlo para cobrar?");
+            if(confirmar_pago){
+              // hacer cobro y sonido chash_out, SI HAY CONEXION SUCESSFULL:
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                  if (this.readyState == 4 && this.status == 200) {
+                   //si entra aqui es porque se recibio el pago alla ok:
+                   //hacer sondio cobro monedas ok, y delay para refresh page new ronda ok.
+                    document.getElementById('sound6').play(); // cobro win cash monedas
+
+                    setTimeout(function() {
+                      document.getElementById('sound6').play(); // cobro win cash monedas
+                    }, 3200); // tiempo suficiente para sondio y cashout completo ok.
+                    
+
+                    setTimeout(function() {
+                      window.location.reload(); 
+                    }, 6000); // tiempo suficiente para sondio y cashout completo ok.
+                   
+                  } // cierre del if readyState and status flags reader condition ok ted.
+
+                };// cierre del onreadystatechange listener function definition ok.
+
+                //hacer pedido dentro del mismo if condition para que el server no haga sorteros innecesarios. ok.
+               // xhttp.open("GET", "/rondaruletats?jugadas=" + data_jugada , true);
+                xhttp.open("GET", "/rondaruletats?credit=cashout_credit" , true);
+                xhttp.send();
+            } // cierre del if confirmar_pago condition ok      
+
+           //actualizar pagina para cargar cero balance y jugadas limpias panel ok ted.
+          // listo, esperar que pongan creditos para jugar nuevamente. ok.
+         } // cierre del else condition
+ 
+//activar el boton panel de nuevo, todo a la normalidad con el panel (si js llega alguna vez aqui porque el setimeout reload  lo reactiva pero ya con el refresh, por protocolo debemos habilitarlo explicitamente. ok ted.:
+// enable_all_panel_button(); // ok 
+
+} // fin de la funcion cobrar_cashout
+
+ function fast_disable_this_btn(){
+   // fast disable ok ted:
+   document.getElementById('btn_prestart').disabled = true;
+
+   //aprovechar y normalizar color jkpot si fuenron previos ganadores (flags):
+   //negro:
+   if(jp_blackwin == 'y'){
+    document.getElementById("black_jackpot_display").style.backgroundColor = "black"; // normalizar color
+   }
+
+   //rojo:
+   if(jp_redwin == 'y'){
+    document.getElementById("red_jackpot_display").style.backgroundColor = "darkred"; // normalizar color
+   }
+
+   //si no hay sellecion de panel en el botton, entonces volver a habilitar
+   //esto porque cuando se presiona sin ningun panel en el boton el user tiene que darle cancel para poder start again, queremos que se corrija eso; ok.
+   var volatil2 = convertir_hash_to_string_ted(); // esto solo para que recorra el panel de botones y revisar si hay jugadas preseleccionadas o no. ok ted. Esta funcion es la que modifica la variable de control: cantidad_de_jugadas_para_iniciar ok.
+
+   if(cantidad_de_jugadas_para_iniciar <= 0){
+   // alert("klkkom");
+   //hacer un delay de 0.5 seg para esperar sonido seleccion termine(otra funcion en el btn.click event ok) y hacer el refresh page:
+     setTimeout(function() {
+            document.getElementById('btn_prestart').disabled = false; // rehabilitar el boton prestart si hay jugadas para que el cliente pueda jugar la ronda sin CANCEL button ok. ted.
+      }, 1000); // esto habilita el boton prestart e1 seg despues de haber revisado panel limpio sin jugadas. ok.
+   }
+
+ } // fin de la funcion fast_disable_this_btn
+
+function sonido_animacion1(){
+   
+ //  if(cantidad_de_jugadas_para_iniciar > 0){
+ //     cantidad_de_jugadas_para_iniciar = 0; //reseteo variable.
+ //     document.getElementById('sound5').play(); // play winnwe sound
+ //   }else{
+ //     document.getElementById('sound3').play(); // play no cash to start sound
+ //   }
+   document.getElementById('sound5').play(); 
+}
+
+//funcion para refrescar el credito de la mq onload refresh ok.
+function refresh_credit(){
+ // alert('klk');
+ var xhttp2 = new XMLHttpRequest();
+  xhttp2.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     
+      document.getElementById('credit_display').innerHTML = this.responseText.split('-')[0]; // "0000" String por favor ok.
+
+      //aprovecho y refresh jackpots tambien aqui mismo, en esta misma funcion de request - ok. ted:
+      document.getElementById("black_jackpot_display").innerHTML  =  this.responseText.split('-')[1];
+      document.getElementById("red_jackpot_display").innerHTML    =  this.responseText.split('-')[2]; 
+    }
+  };
+
+  
+  xhttp2.open("GET", "/rondaruletats?credit=get_credit" , true); // request get_credit balance.
+
+  xhttp2.send();
+    
+}
+
+
+
+var server_win_position = -1; // esto para no ganador provisional ok.
+var server_win_display = 0; // esto para no ganador provisional ok.
+var server_credit_display = 0; // esto para no ganador provisional ok.
+var string_btn_resaltar_gandarores = ""; // como String inicialmente.
+var array_btn_resaltar_gandarores = []; //  Esto con el split se convierte en array y lo almaceno aqui para el for recorrido de resaltar cada boton ganador ok.
+var jp_negro_display = "000"; // inicializar variable
+var jp_rojo_display  = "000"; // inicializar variable
+var jp_blackwin = 'none'; // inicializar variables con valor especifico.
+var jp_redwin =  'none'; // inicializar variables con valor especifico.
+
+var spin_casi_rotando = false;
+
+//funcion get_credit_periodically revisa si enviaron creditos inicio a la mq
+//si llego credito (new credit? server rails flag no se from caja), desactivar fast prestart, sonino new credit, refresh page.
+
+//function function_name(argument) {
+  // Solo si el panel esta en amarillo, sin jugadas va a revisar periodicamente. ok.si hay jugadas con el server spin update se va a act solo.
+   setInterval(function(){ 
+    var xhttp3 = new XMLHttpRequest();
+    xhttp3.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     
+      if( (this.responseText == 'reload_new_credit') && (spin_casi_rotando == false) ) {
+          //desactivo el prestart button para que no coincia inicio de rotacion mientras hago el play sound y el reload. ok.
+          fast_disable_this_btn();
+          //sonar musica de acreditacion y refrescar pagina para que cargue el credito automaticamente.
+          document.getElementById('sound7').play(); // ok sound7 play cuando reciba credito.
+          //pequeno delay en el reload para esperar que termine el sonido de arriba ok, 1.5segs aprox.
+           setTimeout(function() {
+             window.location.reload(); // refresh page
+          }, 1500); 
+                   
+        } 
+         
+      }
+    };
+
+  
+  xhttp3.open("GET", "/rondaruletats?credit=ask_new_credit" , true); // request get_credit balance.
+
+  xhttp3.send();
+    
+     
+    
+
+   }, 5000);
+
+
+
+
+function funcion_ajax(){
+
+  spin_casi_rotando = true; // activo el flag para evitar que el credit reload the page porque casi empieza una spin ronda just started by the user. Esto es un flag de control para evitar coincidencias de tiempos, no se actualiza credito enviado del pos hasta que la ronda termine para evitar el page refresh durante el spin round. ok ted.
+
+  //Convertir el hash y al mismo timepo Revisar que hayan jugadas seleccionas en el panel (por ende balance) para hacer la ronda:
+  
+  var data_jugada = convertir_hash_to_string_ted(); //no mover de aqui esta logica esta por orden.
+  
+    if(cantidad_de_jugadas_para_iniciar > 0){
+
+        cantidad_de_jugadas_para_iniciar = 0; //reseteo variable.
+        // document.getElementById("btn_start").click();
+        //enviar un request con los siguientes parametros:
+        //las jugadas
+        //devuelve: EL Winner number, el credit y el win, ademas de jkpot amount y winner? later...
+
+        // server side: VERIFICAR QUE LAS JUGADAS NO SOBREPASEN EL MONTO DEL CREDIT.
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+           // document.getElementById("demo").innerHTML =
+           // this.responseText;
+            server_win_position = this.responseText.split('-')[0];
+            server_win_display  = this.responseText.split('-')[1];
+            server_credit_display   = this.responseText.split('-')[2];
+            string_btn_resaltar_gandarores = this.responseText.split('-')[3]; // sale string aqui ok.
+            total_apostado_recibido = this.responseText.split('-')[4];
+
+            jp_negro_display = this.responseText.split('-')[5];
+            jp_rojo_display  = this.responseText.split('-')[6];
+            jp_blackwin = this.responseText.split('-')[7];
+            jp_redwin = this.responseText.split('-')[8];       
+            // esto de abajo esa en nueva funcion llamada actualizar_valores()
+            // document.getElementById("win_display").innerHTML    =  server_win_display;
+            // document.getElementById("credit_display").innerHTML =  server_credit_display;
+            document.getElementById("btn_start").click();
+          } // cierre del if readyState and status flags reader condition ok ted.
+
+        };// cierre del onreadystatechange listener function definition ok.
+
+        //hacer pedido dentro del mismo if condition para que el server no haga sorteros innecesarios. ok.
+        xhttp.open("GET", "/rondaruletats?jugadas=" + data_jugada , true);
+        xhttp.send();
+
+    } //; cierre del if(cantidad_de_jugadas_para_iniciar > 0) condition ok 
+  
+  //xhttp.open("GET", "/rondaruletats?jugadas=" + String(hash_bnt_status['btn_0_1']) , true);
+  
+ // xhttp.open("GET", "/rondaruletats?jugadas=" + data_jugada , true);
+  //hash_bnt_status['btn_0_1'])
+
+  //xhttp.open("GET", "/rondaruletats?jugadas=" + String(hash_bnt_status['btn_0_1']) + String(hash_bnt_status['btn_0_2']) , true);
+
+
+ // xhttp.send();
+
+
+} // fin de la funcion llamada funcion_ajax()
+
+
+function actualizar_valores(){
+  // esto de abajo esa en nueva funcion llamada actualizar_valores()
+    setTimeout(function() {
+          if(server_win_display > 0){
+             document.getElementById('sound6').play(); // cobro win cash monedas
+         // document.getElementById("win_display").innerHTML    =  jdas; // debug jugadas solved ok
+            array_btn_resaltar_gandarores = string_btn_resaltar_gandarores.split('k'); // split
+            //array_btn_resaltar_gandarores = array_btn_resaltar_gandarores.pop();
+            //document.getElementById("btn_cancel").innerHTML = String(array_btn_resaltar_gandarores);
+
+// el -1 del for es porque hay una coma al final con el split, sino document.getEl.. en ',' va a dar error ok ted ok.
+          for(var i = 0; i < array_btn_resaltar_gandarores.length - 1; i++){ 
+               var btn_azul = array_btn_resaltar_gandarores[i];
+              //  btn_azul = 'btn_0_1';
+               document.getElementById(btn_azul).style.backgroundColor = "blue";        
+              // document.getElementById('btn_0_1').style.backgroundColor = "red";
+           }
+
+          //verificar si es ganador para resaltarlo.
+          //verificar jackpot negro ganador:
+          if(jp_blackwin == 'y'){
+            document.getElementById("black_jackpot_display").style.backgroundColor = "blue";
+
+             setTimeout(function() {
+                document.getElementById('sound8').play(); //tadan sound ok.
+               // document.getElementById('sound5').play(); 
+
+             },5);
+             setTimeout(function() {
+                document.getElementById('sound8').play(); //tadan sound ok.        
+             },4000);
+
+          }
+
+          //verificar jackpot rojo ganador:
+          if(jp_redwin == 'y'){
+            document.getElementById("red_jackpot_display").style.backgroundColor = "blue";
+
+             setTimeout(function() {
+                document.getElementById('sound8').play(); //tadan sound ok.
+               // document.getElementById('sound5').play(); 
+
+             },5);
+             setTimeout(function() {
+                document.getElementById('sound8').play(); //tadan sound ok.        
+             },4000);
+
+          }
+
+          
+          document.getElementById("win_display").innerHTML    =  server_win_display;
+           //resaltar jugadas ganadoras:
+           //document.getElementById("win_display").innerHTML    =  jdas; // 
+           string_btn_resaltar_gandarores = ""; // Limpio la variable ok.
+
+          }     
+    }, 1000); 
+
+    setTimeout(function() {
+       // if(server_win_display > 0){
+         if(true){
+               document.getElementById("win_display").innerHTML    =  "0000";
+               if ( (server_credit_display - total_apostado_recibido ) >= 0) {
+                 //document.getElementById("credit_display").innerHTML = server_credit_display;
+                 mostrar_credit_display(server_credit_display); 
+                 if(server_win_display > 0){ 
+                    document.getElementById('sound7').play(); // sonido cobro (suena solo si es ganador con el if clause ok)
+                    quitar_azul();
+                  }
+                 //descontar las jugadas preseleccionadas de la proxima ronda posible:
+                 setTimeout(function() {
+                 //  document.getElementById("credit_display").innerHTML = (server_credit_display - total_apostado_recibido);
+                 // if negativo no mopstrar pero y el descuento final? probar con 30+30
+                 if( (server_credit_display - total_apostado_recibido) >= 0) {
+
+  
+                     mostrar_credit_display(server_credit_display - total_apostado_recibido); 
+                  }// esto para evitar balance negativo en en credit display del js, no afecta balance de rails server.
+                     document.getElementById('sound4').play(); // sonido seleccion
+                   }, 2000);
+
+               }
+               if ( (server_credit_display - total_apostado_recibido ) < 0) {
+                //document.getElementById("credit_display").innerHTML = server_credit_display;
+                mostrar_credit_display(server_credit_display);
+                if(server_win_display > 0){ 
+                    document.getElementById('sound7').play(); // sonido cobro (suena solo si es ganador con el if clause ok)
+                     quitar_azul();
+                  } 
+                //document.getElementById('sound7').play(); // sonido cobro 
+                window.location.reload();
+               }
+
+               if(server_win_display > 0){ 
+                    document.getElementById('sound7').play(); // sonido cobro (suena solo si es ganador con el if clause ok)
+                     quitar_azul();
+                  }
+              // document.getElementById('sound7').play(); // sonido cobro 
+            } 
+            enable_all_panel_button(); // Habilitar botoner panel de juego nuevamente.   
+    }, 5000);      
+
+}
+
+
+function quitar_azul(){
+  // body...
+   for(var i = 0; i < array_btn_resaltar_gandarores.length - 1; i++){ 
+               var btn_azul = array_btn_resaltar_gandarores[i];
+              //  btn_azul = 'btn_0_1';
+               document.getElementById(btn_azul).style.backgroundColor = "red";        
+              // document.getElementById('btn_0_1').style.backgroundColor = "red";
+           }
+
+           return;
+}
+
+
+function parar_spin_y_sonido_ganador(){ 
+         document.getElementById('sound2').load(); // parar sonido
+         document.getElementById('sound4').play(); // play selected(argument) 
+         document.getElementById('sound5').play(); // play winnwe sound
+         spin_casi_rotando = false; //flag de control, false indicando que acaba de pararse. ok este flag es para saber cuando actualizar reload si hay que recibir el credit desde el pos. ok. 
+         //aprovecho y muestro los jackpots display desde que termina la ronda del spin ok:
+         document.getElementById("black_jackpot_display").innerHTML  =  jp_negro_display;
+         document.getElementById("red_jackpot_display").innerHTML    =  jp_rojo_display;
+
+
+}
+  
+
+  function refresh_con_delay(){
+    //desabilitar el boton START para que no intenten jugar hasta el reload:
+    document.getElementById('btn_start').disabled = true;
+    // el delay es para esperar 1 seg que termine el mp3 de la funcion sonarbtn al presional CANCEL button ok ted.
+    setTimeout(function() {
+        //your code to be executed after x seconds
+         window.location.reload(); // refresh page and cancel all ruleta plays. ok ted. 
+      }, 1000);  
+    
+
+  }
+
+  function disable_all_panel_button(){
+    //desabilitar todos los botones del panel frontal:
+   document.getElementById('win_display').disabled = true;
+   document.getElementById('credit_display').disabled = true;
+
+   document.getElementById('btn_cancel').disabled = true;
+   document.getElementById('btn_prestart').disabled = true;
+
+   document.getElementById('black_jackpot_display').disabled = true;
+   document.getElementById('red_jackpot_display').disabled = true;
+
+   document.getElementById('btn_0_1').disabled = true;
+   document.getElementById('btn_0_2').disabled = true;
+   document.getElementById('btn_0_3').disabled = true;
+   document.getElementById('btn_0_4').disabled = true;
+
+   document.getElementById('btn_1_1').disabled = true;
+   document.getElementById('btn_1_2').disabled = true;
+   document.getElementById('btn_1_3').disabled = true;
+   document.getElementById('btn_1_4').disabled = true;
+
+   document.getElementById('btn_2_1').disabled = true;
+   document.getElementById('btn_2_2').disabled = true;
+   document.getElementById('btn_2_3').disabled = true;
+   document.getElementById('btn_2_4').disabled = true;
+
+   document.getElementById('btn_3_1').disabled = true;
+   document.getElementById('btn_3_2').disabled = true;
+   document.getElementById('btn_3_3').disabled = true;
+   document.getElementById('btn_3_4').disabled = true;
+
+   document.getElementById('btn_4_1').disabled = true;
+   document.getElementById('btn_4_2').disabled = true;
+   document.getElementById('btn_4_3').disabled = true;
+   document.getElementById('btn_4_4').disabled = true;
+
+   document.getElementById('btn_5_1').disabled = true;
+   document.getElementById('btn_5_2').disabled = true;
+   document.getElementById('btn_5_3').disabled = true;
+   document.getElementById('btn_5_4').disabled = true;
+
+   document.getElementById('btn_6_1').disabled = true;
+   document.getElementById('btn_6_2').disabled = true;
+   document.getElementById('btn_6_3').disabled = true;
+   document.getElementById('btn_6_4').disabled = true;
+
+   document.getElementById('btn_7_1').disabled = true;
+   document.getElementById('btn_7_2').disabled = true;
+   document.getElementById('btn_7_3').disabled = true;
+   document.getElementById('btn_7_4').disabled = true;
+
+   document.getElementById('btn_8_1').disabled = true;
+   document.getElementById('btn_8_2').disabled = true;
+   document.getElementById('btn_8_3').disabled = true;
+   document.getElementById('btn_8_4').disabled = true;
+
+   document.getElementById('btn_9_1').disabled = true;
+   document.getElementById('btn_9_2').disabled = true;
+   document.getElementById('btn_9_3').disabled = true;
+   document.getElementById('btn_9_4').disabled = true;
+
+   document.getElementById('btn_10_1').disabled = true;
+   document.getElementById('btn_10_2').disabled = true;
+   document.getElementById('btn_10_3').disabled = true;
+   document.getElementById('btn_10_4').disabled = true;
+
+   document.getElementById('btn_11_1').disabled = true;
+   document.getElementById('btn_11_2').disabled = true;
+   document.getElementById('btn_11_3').disabled = true;
+   document.getElementById('btn_11_4').disabled = true;
+
+   document.getElementById('btn_12_1').disabled = true;
+   document.getElementById('btn_12_2').disabled = true;
+   document.getElementById('btn_12_3').disabled = true;
+   document.getElementById('btn_12_4').disabled = true;
+
+  }
+  
+
+
+  function enable_all_panel_button(){
+    
+   //Habilitar todos los botones del panel frontal:
+   document.getElementById('win_display').disabled    = false;
+   document.getElementById('credit_display').disabled = false;
+
+   document.getElementById('btn_cancel').disabled   = false;
+   document.getElementById('btn_prestart').disabled = false;
+
+   document.getElementById('btn_0_1').disabled = false;
+   document.getElementById('btn_0_2').disabled = false;
+   document.getElementById('btn_0_3').disabled = false;
+   document.getElementById('btn_0_4').disabled = false;
+
+   document.getElementById('btn_1_1').disabled = false;
+   document.getElementById('btn_1_2').disabled = false;
+   document.getElementById('btn_1_3').disabled = false;
+   document.getElementById('btn_1_4').disabled = false;
+
+   document.getElementById('btn_2_1').disabled = false;
+   document.getElementById('btn_2_2').disabled = false;
+   document.getElementById('btn_2_3').disabled = false;
+   document.getElementById('btn_2_4').disabled = false;
+
+   document.getElementById('btn_3_1').disabled = false;
+   document.getElementById('btn_3_2').disabled = false;
+   document.getElementById('btn_3_3').disabled = false;
+   document.getElementById('btn_3_4').disabled = false;
+
+   document.getElementById('btn_4_1').disabled = false;
+   document.getElementById('btn_4_2').disabled = false;
+   document.getElementById('btn_4_3').disabled = false;
+   document.getElementById('btn_4_4').disabled = false;
+
+   document.getElementById('btn_5_1').disabled = false;
+   document.getElementById('btn_5_2').disabled = false;
+   document.getElementById('btn_5_3').disabled = false;
+   document.getElementById('btn_5_4').disabled = false;
+
+   document.getElementById('btn_6_1').disabled = false;
+   document.getElementById('btn_6_2').disabled = false;
+   document.getElementById('btn_6_3').disabled = false;
+   document.getElementById('btn_6_4').disabled = false;
+
+   document.getElementById('btn_7_1').disabled = false;
+   document.getElementById('btn_7_2').disabled = false;
+   document.getElementById('btn_7_3').disabled = false;
+   document.getElementById('btn_7_4').disabled = false;
+
+   document.getElementById('btn_8_1').disabled = false;
+   document.getElementById('btn_8_2').disabled = false;
+   document.getElementById('btn_8_3').disabled = false;
+   document.getElementById('btn_8_4').disabled = false;
+
+   document.getElementById('btn_9_1').disabled = false;
+   document.getElementById('btn_9_2').disabled = false;
+   document.getElementById('btn_9_3').disabled = false;
+   document.getElementById('btn_9_4').disabled = false;
+
+   document.getElementById('btn_10_1').disabled = false;
+   document.getElementById('btn_10_2').disabled = false;
+   document.getElementById('btn_10_3').disabled = false;
+   document.getElementById('btn_10_4').disabled = false;
+
+   document.getElementById('btn_11_1').disabled = false;
+   document.getElementById('btn_11_2').disabled = false;
+   document.getElementById('btn_11_3').disabled = false;
+   document.getElementById('btn_11_4').disabled = false;
+
+   document.getElementById('btn_12_1').disabled = false;
+   document.getElementById('btn_12_2').disabled = false;
+   document.getElementById('btn_12_3').disabled = false;
+   document.getElementById('btn_12_4').disabled = false;
+
+  }
+
+
+  function ronda_spin_animation1(){
+    //document.getElementById('sound4').play();
+    document.getElementById("spin_0").style.visibility = "visible"; 
+    document.getElementById("spin_5").style.visibility = "visible"; 
+    document.getElementById("spin_12").style.visibility = "visible"; 
+    document.getElementById("spin_3").style.visibility = "visible"; 
+    document.getElementById("spin_10").style.visibility = "visible"; 
+    document.getElementById("spin_1").style.visibility = "visible"; 
+    document.getElementById("spin_8").style.visibility = "visible"; 
+    document.getElementById("spin_9").style.visibility = "visible"; 
+    document.getElementById("spin_2").style.visibility = "visible"; 
+    document.getElementById("spin_7").style.visibility = "visible"; 
+    document.getElementById("spin_6").style.visibility = "visible"; 
+    document.getElementById("spin_11").style.visibility = "visible"; 
+    document.getElementById("spin_4").style.visibility = "visible"; 
+
+  }
+// funcion que apaga todos los leds de la ruleta ok. hiiden. ok.
+  function ronda_spin_animation1_off(){
+    //document.getElementById('sound4').play();
+    document.getElementById("spin_0").style.visibility =  "hidden"; 
+    document.getElementById("spin_5").style.visibility =  "hidden"; 
+    document.getElementById("spin_12").style.visibility = "hidden"; 
+    document.getElementById("spin_3").style.visibility =  "hidden"; 
+    document.getElementById("spin_10").style.visibility = "hidden"; 
+    document.getElementById("spin_1").style.visibility =  "hidden"; 
+    document.getElementById("spin_8").style.visibility =  "hidden"; 
+    document.getElementById("spin_9").style.visibility =  "hidden"; 
+    document.getElementById("spin_2").style.visibility =  "hidden"; 
+    document.getElementById("spin_7").style.visibility =  "hidden"; 
+    document.getElementById("spin_6").style.visibility =  "hidden"; 
+    document.getElementById("spin_11").style.visibility = "hidden"; 
+    document.getElementById("spin_4").style.visibility =  "hidden"; 
+
+
+  }
+
+  
+  // Esta funcion conveirte el hash de botones de jugadas en string para ser enviado al controlador.
+  function  convertir_hash_to_string_ted(){
+      
+     var a = hash_bnt_status; // copio el hash
+     var  resultado = "";
+      for (var key in a) {
+          resultado = resultado + String(key) + ">"; // seprarador especial ted >, : no permitido.
+          resultado = resultado + String(a[key]) + " "; // no se puede enviar separado con : ni - poque el framework corta el string y solo llega btn_0_1:y como primer parmam ok. ted.
+          //Verificar si hay jugadas 'y' para activar flag de ruleta spin round start ok ted.
+          if(a[key] == 'y'){
+            cantidad_de_jugadas_para_iniciar ++; // incremento la variable de control. ok.
+          }
+
+      }
+   // document.getElementById("btn_cancel").innerHTML =  resultado; //debug only solved ok.
+
+     return resultado;
+
+  } // fin de la funcion String convertir_hash_to_string_ted()
+
+
+
+  function toggle_selection(id_btn) {
+
+    if ( document.getElementById(id_btn).style.backgroundColor == "red" ) // estaba rojo
+      {
+        document.getElementById(id_btn).style.backgroundColor = "yellow";
+        //sacar_btn_de_la_ronda(id_btn);
+        hash_bnt_status[id_btn]='n'; //sacar_btn_de_la_ronda
+        
+        // retornar el credito del jugador:
+        balance = parseInt(document.getElementById('credit_display').innerHTML); // capturar valor 
+        moneda_apostada = id_btn[id_btn.length-1] // ej: btn_0_1 => 1 moneda
+  //document.getElementById('credit_display').innerHTML = (balance + parseInt(moneda_apostada));
+        var enviar1 = balance + parseInt(moneda_apostada);
+        mostrar_credit_display(enviar1);
+        //alert debug msj:
+       // alert(hash_bnt_status[id_btn]);
+
+      }else{
+       
+        //si hay balance, adicionar_btn_en_la_ronda(id_btn);
+        balance = parseInt(document.getElementById('credit_display').innerHTML); // capturar valor string del credito y hacer un casting a intenger para descontar apuesta. ok. ted.
+        moneda_apostada = id_btn[id_btn.length-1] // ej: btn_0_1 => 1 moneda
+        if( (balance - moneda_apostada) >= 0 ) 
+          { 
+            //adicionar_btn_en_la_ronda(id_btn);
+
+            //cambiar status color boton seleccionado para apuesta.
+            document.getElementById(id_btn).style.backgroundColor = "red";
+           // document.getElementById('credit_display').value = (balance - moneda_apostada);
+           // document.getElementById('credit_display').innerHTML = (balance - moneda_apostada);
+            mostrar_credit_display(balance - moneda_apostada);
+
+            hash_bnt_status[id_btn]='y'; // asigno 'y' como seleecionado par ael sortreo. ok.
+
+             //alert debug msj:
+            //alert(hash_bnt_status[id_btn]);
+          }else{
+             document.getElementById('sound3').play();
+             hash_bnt_status[id_btn]='n'; //sacar_btn_de_la_ronda, me aseguro. No tiene cred. suficiente ok. ted. 
+             //En resumen, esta parte del else deja el boton en amarillo, suena no credit y saca le pone 'n' a la seleccion del hash ok ted.
+          }
+
+       // alert(moneda_apostada);
+        //alert(balance + 1);
+      }
+     
+  } // fin de la funcion toggle_seleccion
+
+  function mostrar_credit_display(credito) {
+    // visualizar el credito en un formato apropiado led ej. "0012"
+    var credito = parseInt(credito); // me aseguro trabajar castin integer type.
+    var formato = "";
+    
+    if(credito <= 9){
+      formato = "000"+ credito;
+    }
+
+     if((credito >= 10) && (credito <= 99)){
+      formato = "00" + credito;
+    }
+
+    if((credito >= 100) && (credito <= 999)){
+      formato = "0" + credito;
+    }
+
+    if(credito >= 1000){
+      formato = "" + credito;
+    }
+
+    document.getElementById('credit_display').innerHTML = formato;
+  }
+
+var vuelta = 0; // variable global para controlar las vueltas de ronda_spin_game_fast
+function reset_vuelta_counter(){
+  vuelta = 0; // esta funcion resetea la variable gobal vuelta.
+}
+  function ronda_spin_game_fast(factor, sonido, posicion){
+   
+    
+    setTimeout(function() {
+        //your code to be executed after x seconds   
+       if( 1 < posicion ){
+          document.getElementById("spin_0").style.visibility =  "visible";
+        }  
+
+      }, 0);
+
+    setTimeout(function() {
+         //your code to be executed after x seconds
+       document.getElementById("spin_0").style.visibility =  "hidden";
+       if( sonido == 1){
+         document.getElementById('sound2').load(); 
+       } 
+       if(posicion == 1){
+          document.getElementById("spin_0").style.visibility =  "visible";   
+        }
+        if( sonido == 1 ){
+         parar_spin_y_sonido_ganador();
+         actualizar_valores();
+       }
+        
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 200/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds   
+       if( 2 < posicion ){
+          document.getElementById("spin_5").style.visibility =  "visible";
+        }   
+      
+      }, 200/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_5").style.visibility =  "hidden";
+       if( sonido == 2){
+         document.getElementById('sound2').load(); 
+       } 
+       if(posicion == 2){
+          document.getElementById("spin_5").style.visibility =  "visible";   
+        }
+        if( sonido == 2 ){
+         parar_spin_y_sonido_ganador();
+         actualizar_valores();
+       }
+        
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 400/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds   
+       if( 3 < posicion ){
+          document.getElementById("spin_12").style.visibility =  "visible";
+        }   
+       if( sonido == 1 ){
+       //  document.getElementById('sound22').play(); 
+
+       }  
+       if( sonido == 2 ){
+        // document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 400/factor);
+
+    setTimeout(function() {
+         //your code to be executed after x seconds
+       document.getElementById("spin_12").style.visibility =  "hidden";
+       if( sonido == 3){
+         document.getElementById('sound2').load(); 
+       } 
+       if(posicion == 3){
+          document.getElementById("spin_12").style.visibility =  "visible";   
+        }
+        if( sonido == 3 ){
+         parar_spin_y_sonido_ganador();
+         actualizar_valores();
+       }
+        
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 600/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds   
+       if( 4 < posicion ){
+          document.getElementById("spin_3").style.visibility =  "visible";
+        }   
+       if( sonido == 2 ){
+        // document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 600/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_3").style.visibility =  "hidden";
+       if( sonido == 4){
+         document.getElementById('sound2').load(); 
+       } 
+       if(posicion == 4){
+          document.getElementById("spin_3").style.visibility =  "visible";   
+        }
+        if( sonido == 4 ){
+         parar_spin_y_sonido_ganador();
+         actualizar_valores();
+       }
+        
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 800/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds   
+       if( 5 < posicion ){
+          document.getElementById("spin_10").style.visibility =  "visible";
+        }   
+       if( sonido == 1 ){
+        // document.getElementById('sound24').play(); 
+
+       }  
+       if( sonido == 9 ){
+         //document.getElementById('sound2').load(); 
+       }  
+       //document.getElementById('sound4').play();
+      }, 800/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_10").style.visibility =  "hidden";
+       if( sonido == 5){
+         document.getElementById('sound2').load(); 
+       } 
+       if(posicion == 5){
+          document.getElementById("spin_10").style.visibility =  "visible";   
+        }
+        if( sonido == 5 ){
+         parar_spin_y_sonido_ganador();
+         actualizar_valores();
+       }
+        
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1000/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds   
+       if( 6 < posicion ){
+          document.getElementById("spin_1").style.visibility =  "visible";
+        }   
+
+       if( sonido == 1 ){
+      //   document.getElementById('sound25').play(); 
+
+       }  
+       if( sonido == 2 ){
+       //  document.getElementById('sound4').play(); 
+       }  
+       //document.getElementById('sound4').play();
+      }, 1000/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_1").style.visibility =  "hidden";
+       if( sonido == 6){
+         document.getElementById('sound2').load(); 
+       } 
+       if(posicion == 6){
+          document.getElementById("spin_1").style.visibility =  "visible";   
+        }
+        if( sonido == 6 ){
+         parar_spin_y_sonido_ganador();
+         actualizar_valores();
+       }
+        
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1200/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+        if( 7 < posicion ){
+          document.getElementById("spin_8").style.visibility =  "visible";
+        }  
+       
+       if( sonido == 1 ){
+       //  document.getElementById('sound26').play(); 
+
+       }  
+       if( sonido == 2 ){
+       //  document.getElementById('sound4').play(); 
+       }  
+       //document.getElementById('sound4').play();
+      }, 1200/factor);
+
+    setTimeout(function() {
+       //your code to be executed after x seconds
+       document.getElementById("spin_8").style.visibility =  "hidden";
+       if( sonido == 7){
+         document.getElementById('sound2').load(); 
+       } 
+       if(posicion == 7){
+          document.getElementById("spin_8").style.visibility =  "visible";   
+        }
+        if( sonido == 7 ){
+         parar_spin_y_sonido_ganador();
+         actualizar_valores();
+       }
+        
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1400/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+         if(8 < posicion){
+          document.getElementById("spin_9").style.visibility =  "visible";
+        }
+       //document.getElementById("spin_9").style.visibility =  "visible";
+       if( sonido == 1 ){
+       //  document.getElementById('sound27').play(); 
+
+       }  
+       if( sonido == 2 ){
+       //  document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1400/factor);
+
+    setTimeout(function() {
+       //your code to be executed after x seconds
+       document.getElementById("spin_9").style.visibility =  "hidden";
+       if( sonido == 8){
+         document.getElementById('sound2').load(); 
+       } 
+       if(posicion == 8){
+          document.getElementById("spin_9").style.visibility =  "visible";   
+        }
+        if( sonido == 8 ){
+         parar_spin_y_sonido_ganador();
+         actualizar_valores();
+       }
+        
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1600/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+        if(9 < posicion){
+          document.getElementById("spin_2").style.visibility =  "visible";
+        }
+      // document.getElementById("spin_2").style.visibility =  "visible";
+       if( sonido == 1 ){
+       //  document.getElementById('sound28').play(); 
+
+       }  
+       if( sonido == 2 ){
+      //   document.getElementById('sound4').play(); 
+       }  
+       //document.getElementById('sound4').play();
+      }, 1600/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_2").style.visibility =  "hidden";
+       if( sonido == 9){
+         document.getElementById('sound2').load(); 
+       } 
+       if(posicion == 9){
+          document.getElementById("spin_2").style.visibility =  "visible";   
+        }
+        if( sonido == 9 ){
+         parar_spin_y_sonido_ganador();
+         actualizar_valores();
+       }
+        
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 1800/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+        if(10 < posicion){
+          document.getElementById("spin_7").style.visibility =  "visible";
+        }
+      // document.getElementById("spin_7").style.visibility =  "visible";
+       if( sonido == 1 ){
+       //  document.getElementById('sound29').play(); 
+
+       }  
+       if( sonido == 2 ){
+       //  document.getElementById('sound4').play(); 
+       }  
+       //document.getElementById('sound4').play();
+      }, 1800/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_7").style.visibility =  "hidden";
+       if(posicion == 10){
+          document.getElementById("spin_7").style.visibility =  "visible";   
+       }
+       if( sonido == 10 ){
+         parar_spin_y_sonido_ganador();
+         actualizar_valores();
+       } 
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 2000/factor);
+
+     setTimeout(function() {
+        //your code to be executed after x seconds
+        if(11 < posicion){
+          document.getElementById("spin_6").style.visibility =  "visible";
+        }
+       //document.getElementById("spin_6").style.visibility =  "visible";
+       if( sonido == 1 ){
+       //  document.getElementById('sound30').play(); 
+
+       }  
+       if( sonido == 2 ){
+       //  document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 2000/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_6").style.visibility =  "hidden";
+       if(posicion == 11){
+          document.getElementById("spin_6").style.visibility =  "visible";   
+        }
+        if( sonido == 11 ){
+         parar_spin_y_sonido_ganador();
+         actualizar_valores();
+       } 
+       if( sonido == 1 ){
+ //        document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 2200/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+         if(12 < posicion){
+          document.getElementById("spin_11").style.visibility =  "visible";
+        }
+       //document.getElementById("spin_11").style.visibility =  "visible";
+       if( sonido == 1 ){
+       //  document.getElementById('sound31').play(); 
+
+       }  
+       if( sonido == 2 ){
+       //  document.getElementById('sound4').play(); 
+       }  
+       //document.getElementById('sound4').play();
+      }, 2200/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_11").style.visibility =  "hidden";
+       if(posicion == 12){
+          document.getElementById("spin_11").style.visibility =  "visible";   
+        }
+        if( sonido == 12 ){
+         parar_spin_y_sonido_ganador();
+         actualizar_valores();
+       } 
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 2400/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+         if(13 < posicion){
+          document.getElementById("spin_4").style.visibility =  "visible";
+        }
+       //document.getElementById("spin_4").style.visibility =  "visible";
+       if( sonido == 1 ){
+        // document.getElementById('sound32').play(); 
+
+       }  
+       if( sonido == 2 ){
+       //  document.getElementById('sound4').play(); 
+       } 
+       //document.getElementById('sound4').play();
+      }, 2400/factor);
+
+    setTimeout(function() {
+        //your code to be executed after x seconds
+       document.getElementById("spin_4").style.visibility =  "hidden";
+       if(posicion == 13){
+          document.getElementById("spin_4").style.visibility =  "visible";   
+        }
+       if( sonido == 13 ){
+         parar_spin_y_sonido_ganador();
+         actualizar_valores();
+       } 
+       if( sonido == 1 ){
+//         document.getElementById('sound4').play(); 
+       }   
+       //document.getElementById('sound4').play();
+      }, 2600/factor);
+
+    if (vuelta < 3) {
+        vuelta++;
+        setTimeout(function() {
+            //your code to be executed after x seconds
+           //document.getElementById("spin_4").style.visibility =  "hidden";  
+           ronda_spin_game_fast(factor, 100, 100);
+           sonarporbtn(); 
+           //document.getElementById('sound4').play();
+          }, 2600/factor);
+    }
+
+    if (vuelta == 3) {
+        vuelta++;
+        setTimeout(function() {
+          
+            //your code to be executed after x seconds
+           //document.getElementById("spin_4").style.visibility =  "hidden";  
+           ronda_spin_game_fast((factor/2), 100, 100);
+           //document.getElementById('sound4').play();
+          }, 2600*2/factor );
+    }
+
+    if (vuelta == 4) {
+        vuelta++;
+        setTimeout(function() {
+          
+            //your code to be executed after x seconds
+           //document.getElementById("spin_4").style.visibility =  "hidden";  
+           ronda_spin_game_fast((factor/4), 100, 100);
+           //document.getElementById('sound4').play();
+          }, 2600*4/factor );
+    }
+
+     if (vuelta == 5) {
+        vuelta++;
+
+        setTimeout(function() {
+          
+            //your code to be executed after x seconds
+           //document.getElementById("spin_4").style.visibility =  "hidden";  
+           ronda_spin_game_fast((factor/8), server_win_position, server_win_position);//params:factor,sonido, posicicion
+           //document.getElementById('sound4').play();
+         //  document.getElementById('sound1').pause();
+   //        document.getElementById('sound1').load();
+           // esto en iphone con safari IOS <~ 11.0 no quiere funcionar ambos sondios. probar con chrome o firefox en ios, mientras tanto el development continuara para androis samsung galaxy s5 con chrome, html audio tags are working ok there. ok ted para avanzar.
+          }, 2600*8/factor );
+    }
+
+     if (vuelta == 66) {
+        vuelta++;
+        setTimeout(function() {
+          
+            //your code to be executed after x seconds
+           //document.getElementById("spin_4").style.visibility =  "hidden";  
+           ronda_spin_game_fast((factor/8), 100,100);
+           
+          }, 2600*16/factor );  // (factor/32) y 2600*16/factor seria el prox ciclo
+    }
+//PDTE UNA SOLA MUSICA, QUITAR SONIDO LAST-1 ROUND Y CONTINUAR, IMAGINAR SONIDO TROCHE
+
+
+
+  } //fin de la funcion ronda_spin_game_fast. nota: 0,3 puede ser factor final
+
+  
+</script>
+
+
+

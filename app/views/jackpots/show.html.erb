@@ -1,0 +1,391 @@
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<% @sonar_musica_jp_ganador = false %>
+
+<%if @sonar_musica_jp_ganador %>
+    <!-- nota mas abajo hay otro condition con la misma variable esvaluada en este if de arriba ok ted.-->
+    <audio id="sound1" src="../tadan.mp3" preload="auto"></audio>
+    <audio id="sound2" src="../cobrowin.mp3" preload="auto"></audio>
+    
+   
+<%end%>
+
+
+
+
+<%if @sonar_actualizacion_jp %>  
+
+    <audio id="sound3" src="../winnerspinsound.mp3" preload="auto"></audio>
+
+<%end%>
+
+
+
+
+      <style>
+          body, html {
+            height: 95%;
+            margin: 0;
+            background-color: black;
+          }
+
+          .bg {
+            /* The image used */
+             /* background-image: url(br1.jpg);  */
+            position: relative;
+           /* left: 10px; */
+           /* top: 10px; */
+
+           /*Monitor normal dell 17*/
+           /* width: 1024px; */
+           /* height: 766px; */
+
+           /*Monitor touch de 22, debe ser 1366x768 o 766, pero la imagen esta solo en 1280x973, probar con imagen de 1366, 1380, 1400 etc.. x 768 q ver klk. */
+            width:  1356px; 
+            height: 750px;
+
+
+            <%if @sonar_musica_jp_ganador %>
+               background-image: url("../animated2.gif"); 
+            <% else %>
+               background-image: url("../jackpot.jpg"); 
+             <% end %>
+
+           /* background-image: url('<%= asset_path 'br1.jpg' %>');*/
+
+           /* background-image: url("br1.jpg") */
+
+            /* Full height */
+           /*   height: 100%;  */
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+
+
+
+
+
+          .pwd_div {
+            /* The image used */
+             /* background-image: url(br1.jpg);  */
+            position: relative;
+           /* left: 10px; */
+           /* top: 10px; */
+            padding: 4px 0px;
+            width: 272px; 
+            height: 72px;
+
+             background-color: yellow;
+
+           /* background-image: url('<%= asset_path 'br1.jpg' %>');*/
+
+           /* background-image: url("br1.jpg") */
+
+            /* Full height */
+           /*   height: 100%;  */
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+
+
+          .diamond_display{
+            background-color: transparent;
+            color: white;
+            font-size: 120px;
+            border-radius: 1%;
+            padding: 0px 45px;
+            position: absolute;
+            left: 375px;
+            top: 210px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             border: 0px transparent; /* */
+             height: 48px;  
+
+          }
+
+          .gold_display{
+            background-color: transparent;
+            color: yellow;
+            font-size: 80px;
+            border-radius: 1%;
+            padding: 0px 45px;
+            position: absolute;
+            left: 500px;
+            top: 435px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             border: 0px transparent; /* */
+             height: 48px;  
+
+          }
+
+          .gold_display_banca{
+            background-color: transparent;
+            color: yellow;
+            font-size: 24px;
+            border-radius: 1%;
+            padding: 0px 45px;
+            position: absolute;
+            left: 505px;
+            top: 404px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             border: 0px transparent; /* */
+             height: 48px;  
+
+          }
+
+          .bronze_display{
+            background-color: transparent;
+            color: white;
+            font-size: 60px;
+            border-radius: 1%;
+            padding: 0px 45px;
+            position: absolute;
+            left: 460px;
+            top: 600px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             border: 0px transparent; /* */
+             height: 48px;  
+
+          }
+          .bronze_display_hora{
+            background-color: transparent;
+            color: white;
+            font-size: 28px;
+            border-radius: 1%;
+            padding: 0px 45px;
+            position: absolute;
+            left: 565px;
+            top: 648px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             border: 0px transparent; /* */
+             height: 48px;  
+
+          }
+
+
+          .diamond_label{
+            background-color: black;
+            color: white;
+            font-size: 26px;
+            border-radius: 1%;
+            padding: 0px 6px;
+            position: absolute;
+            left: 362px;
+            top: 170px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             border: 0px transparent; /* */
+             height: 30px;  
+
+          }
+
+          .gold_label{
+            background-color: black;
+            color: gold;
+            font-size: 24px;
+            border-radius: 1%;
+            padding: 0px 1px;
+            position: absolute;
+            left: 410px;
+            top: 380px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             border: 0px transparent; /* */
+             height: 24px;  
+
+          }
+
+           
+          .bronze_label{
+            background-color: black;
+            color: gold;
+            font-size: 24px;
+            border-radius: 1%;
+            padding: 0px 2px;
+            position: absolute;
+            left: 470px;
+            top: 570px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             border: 0px transparent; /* */
+             height: 24px;  
+
+          }
+
+
+
+
+
+          .red_jackpot_display{
+            background-color: darkred;
+            color: white;
+            font-size: 65px;  /*56px; para mostrar el mega jackpot de 4 digitos max 9999 monedas display ok  */
+            border-radius: 1%;
+            padding: 0px 38px;
+            position: absolute;
+            left: 386px;
+            top: 468px;
+             /*border: 2px transparent; */  
+             /* border: 0px solid #4CAF50;*/
+             border: 0px transparent; /* */             
+             height: 48px; 
+          }
+
+          
+
+           .button_transparente{
+            font-size: 19px;
+            border-radius: 20%;
+           /* padding: 5px 8px;*/
+            position: absolute;
+            /*border: 2px transparent; */  
+            /* border: 0px solid #4CAF50;*/
+             background-color: transparent; 
+            /* border: 2px transparent;   */
+           /* border: 1px solid darkred; */
+           border: 1px solid transparent;
+           /* color:  #8E8E8E; lo pondremos white al inicio y de su color 2 segs pagina cargada ok*/
+            color:  transparent;
+            /* font-size: 8px; border-radius: 10%; padding: 2px 2px;  */
+          }
+
+         
+         
+
+          @font-face{
+           
+          font-family:'bernanrd-mt-condensed';  
+          src: url('bernhc.ttf');
+
+          }
+
+      </style>
+
+  </head>
+
+
+
+
+
+<div align="center"> <!-- Este div me permita alinear, el child trabaja la ruleta ok.-->
+ <div class="bg">  
+
+
+
+
+<p id="notice"><%= notice %></p>
+
+
+
+
+
+<%if @sonar_musica_jp_ganador%>
+
+  <body  onload="document.getElementById('sound1').play();document.getElementById('sound2').play();" > 
+
+
+
+
+
+<%end%>
+
+
+
+<%if @sonar_actualizacion_jp%>
+
+  <body onload="document.getElementById('sound3').play();" > 
+
+<%end%>
+
+
+
+
+
+
+
+<button style="font-family:'digital-clock-font'" id="gold_jackpot1" disabled="true" class="diamond_label" onclick="sonartbn();" > Acomulado </button>
+
+ <button style="font-family:'digital-clock-font'" id="diamond_jackpot1" disabled="true" class="diamond_display" onclick="sonartbn();" ><%= @vista_jp_azul = number_with_precision(@vista_jp_azul, precision: 2) %></button>
+
+
+
+
+
+ <button style="font-family:'digital-clock-font'" id="gold_jackpot2" disabled="true" class="gold_label" onclick="sonartbn();" >Ganador</button>
+
+
+ <button style="font-family:'digital-clock-font'" id="gold_jackpot3" disabled="true" class="gold_display" onclick="sonartbn();" ><%= @vista_jp_ganador = number_with_precision(@vista_jp_ganador, precision: 2)  %></button>
+
+ 
+
+
+ <button style="font-family:'digital-clock-font'" id="gold_jackpot5" disabled="true" class="gold_display_banca" onclick="sonartbn();" >MQ: <%= @maquina_ganadora_jp.to_s[0..20] %></button>
+
+
+
+
+
+
+
+
+ <button style="font-family:'digital-clock-font'" id="gold_jackpot4" disabled="true" class="bronze_label" onclick="sonartbn();" >Fecha</button>
+
+
+
+ <button style="font-family:'digital-clock-font'" id="bronze_jackpot2" disabled="true" class="bronze_display" onclick="sonartbn();" ><%= @vista_fecha_jp_ganador %> </button>
+
+
+
+ <button style="font-family:'digital-clock-font'" id="bronze_jackpot2hora" disabled="true" class="bronze_display_hora" onclick="sonartbn();" > <%= @vista_hora_jp_ganador %> </button>
+
+
+ 
+
+</div>
+
+
+<script type="text/javascript">
+
+function sonar_musica_jp_ganador_loop() {
+    document.getElementById('sound1').play();
+    document.getElementById('sound2').play();
+}
+
+
+
+
+  <%if @sonar_musica_jp_ganador %>
+              
+      setTimeout(function(){
+        window.location.reload(1);  // refresh page later 60seg mostrando efecto ok
+      }, 60000);
+
+      setInterval(sonar_musica_jp_ganador_loop, 6000);
+
+
+
+                 
+  <% else %>
+       
+      setTimeout(function(){
+        window.location.reload(1);  // refresh page periodically
+      }, 12000);
+       
+  <% end %>
+
+
+</script>

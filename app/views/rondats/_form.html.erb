@@ -1,0 +1,42 @@
+<%= form_with(model: rondat, local: true, id: 'myform1ted') do |form| %>
+  <% if rondat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(rondat.errors.count, "error") %> prohibited this rondat from being saved:</h2>
+
+      <ul>
+      <% rondat.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :jugador %>
+    <%= form.text_field :jugador, id: :rondat_jugador %>
+  </div>
+
+  <div class="field">
+    <%= form.label :credito %>
+    <%= form.text_field :credito, id: :rondat_credito %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cartucho %>
+    <%= form.text_field :cartucho, id: :rondat_cartucho %>
+  </div>
+
+  <div class="field">
+    <%= form.label :posiciondisparo %>
+    <%= form.text_field :posiciondisparo, id: :rondat_posiciondisparo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :resultado %>
+    <%= form.text_field :resultado, id: :rondat_resultado %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

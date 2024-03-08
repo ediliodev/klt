@@ -21,10 +21,5 @@ test:
   database: db/test.sqlite3
 
 production:
-   adapter: postgresql
-   host:  10.0.7.39
-   database: kollector_production
-   username: deploy
-   password: Admin2020
-   encoding: unicode
-   pool: 5
+  <<: *default
+  database: db/production.sqlite3

@@ -1,2 +1,82 @@
-# RubyEncoder v2.5.1 evaluation
-if not self.respond_to?(:RGLoader_load,:include_private) then _d = _d0 = File.expand_path(File.dirname(__FILE__)); while 1 do _f = _d + '/rgloader/loader.rb'; break if File.exist?(_f); _d1 = File.dirname(_d); if _d1 == _d then raise "Ruby script '"+__FILE__+"' is protected by RubyEncoder and requires a RubyEncoder loader to be installed. Please visit the https://www.rubyencoder.com/loaders/ RubyEncoder web site to download the required loader and unpack it into '"+_d0+"/rgloader/' directory in order to run this protected file."; exit; else _d = _d1; end; end; require _f; end; RGLoader_load('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');
+class LocalidadtsController < ApplicationController
+  http_basic_authenticate_with name: "admin", password: "64738", except: :index
+
+  before_action :set_localidadt, only: [:show, :edit, :update, :destroy]
+  after_action :registro_login_admin,  except: :index
+
+  # GET /localidadts
+  # GET /localidadts.json
+  def index
+    
+    if verificar_violacion_simple 
+      render plain: 'Locked System. Contact support.' #comando Ruleta de Luis.
+    end
+
+    @localidadts = Localidadt.all
+  end
+
+  # GET /localidadts/1
+  # GET /localidadts/1.json
+  def show
+  end
+
+  # GET /localidadts/new
+  def new
+    @localidadt = Localidadt.new
+  end
+
+  # GET /localidadts/1/edit
+  def edit
+  end
+
+  # POST /localidadts
+  # POST /localidadts.json
+  def create
+  #  @localidadt = Localidadt.new(localidadt_params)
+
+    respond_to do |format|
+      if true #@localidadt.save # No Allowed to create new localidads from web. Only project admin. ok ted.
+        format.html { redirect_to @localidadt, notice: 'Localidadt was not (not allowed, contact admin) successfully created.' }
+        format.json { render :show, status: :created, location: @localidadt }
+      else
+        format.html { render :new }
+        format.json { render json: @localidadt.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /localidadts/1
+  # PATCH/PUT /localidadts/1.json
+  def update
+    respond_to do |format|
+      if @localidadt.update(localidadt_params)
+        format.html { redirect_to @localidadt, notice: 'Localidadt was successfully updated.' }
+        format.json { render :show, status: :ok, location: @localidadt }
+      else
+        format.html { render :edit }
+        format.json { render json: @localidadt.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /localidadts/1
+  # DELETE /localidadts/1.json
+  def destroy
+   # @localidadt.destroy # NOt Allowed from web, only admin. ted. ok. 
+    respond_to do |format|
+      format.html { redirect_to localidadts_url, notice: 'Localidadt not allowed to delete. Admin only. Incident reported.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_localidadt
+      @localidadt = Localidadt.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def localidadt_params
+      params.require(:localidadt).permit(:consorcio, :sucursal, :direccion)
+    end
+end

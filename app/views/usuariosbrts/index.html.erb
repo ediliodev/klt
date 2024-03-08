@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Usuarios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Usuario</th>
+      <th>Contrasena</th>
+      <th>Telefono</th>
+      <th>Email</th>
+      <th>Cedula</th>
+      <th>Direccion</th>
+      <th>tipousuario</th>
+      <th>md5pc</th>
+      <th>consorcioasociado</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usuariosbrts.each do |usuariosbrt| %>
+      <tr>
+        <td><%= usuariosbrt.id %></td>
+        <td><%= usuariosbrt.nombre %></td>
+        <td><%= usuariosbrt.apellido %></td>
+        <td><%= usuariosbrt.usuario %></td>
+        <td>******* <% usuariosbrt.contrasena %></td>
+        <td><%= usuariosbrt.telefono %></td>
+        <td><%= usuariosbrt.email %></td>
+        <td><%= usuariosbrt.cedula %></td>
+        <td><%= usuariosbrt.direccion %></td>
+        <td><%= usuariosbrt.tipousuario %></td>
+        <td><%= usuariosbrt.md5pc %></td>
+        <td><%= usuariosbrt.consorcioasociado %></td>
+
+        
+        <td><%= link_to 'Show', usuariosbrt %></td>
+        <td><%= link_to 'Edit', edit_usuariosbrt_path(usuariosbrt) %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo Usuario', new_usuariosbrt_path %>

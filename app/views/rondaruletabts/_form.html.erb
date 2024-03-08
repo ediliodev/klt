@@ -1,0 +1,52 @@
+<%= form_with(model: rondaruletabt, local: true) do |form| %>
+  <% if rondaruletabt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(rondaruletabt.errors.count, "error") %> prohibited this rondaruletabt from being saved:</h2>
+
+      <ul>
+      <% rondaruletabt.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :jugador %>
+    <%= form.text_field :jugador, id: :rondaruletabt_jugador %>
+  </div>
+
+  <div class="field">
+    <%= form.label :win %>
+    <%= form.text_field :win, id: :rondaruletabt_win %>
+  </div>
+
+  <div class="field">
+    <%= form.label :credit %>
+    <%= form.text_field :credit, id: :rondaruletabt_credit %>
+  </div>
+
+  <div class="field">
+    <%= form.label :jugadas %>
+    <%= form.text_field :jugadas, id: :rondaruletabt_jugadas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalbet %>
+    <%= form.text_field :totalbet, id: :rondaruletabt_totalbet %>
+  </div>
+
+  <div class="field">
+    <%= form.label :winnernumberspin %>
+    <%= form.text_field :winnernumberspin, id: :rondaruletabt_winnernumberspin %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.text_field :status, id: :rondaruletabt_status %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

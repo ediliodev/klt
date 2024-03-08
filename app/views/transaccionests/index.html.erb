@@ -14,19 +14,23 @@
 
     <% if @param_serial != nil  &&  @transaccion_actual_objeto_no_existe != true %>
 
-    <h2>Valor del comando acutal: <%= @transaccion_actual_objeto.comando %> </h2> 
+      <h2>Valor del comando acutal: <%= @transaccion_actual_objeto.comando %> </h2> 
 
-
-    <h2> <% @transaccion_actual_objeto.comando  %> </h2>
-
-    <h3> <%= @transaccion_actual_objeto.created_at  %> - <%= Time.now %> </h3>
+      <h2> <% @transaccion_actual_objeto.comando  %> </h2>
+ 
+      <h3> <%= @transaccion_actual_objeto.created_at  %> - <%= Time.now %> </h3>
 
     <%end%>
+
+     <h2>Valor del comando keep alive_pog_tst: <%= "@bien^" %> </h2> 
+
 
 <%end%>
 
 
 <% if @mostrar_vista_web_normal == true %>
+
+<h1>param serial tiene: <%=  @param_serial  %></h1>
 <p style="color: red">X no permitido. Incidente reportado!</p>
 <!-- Solo admin ok.
     <table>
@@ -42,24 +46,24 @@
       </thead>
 
       <tbody>
-        <% @transaccionests.each do |transaccionest| %>
+        <  # @transaccionests.each do |transaccionest| %>
           <tr>
-            <td><%= transaccionest.maquinat.descripcion %></td>
-            <td><%= transaccionest.tipotransaccion %></td>
-            <td><%= transaccionest.cantidad %></td>
-            <td><%= transaccionest.comando %></td>
-            <td><%= transaccionest.status %></td>
-            <td><%= link_to 'Show', transaccionest %></td>
-            <td><%= link_to 'Edit', edit_transaccionest_path(transaccionest) %></td>
-            <td><%= link_to 'Destroy', transaccionest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td>< # transaccionest.maquinat.descripcion %></td>
+            <td>< # transaccionest.tipotransaccion %></td>
+            <td>< # transaccionest.cantidad %></td>
+            <td>< # transaccionest.comando %></td>
+            <td>< # transaccionest.status %></td>
+            <td><  # link_to 'Show', transaccionest %></td>
+            <td><  # link_to 'Edit', edit_transaccionest_path(transaccionest) %></td>
+            <td><  # link_to 'Destroy', transaccionest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
-        <% end %>
+        < # end %>
       </tbody>
     </table>
 
     <br>
 
-    <%= link_to 'New Transaccionest', new_transaccionest_path %>
+    
 
   -->
 

@@ -1,0 +1,2 @@
+class Rondat < ApplicationRecord
+end

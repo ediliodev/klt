@@ -1,0 +1,47 @@
+
+<p>Not allowed ok.</p>
+
+<%if false%>
+
+
+    <p id="notice"><%= notice %></p>
+
+    <h1>Rondaruletabbts</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Jugador</th>
+          <th>Win</th>
+          <th>Credit</th>
+          <th>Jugadas</th>
+          <th>Totalbet</th>
+          <th>Winnernumberspin</th>
+          <th>Status</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @rondaruletabbts.each do |rondaruletabbt| %>
+          <tr>
+            <td><%= rondaruletabbt.jugador %></td>
+            <td><%= rondaruletabbt.win %></td>
+            <td><%= rondaruletabbt.credit %></td>
+            <td><%= rondaruletabbt.jugadas %></td>
+            <td><%= rondaruletabbt.totalbet %></td>
+            <td><%= rondaruletabbt.winnernumberspin %></td>
+            <td><%= rondaruletabbt.status %></td>
+            <td><%= link_to 'Show', rondaruletabbt %></td>
+            <td><%= link_to 'Edit', edit_rondaruletabbt_path(rondaruletabbt) %></td>
+            <td><%= link_to 'Destroy', rondaruletabbt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'New Rondaruletabbt', new_rondaruletabbt_path %>
+
+<%end%>

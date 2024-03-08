@@ -34,4 +34,106 @@ link: "https://stackoverflow.com/questions/4110866/ruby-on-rails-where-to-define
 <h1> Valor de archi es: <%= begin IO.read("/home/ted/Desktop/workspace/kollector/public/a2.rb") rescue "" end %> </h1>
 
 <h1> KIKOO <%= Rails.configuration.x.colours.default %> </h1>
+
+
+*********************************
+
+Auto Start Firefox and Launch a URL by Default in Lubuntu 14.04
+Link: https://askubuntu.com/questions/487096/auto-start-firefox-and-launch-a-url-by-default-in-lubuntu-14-04
+
+*You can also use Upstart:
+
+Create a file $HOME/.config/upstart/firefox-with-url.conf #Nota esta creado en el user 'ventas' y no sale con tab automatico, HAY QUE PONER EL COMANDO COMPLETO PARA ABRIR EL ARCHIVO. OK TED. WORKS. : sudo nano /home/ventas/.config/upstart/firefox-with-url.conf  # ok ted
+*PERO EL ARCHIVO DE DEBRE CREAR  EL EN USER VENTAS DESDE UN USUARIO PRIVILEGIADO COMO DEPLOY POR EJ. OK. O SEA #su deploy , cd /home/ventas/.config/upstart/ , # sudo nano ./firefox-with-url.conf #ok ted.
+
+
+Content:
+
+start on desktop-start
+stop on desktop-end
+
+exec firefox <url>  # ==>>>>>> AKI VA ASI: exec firefox localhost:3000 -fullscreen #ok ted
+
+
+RESUMEN:
+
+#su deploy
+#sudo nano /home/ventas/.config/upstart/firefox-with-url.conf
+
+Contenido seria:
+
+start on desktop-start
+stop on desktop-end
+exec firefox localhost:3000 -fullscreen 
+
+#listo ok.
+******************************
+
+COMO RESOLVER EL PROBLE DE ASSET IMAGENES QUE SE MUESTREN EN PRODUCCCION:
+SOLO EDITAR EL ARCHIVO Y SETEAR ESTA LINEA (config.assets.compile = false) EN 'TRUE' ok ted. worked.
+
+I went into my production.rb file and changed two lines of code and set them to true. It works now without any errors.
+config.serve_static_assets = true
+config.assets.compile = true
+
+
+LINK:https://www.digitalocean.com/community/questions/rails-4-images-not-loading
+
+**********************
+**********************
+MUY IMPORTANTE ESTA NOTA 1:
+
+EL COMANDO DE AUTOSTART RAILS PRODUCTION SCRIPT ESTA EN >sudo crontab -e
+>crontab -e muestra las tareas, lo vas a encontrar ahi, este es el que sube rails server web ok ted con puma en el folder path especificado.
+
+@reboot cd /home/deploy/Desktop/koll250/kollector && /home/deploy/.rbenv/shims/bundle exec rails s -b 0.0.0.0 -p 3000 -e production
+
+
+
+***************************************************************
+***************************************************************
+***************************************************************
+MUY IMPORTANTE ESTA NOTA 2:
+PARA TRBAJAR CON RUBYENCODER HAY QUE CONSIDERAR LO SIGUIENTE:
+
+EL FODER A DEL PROYECTO ES EL NAVITO
+EL FOLDER B ES EL NATIVO LIMPIO SIN .TXTS DE MAS Y DEMAS Y CON RAILS SECRET.YML GENERADO Y LAS CREDNECIALES EN CONFIG/APPLICATION.RB QUE EL FODER A NO LO TINEE, BASICAMENTE DE COPIA EL CONTENIDO DE APP/ EN LA MISMA RUTA PERO EN EL FORDER B/KOLLECTOR/APP/* PARA QUE SOLO SEA ENCRYPTARLO.
+
+EL FOLDER C ES LA SALIDA ENCRIPTADA Y OJO, SOLO DEBES COPIAR EL FOLDER APP AL POS DE PRODUCCION.
+
+*SI COPIAS EL PROYECTO COMPLETO AL POS PARA PRODUCCION DEBERAS HACER LO SIGUIENTE PORUQE SALEN ERRORES RAILS SERVER:
+
+https://bundler.io/blog/2019/05/14/solutions-for-cant-find-gem-bundler-with-executable-bundle.html #=> CORRER EL COMANDO: gem update --system DE ESTE LINK Y LUEGO gem install bundler:1.16.2 Y LUEGO BUNDLE INSTALL
+
+EN RESUMEN:.
+ruby -v
+gem update --system
+bundle install
+/home/deploy/.rbenv/shims/bundle exec rails s -b 0.0.0.0 -p 3000 -e production    (PARA CORRER EL SERVER Y PROBAR TODO OK)
+
+
+
+BUNDLE INSTALL
+Y VER SI CORRE 
+
+LO MEJO ES DEJAR EL FOLDER COMPLETO DEL PTOYECTO COMO ESTABA EN EL POS DE PRODUCCION Y SOLO COPIAR LA CARPETA /APP GENERADA POR RUBYENCODER.
+BUENAS SUERTE, RECUERDA CAMBIAR EL HW SERIAL DEL CONTROLADOR PARA QUE COINCIDA CON LA PC POS. OK TED SEC.  
+ALUGUNOS LINKS DE AYUDA:
+
+https://bundler.io/blog/2019/05/14/solutions-for-cant-find-gem-bundler-with-executable-bundle.html
+
+
+*******************
+*******************
+Trabajando con POSTGRESQL link de guia rapida para comandos conectar, agregar tablas, modificar columnas, etc en postgres db production pos ted:
+
+https://www.digitalocean.com/community/tutorials/como-instalar-y-utilizar-postgresql-en-ubuntu-16-04-es
+
+
+**********************************
+Crontab para FTP vtas dayly backup info help links:
+
+https://stackoverflow.com/questions/13259530/using-cron-jobs-to-visit-url
+https://stackoverflow.com/questions/8063704/how-to-setup-a-wget-cron-job-command/8063739
+
 	

@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Historial de Ganadores del MegaJackpot:</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Consorcio</th>
+      <th>Sucursal</th>
+      <th>Localidad</th>
+      <th>Serialmq</th>
+      <th>Cantidad</th>
+      <th>Contribuyentes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ganadoresmegajackpots.each do |ganadoresmegajackpot| %>
+      <tr>
+        <td><%= ganadoresmegajackpot.fecha.to_s[0..19] %></td>
+        <td><%= ganadoresmegajackpot.consorcio %></td>
+        <td><b><%= ganadoresmegajackpot.sucursal %></td>
+        <td><%= ganadoresmegajackpot.localidad %></td>
+        <td><%= ganadoresmegajackpot.serialmq.to_s[8..11] %></td>
+        <td><b><%= ganadoresmegajackpot.cantidad %></td>
+        <td>Click for details...<% ganadoresmegajackpot.montoxcontribuyente %></td>
+        <td><%= link_to 'Show', ganadoresmegajackpot %></td>
+       <!--  <td><%= link_to 'Edit', edit_ganadoresmegajackpot_path(ganadoresmegajackpot) %></td> -->
+       <!--  <td><%= link_to 'Destroy', ganadoresmegajackpot, method: :delete, data: { confirm: 'Are you sure?' } %> --></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

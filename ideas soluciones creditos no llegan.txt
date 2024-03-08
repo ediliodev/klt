@@ -1,0 +1,8 @@
+Para palear un poco el problema de los creditos enviados que se procesab (ok) pero no llegan a la mq
+debemos desarrollar un resource de auditoria post como el de pagos pero desde el arduino al pos
+o sea que cada get recibido y procesado por el arduino sea reenviado a un resource de auditoria de creditos
+esto para validar/comparar lo que se el ha enviado y lo que el ha entendido o procesado. Si hay comandos con 
+diferencias o basuras entonces es valido anular el credito enviado get(ok) pero no procesado comando arduino !@#$%
+
+para resolver provisionamente el problea de Malformed puma request y mq en rojo pero dan ping arduinos, hay que reset en cada pago
+cashout y en get que lleguen en blaco o diferentea comandos conocidos. En prueba ya. ..
